@@ -1,0 +1,437 @@
+/****************переменные цвета*************/
+:root {
+  --vh: 210;
+  --vcolor0: hsl(var(--vh), 50%, 50%);
+  --vcolor1: hsl(var(--vh), 15%, 75%);
+  --vcolor2: hsl(var(--vh), 25%, 50%);
+
+  --vcolor-t-w: hsl(0, 0%, 100%);
+  --vcolor-t-b: hsl(0, 0%, 0%);
+  --vcolor-t-s: hsl(0, 0%, 50%);
+  --vcolor-t-s2: hsl(0, 0%, 75%);
+}
+
+/* body {
+    background-color: var(--vcolor-t-s2);
+} */
+
+.vit-color-0 {
+  color: var(--vcolor0);
+  /*border-color: var(--vcolor0);*/
+  /*text-shadow: var(--vcolor-t-s2) 10px 10px 5px;*/
+}
+
+.vit-color-1 {
+  color: var(--vcolor-t-s2);
+  /*text-shadow: var(--vcolor-t-s2) 10px 10px 5px;*/
+}
+
+.vit-color-2 {
+  color: hsl(32, 80%, 70%);
+}
+
+.vit-color-3 {
+  color: hsl(352, 58%, 58%);
+}
+
+.vit-color-v {
+  color: hsl(274, 100%, 50%);
+}
+
+.vit-color-j {
+  color: hsl(354, 70%, 54%);
+}
+
+.vit-font-0 {
+  font-family: IntroScriptDemo;
+}
+
+.vit-font-verdana {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.vit-font-1 {
+  font-family: YanoneKaffeesatz-Medium;
+}
+
+.vit-outline-0 {
+  border-color: var(--vcolor0);
+}
+
+.vit-border-0 {
+  /* border: 1px solid red; */
+  background-color: var(--vcolor0);
+  border-radius: 10px;
+  color: hsl(0, 0%, 100%);
+  padding: 10px;
+}
+
+.vit-border-white {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 10px;
+  /* color: hsl(0, 0%, 100%); */
+  padding: 10px;
+}
+.vit-background-0 {
+  background-color: var(--vcolor0);
+}
+
+.vit-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/********************Кнопка вызова*****************************/
+.fixedbut {
+  position: fixed;
+  right: 20px;
+  display: block;
+  top: 85%;
+  z-index: 99999;
+  color: var(--vcolor-t-s2);
+  background-color: var(--vcolor0);
+  border-radius: 50%;
+}
+
+.fixedcattree {
+  position: relative;
+  left: 10px;
+  display: block;
+  top: 10px;
+  z-index: 99998;
+}
+
+/*.list-group-item:hover > .list-group{
+    display: block;
+}*/
+
+.vVerx {
+  position: fixed;
+  display: block;
+  z-index: 100;
+}
+
+.fixedbut:hover {
+  color: hsl(0, 0%, 100%);
+}
+
+.row-flex {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/**********************Цвет текста*****************/
+@font-face {
+  font-family: YanoneKaffeesatz-Bold;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-Bold.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-ExtraLight;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-ExtraLight.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-Light;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-Light.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-Medium;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-Medium.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-Regular;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-Regular.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-SemiBold;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-SemiBold.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: YanoneKaffeesatz-VariableFont_wght;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/YanoneKaffeesatz-VariableFont_wght.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+  font-family: IntroScriptDemo;
+  /* Гарнитура шрифта */
+  src: url(/template/fonts/IntroScriptDemo-Medium.ttf);
+  /* Путь к файлу со шрифтом */
+}
+
+.vit-color-gold {
+  text-shadow: black 0px 10px 20px, black 1px 1px 3px;
+  color: hsl(55, 100%, 50%);
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+.vit-color-gold-logo {
+  opacity: 1;
+  text-shadow: black 0px 10px 20px, black 1px 1px 3px;
+  color: hsl(43, 89%, 52%);
+  /*font-family: YanoneKaffeesatz-Medium;*/
+}
+
+.vit-color-gold-logo2 {
+  color: hsl(0, 0%, 0%);
+  /*font-family: YanoneKaffeesatz-Medium;*/
+}
+
+.vit-color-gold2 {
+  color: hsl(40, 71%, 46%);
+}
+
+.vit-color-red {
+  color: hsl(0, 78%, 55%);
+}
+
+.vColorWhite {
+  color: #ffffff;
+}
+
+.vColorYeloow {
+  color: hsl(55, 100%, 50%);
+}
+
+/*************************Фоны*******************/
+
+.bgvideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -9999;
+}
+
+.bgvideo2 {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -9999;
+}
+
+.vit-background {
+  /*padding: 20px;*/
+  /*opacity: 0.4;*/
+  background-image: url(/template/images/Fon12.png);
+  /*opacity: 1;*/
+  /*background: rgba(255, 255, 255, 0.7);*/
+  background-position: top;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+  background-size: contain;
+  /*background-color: white;*/
+}
+
+.vit-background-image {
+  /*padding: 20px;*/
+  /*opacity: 0.4;*/
+  background-image: url(/template/images/stroyka.jpg);
+  /*opacity: 1;*/
+  /*background: rgba(255, 255, 255, 0.7);*/
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  /*background-color: white;*/
+}
+
+.vit-background-karta {
+  /*padding: 20px;*/
+  /*opacity: 0.4;*/
+  background-image: url(/template/images/karta.PNG);
+  /*opacity: 1;*/
+  background-position: bottom;
+  background-repeat: no-repeat;
+  /*background-attachment: fixed;*/
+  background-size: cover;
+  /*background-color: white;*/
+}
+
+.vBackground0 {
+  background-image: url(/template/images/Fon01.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.vBackgroundWhite {
+  background-color: white;
+}
+
+.vBackground1 {
+  background-image: url(/template/images/stroyka.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/*******************Затемнение фона********************************/
+.vit-background-opacity {
+  background-color: hsla(0, 0%, 100%, 0.7);
+  /*background-size: contain;*/
+}
+
+.vit-background-opacity-silver {
+  background-color: hsla(0, 0%, 75%, 0.3);
+  color: hsl(0, 0%, 100%);
+}
+
+.vit-background-opacity-silver2 {
+  background-color: hsla(0, 0%, 30%, 0.7);
+  /*background-size: contain;*/
+}
+
+/***********************Фиксирование НавБара*********************************/
+.vit-navbar-fixed {
+  position: fixed;
+}
+
+/************************кнопки******************************/
+.vit-btn-rounded {
+  border-radius: 19px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+}
+
+.vBorderRounded {
+  /* border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px; */
+  border-radius: 15px;
+  padding: 0.5rem !important;
+}
+
+.vBorderBottomRounded {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  /* border-radius: 15px;   */
+}
+
+.vit-btn-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 16px;
+  white-space: normal;
+  /* восстанавливаем свойству значение по умолчанию */
+}
+
+/***********Центрирование текста******************************************/
+.vTextCenterPicture {
+  /*position: absolute;*/
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.hr-line {
+  margin: 20px 0;
+  padding: 0;
+  height: 0;
+  border: none;
+  border-top: 1px solid hsl(0, 0%, 100%);
+}
+
+/*обтекание картинки слева*/
+.vImageleft {
+  margin: 0 20px 10px 0;
+  padding: 0;
+  float: left;
+}
+
+/*тень*/
+.vShadow {
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.5);
+}
+
+.vShadowT {
+  text-shadow: var(--vcolor-t-s2) 10px 10px 5px;
+}
+
+/*************************************************Переливающийся текст*/
+.pouring {
+  font-size: 40px;
+  line-height: 50px;
+  font-family: Verdana, sans-serif;
+  font-weight: 900;
+  position: relative;
+  background: hsl(0, 0%, 100%);
+  overflow: hidden;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.pouring:before {
+  content: "";
+  position: absolute;
+  filter: blur(10px);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+  background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 1em,
+      #bfe2ff 1em,
+      #337ab7 50%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #337ab7,
+      #337ab7 1em,
+      #fff 1em,
+      #bfe2ff 50%
+    );
+  background-size: 3em 3em, 2em 2em;
+  animation-name: ani;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes ani {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@media (max-width: 690px) {
+  .pouring {
+    font-size: 20px;
+  }
+}

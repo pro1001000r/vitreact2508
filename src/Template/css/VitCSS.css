@@ -1,0 +1,114 @@
+/* import vstyles from 'VitCSS.module.css'; */
+
+@font-face {
+  font-family: 'NinaCTT';
+  /* шрифт прописью */
+  src: url("/src/Template/fonts/NinaCTT.ttf");
+  /* Путь к файлу со шрифтом */
+}
+.vit-font-propis {
+  font-family: 'NinaCTT';
+  /* font-size: 96px; */
+}
+
+@font-face {
+	font-family: 'EanGnivc';
+	src: url("/src/Template/fonts/EanGnivc.ttf"); 
+}
+ 
+.barcode {
+	font-family: 'EanGnivc';
+	font-size: 96px;
+}
+
+/****************переменные цвета*************/
+:root {
+  --vh: 210;
+  --vcolor0: hsl(var(--vh), 50%, 50%);
+  --vcolor1: hsl(var(--vh), 15%, 75%);
+  --vcolor2: hsl(var(--vh), 25%, 50%);
+
+  --vcolor-t-w: hsl(0, 0%, 100%);
+  --vcolor-t-b: hsl(0, 0%, 0%);
+  --vcolor-t-s: hsl(0, 0%, 50%);
+  --vcolor-t-s2: hsl(0, 0%, 75%);
+}
+
+/* **************************************цвет******************************************* */
+
+.vit-color-0 {
+  color: var(--vcolor0);
+  /*border-color: var(--vcolor0);*/
+  /*text-shadow: var(--vcolor-t-s2) 10px 10px 5px;*/
+}
+
+/* **************************************изображения ***************************************/
+
+.vitright {
+  display: flex;
+  align-items: center;
+  color: aquamarine;
+}
+
+.vitImageContain {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
+/* *************************************Оформление********************************************************** */
+.vit-button {
+  /* border: solid; */
+  border-radius: 5;
+  border-color: rgb(236, 236, 236);
+  line-height: 1.5;
+  /* border: 1px solid; */
+  cursor: pointer;
+}
+
+.vit-button:hover {
+  color: var(--vcolor0);
+  border-color: var(--vcolor0);
+}
+
+/* *************************************Тени********************************************************** */
+.vShadowT {
+  text-shadow: var(--vcolor-t-s2) 10px 10px 5px;
+}
+
+/*тень*/
+.vShadow {
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.5);
+}
+
+.vShadowButton {
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.5);
+}
+.vShadowImg {
+  filter: drop-shadow(25px 25px 3px rgba(0, 0, 0, 0.5)); /* Параметры тени */
+}
+
+/* ************************************** шрифты ****************************************************** */
+/* @font-face {
+  font-family: BirchCTT;
+  /* шрифт прописью */
+/* src: local("BirchCTT"), url(/src/vtemplate/fonts/BirchCTT.ttf) format("ttf"); */
+/* Путь к файлу со шрифтом */
+/* } */
+
+/* **************************************текст************************************************************ */
+
+
+
+.vit-font-verdana {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.vit-color-gold-logo {
+  opacity: 1;
+  text-shadow: black 0px 10px 20px, black 1px 1px 3px;
+  color: hsl(43, 89%, 52%);
+  /* font-family: BirchCTT; */
+}

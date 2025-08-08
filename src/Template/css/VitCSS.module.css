@@ -1,0 +1,35 @@
+/* import vstyles from 'VitCSS.module.css'; */
+
+/****************переменные цвета*************/
+:root {
+  --vh: 210;
+  --vcolor0: hsl(var(--vh), 50%, 50%);
+  --vcolor1: hsl(var(--vh), 15%, 75%);
+  --vcolor2: hsl(var(--vh), 25%, 50%);
+
+  --vcolor-t-w: hsl(0, 0%, 100%);
+  --vcolor-t-b: hsl(0, 0%, 0%);
+  --vcolor-t-s: hsl(0, 0%, 50%);
+  --vcolor-t-s2: hsl(0, 0%, 75%);
+}
+
+.vit-color-0 {
+  color: var(--vcolor0);
+  /*border-color: var(--vcolor0);*/
+  /*text-shadow: var(--vcolor-t-s2) 10px 10px 5px;*/
+}
+
+.vitright {
+  display: flex;
+  align-items: center;
+  color: aquamarine;
+}
+
+.vShadowT {
+  text-shadow: var(--vcolor-t-s2) 10px 10px 5px;
+}
+
+/*тень*/
+.vShadow {
+  box-shadow: 5px 5px 5px -5px rgba(0, 0, 0, 0.5);
+}
