@@ -6,7 +6,7 @@ import "./Template/css/VitCSS.css";
 
 import HomeScreen from "./Screens/HomeScreen";
 
-function App() {
+const App:React.FC = () => {
   return (
     <>
       <Router>

@@ -7,17 +7,25 @@
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.2.1",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "axios": "^1.11.0",
     "bootstrap": "^5.3.7",
+    "html5-qrcode": "^2.3.8",
+    "mkcert": "^3.2.0",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.7.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "typescript": "^5.9.2"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start1": "set HTTPS=true&&set SSL_CRT_FILE=./.sert/localhost.pem&&set SSL_KEY_FILE=./.sert/localhost-key.pem&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
