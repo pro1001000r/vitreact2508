@@ -1,8 +1,16 @@
-
 import { Nav } from "react-bootstrap";
 import { IconVit } from "./IconVit";
 
-const ButtonVit = ({
+interface IButtonVit {
+  onAdd?(title: string): void;
+  href?: string;
+  name?: string;
+  onClick?(): void;
+  icon?: string;
+  className?: string;
+}
+
+const ButtonVit: React.FC<IButtonVit> = ({
   href = "#",
   name = "",
   onClick = undefined,

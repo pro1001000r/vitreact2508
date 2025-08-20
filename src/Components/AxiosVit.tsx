@@ -1,10 +1,18 @@
-
 import db from "../config.json";
 import axios from "axios";
-//import DbParams from "./DbParams";
 
-const AxiosVit = (dataUrl, setData = undefined, setLoad = undefined) => {
-  
+type AxiosProps = {
+  dataUrl: {};
+  setData?: any|undefined;
+  setLoad?(): void|null;
+};
+
+const AxiosVit = ({
+  dataUrl,
+  setData = undefined,
+  setLoad = undefined,
+}: AxiosProps):void => {
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -23,8 +31,9 @@ const AxiosVit = (dataUrl, setData = undefined, setLoad = undefined) => {
       //   setLoad(true);
       // }
     } catch (e) {
-      //setLoad(false);
-      setData(apiUrl);
+      if (setData) {
+        setData(apiUrl);
+      }
     } finally {
       // if (setLoad) {
       //   setLoad(true);
