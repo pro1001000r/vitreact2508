@@ -65,7 +65,12 @@ export interface IUsers {
   place_id?: number;
 }
 
+export enum ICommand {
+  GetTable = 'GetTable',
+  test = 'test',
+}
+
 export interface IDataUrl {
-  command: string;
+  command: ICommand;
   data: {};
 }
