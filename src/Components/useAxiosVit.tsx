@@ -3,9 +3,9 @@ import db from "../config.json";
 import { IDataUrl } from "../inrefaces";
 import axios from "axios";
 
-export function useAxiosVit(dataUrl: IDataUrl) {
+export function useAxiosVit<T>(dataUrl: IDataUrl) {
   const [load, setLoad] = useState(false);
-  const [data, setData] = useState({});
+  const [data, setData] = useState<T[]>([]);
   const [dataU, setDataU] = useState({});
 
   const config = {

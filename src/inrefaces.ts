@@ -65,6 +65,7 @@ export interface IUsers {
   place_id?: number;
 }
 
+// перечисление комманд для обмена
 export enum ICommand {
   GetTable = 'GetTable',
   test = 'test',
