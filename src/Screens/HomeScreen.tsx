@@ -1,6 +1,6 @@
 import React, { useState, FC } from "react";
 
-import { IUsers } from "../inrefaces";
+import { IDataUrl, IUsers } from "../inrefaces";
 
 // import CanvasVit from "../Components/CanvasVit";
 import { Card, Col, Container, Row } from "react-bootstrap";
@@ -8,12 +8,16 @@ import AxiosVit from "../Components/AxiosVit";
 import ButtonVit from "../Components/ButtonVit";
 import FirstVit from "../Components/FirstVit";
 
+
 const HometScreen: FC = () => {
   const [data, setData] = useState<IUsers[] | undefined>([]);
   const [user, setUser] = useState<string>("Нет данных");
 
   const vFunc = (i: string) => {
-    const dataUrl = { GetTable: "users" };
+    const dataUrl: IDataUrl = {
+      command: "GetTable",
+      data: { tableName: "users" },
+    };
     AxiosVit({ dataUrl, setData });
 
     //консоль 03 Июнь 2025 (вторник)

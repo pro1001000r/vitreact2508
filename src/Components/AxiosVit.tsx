@@ -1,8 +1,9 @@
 import db from "../config.json";
 import axios from "axios";
+import { IDataUrl } from "../inrefaces";
 
 type AxiosProps = {
-  dataUrl: {};
+  dataUrl: IDataUrl;
   setData?: any|undefined;
   setLoad?(): void|null;
 };
