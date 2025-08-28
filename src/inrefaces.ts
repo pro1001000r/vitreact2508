@@ -70,6 +70,7 @@ export enum ICommand {
   GetTable = "GetTable",
   test = "test",
   GetProperty = "GetProperty",
+  CreateTableItem = "CreateTableItem",
 }
 
 export interface IDataUrl {
@@ -86,4 +87,9 @@ export interface IGetTable  extends IDataUrl{
 export interface IGetProperty extends IDataUrl{
   command: ICommand.GetProperty;
   data: { tableName: string; tableId: number; property: string };
+}
+
+export interface ICreateTableItem extends IDataUrl{
+  command: ICommand.CreateTableItem;
+  data: { tableName: string; vp: IProducts|IUsers };
 }

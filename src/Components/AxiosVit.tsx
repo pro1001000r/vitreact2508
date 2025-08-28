@@ -5,7 +5,7 @@ import { IDataUrl } from "../inrefaces";
 type AxiosProps = {
   dataUrl: IDataUrl;
   setData?: any|undefined;
-  setLoad?(): void|null;
+  setLoad?: any|undefined;
 };
 
 const AxiosVit = ({
@@ -28,9 +28,9 @@ const AxiosVit = ({
       if (setData) {
         setData(response.data);
       }
-      // if (setLoad) {
-      //   setLoad(true);
-      // }
+      if (setLoad) {
+        setLoad(true);
+      }
     } catch (e) {
       if (setData) {
         setData(apiUrl);

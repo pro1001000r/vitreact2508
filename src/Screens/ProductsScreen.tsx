@@ -1,26 +1,39 @@
-import React, { FC } from "react";
-import { useAxiosVit } from "../Components/useAxiosVit";
-import { ICommand, IDataUrl, IGetTable } from "../inrefaces";
+import React, { FC, useEffect, useState } from "react";
+
+import { ICommand, ICreateTableItem, IProducts } from "../inrefaces";
 import TableVit from "../Components/TableVit";
 import { Container } from "react-bootstrap";
+import InputVit from "../Components/InputVit";
+import AxiosVit from "../Components/AxiosVit";
 
 const ProductsScreen: FC = () => {
-  const vFunc = () => {
-    return <>arg</>;
+  const [products, setProducts] = useState<IProducts[]>([]);
+
+  const addHandler = (title: string) => {
+    const newProducts: IProducts = {
+      name: title,
+    };
+
+    const dataUrl: ICreateTableItem = {
+      command: ICommand.CreateTableItem,
+      data: {
+        tableName: "products",
+        vp: newProducts,
+      },
+    };
+    AxiosVit({ dataUrl });
+
+    setProducts((prev) => [newProducts, ...prev]);
   };
 
-  const dataUrl: IGetTable = {
-    command: ICommand.GetTable,
-    data: { tableName: "productsColor" },
-  };
-
-  const { load, data } = useAxiosVit(dataUrl);
-
-  //консоль 27 Август 2025 (среда)
-  console.log(">>>> data из (ProductsScreen):", data); //консоль
+  useEffect(() => {
+    //консоль 10 Август 2025 (воскресенье)
+    console.log("products после:", products); //консоль
+  }, [products]);
 
   return (
     <>
+      <InputVit onAdd={addHandler} />
       <Container>
         <TableVit />
       </Container>
