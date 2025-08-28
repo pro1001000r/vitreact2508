@@ -8,10 +8,14 @@ export default function TableVit() {
       command: ICommand.GetTable,
       data: { tableName: "productsColor" },
     };
-  const { data } = useAxiosVit<IProductsColor>(dataUrl);
+  const { data } = useAxiosVit<IProductsColor[]>(dataUrl);
 
   //консоль 09 Май 2025 (пятница)
   console.log(">>>> data из (TableVit):", data); //консоль
+
+  if (data === undefined){
+    return
+  }
 
   let listRow = data.map((elem) => {
     return (

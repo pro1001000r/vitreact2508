@@ -5,7 +5,7 @@ import axios from "axios";
 
 export function useAxiosVit<T>(dataUrl: IDataUrl) {
   const [load, setLoad] = useState(false);
-  const [data, setData] = useState<T[]>([]);
+  const [data, setData] = useState<T>();
   const [dataU, setDataU] = useState({});
 
   const config = {

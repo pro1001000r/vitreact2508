@@ -65,13 +65,25 @@ export interface IUsers {
   place_id?: number;
 }
 
-// перечисление комманд для обмена
+// перечисление команд для обмена
 export enum ICommand {
-  GetTable = 'GetTable',
-  test = 'test',
+  GetTable = "GetTable",
+  test = "test",
+  GetProperty = "GetProperty",
 }
 
 export interface IDataUrl {
   command: ICommand;
   data: {};
+}
+
+//Синхронизация команд для обмена
+export interface IGetTable  extends IDataUrl{
+  command: ICommand.GetTable;
+  data: { tableName: string };
+}
+
+export interface IGetProperty extends IDataUrl{
+  command: ICommand.GetProperty;
+  data: { tableName: string; tableId: number; property: string };
 }
