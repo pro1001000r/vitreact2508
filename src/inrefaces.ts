@@ -68,9 +68,11 @@ export interface IUsers {
 // перечисление команд для обмена
 export enum ICommand {
   GetTable = "GetTable",
+  GetTableById = "GetTableById",
   test = "test",
   GetProperty = "GetProperty",
   CreateTableItem = "CreateTableItem",
+  UpdateTableById = "UpdateTableById",
 }
 
 export interface IDataUrl {
@@ -78,10 +80,15 @@ export interface IDataUrl {
   data: {};
 }
 
-//Синхронизация команд для обмена
+
 export interface IGetTable  extends IDataUrl{
   command: ICommand.GetTable;
   data: { tableName: string };
+}
+
+export interface IGetTableById extends IDataUrl{
+  command: ICommand.GetTableById;
+  data: { tableName: string; tableId: number };
 }
 
 export interface IGetProperty extends IDataUrl{
@@ -93,3 +100,9 @@ export interface ICreateTableItem extends IDataUrl{
   command: ICommand.CreateTableItem;
   data: { tableName: string; vp: IProducts|IUsers };
 }
+
+export interface IUpdateTableById extends IDataUrl{
+  command: ICommand.UpdateTableById;
+  data: { tableName: string; tableId:number; vp: IProducts|IUsers|unknown  };
+}
+

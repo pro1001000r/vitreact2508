@@ -9,6 +9,8 @@ import AxiosVit from "../Components/AxiosVit";
 const ProductsScreen: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
 
+  const[newprod,setNewprod] = useState<string>('')
+
   const addHandler = (title: string) => {
     const newProducts: IProducts = {
       name: title,
@@ -33,7 +35,7 @@ const ProductsScreen: FC = () => {
 
   return (
     <>
-      <InputVit onAdd={addHandler} />
+      <InputVit value={newprod} onChange={setNewprod} onPressVit={addHandler}/>
       <Container>
         <TableVit />
       </Container>

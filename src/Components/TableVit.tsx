@@ -1,4 +1,4 @@
-import { Table } from "react-bootstrap";
+import { Nav, Table } from "react-bootstrap";
 import { useAxiosVit } from "./useAxiosVit";
 import { ICommand, IGetTable, IProducts } from "../inrefaces";
 
@@ -18,7 +18,9 @@ export default function TableVit() {
       <tr key={elem.id}>
         <td>{elem.id}</td>
         <td>
-          <b>{elem.name}</b>
+          <Nav.Link href={"/ProductsEdit/" + elem.id}>
+            <b>{elem.name}</b>
+          </Nav.Link>
         </td>
         <td>
           <div style={{ fontSize: "12px" }}>{elem.code1c}</div>

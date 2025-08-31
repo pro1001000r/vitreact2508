@@ -4,8 +4,8 @@ import { IDataUrl } from "../inrefaces";
 
 type AxiosProps = {
   dataUrl: IDataUrl;
-  setData?: any|undefined;
-  setLoad?: any|undefined;
+  setData?(data:any): void;
+  setLoad?(i:boolean): void;
 };
 
 const AxiosVit = ({
