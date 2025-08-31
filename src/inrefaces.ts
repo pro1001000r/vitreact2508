@@ -73,6 +73,7 @@ export enum ICommand {
   GetProperty = "GetProperty",
   CreateTableItem = "CreateTableItem",
   UpdateTableById = "UpdateTableById",
+  DeleteTableById = "DeleteTableById",
 }
 
 export interface IDataUrl {
@@ -80,29 +81,35 @@ export interface IDataUrl {
   data: {};
 }
 
-
-export interface IGetTable  extends IDataUrl{
+export interface IGetTable extends IDataUrl {
   command: ICommand.GetTable;
   data: { tableName: string };
 }
 
-export interface IGetTableById extends IDataUrl{
+export interface IGetTableById extends IDataUrl {
   command: ICommand.GetTableById;
   data: { tableName: string; tableId: number };
 }
 
-export interface IGetProperty extends IDataUrl{
+export interface IGetProperty extends IDataUrl {
   command: ICommand.GetProperty;
   data: { tableName: string; tableId: number; property: string };
 }
 
-export interface ICreateTableItem extends IDataUrl{
+export interface ICreateTableItem extends IDataUrl {
   command: ICommand.CreateTableItem;
-  data: { tableName: string; vp: IProducts|IUsers };
+  data: { tableName: string; vp: IProducts | IUsers };
 }
 
-export interface IUpdateTableById extends IDataUrl{
+export interface IUpdateTableById extends IDataUrl {
   command: ICommand.UpdateTableById;
-  data: { tableName: string; tableId:number; vp: IProducts|IUsers|unknown  };
+  data: {
+    tableName: string;
+    tableId: number;
+    vp: IProducts | IUsers | unknown;
+  };
 }
-
+export interface IDeleteTableById extends IDataUrl {
+  command: ICommand.DeleteTableById;
+  data: { tableName: string; tableId: number };
+}

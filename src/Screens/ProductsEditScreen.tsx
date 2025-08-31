@@ -9,11 +9,14 @@ import InputVit from "../Components/InputVit";
 import ButtonVit from "../Components/ButtonVit";
 import {
   ICommand,
+  IDeleteTableById,
   IGetTableById,
   IProducts,
   IUpdateTableById,
 } from "../inrefaces";
 // import TableBarcode from "../Components/TableBarcode";
+
+declare var confirm: (q: string) => boolean; //объявление типа confirm
 
 const ProductsEditScreen: FC = () => {
   //1.Безопасность странички
@@ -28,7 +31,7 @@ const ProductsEditScreen: FC = () => {
     navigate(-1);
   }
 
-  console.log(">>>>params1 >>>>:", params); //консоль
+  // console.log(">>>>params1 >>>>:", params); //консоль
 
   //данные странички
   const [data, setData] = useState<IProducts>();
@@ -52,24 +55,46 @@ const ProductsEditScreen: FC = () => {
 
   //Сохраняем изменения и уходим со странички
   const UpdateProducts = () => {
+    const output: IProducts = {
+      name: name,
+      compositions_id: compositions,
+      price: price,
+    };
     const dataUrl: IUpdateTableById = {
       command: ICommand.UpdateTableById,
       data: {
         tableName: "products",
         tableId: Number(params.id),
-        vp: data,
+        vp: output,
       },
     };
     AxiosVit({ dataUrl });
 
     //Пока не уходим
-    //navigate(-1);
+    navigate(-1);
+  };
+
+  const DeleteProducts = () => {
+    const isrem = confirm("вы уверены что хотите удалить?"); //!!!!!!! confirm
+    if (isrem) {
+      const dataUrl: IDeleteTableById = {
+        command: ICommand.DeleteTableById,
+        data: {
+          tableName: "products",
+          tableId: Number(params.id),
+        },
+      };
+      AxiosVit({ dataUrl });
+
+      //Пока не уходим
+      navigate(-1);
+    }
   };
   //Первый рендеринг
   useEffect(() => {
     getItem();
     //консоль 31 Август 2025 (воскресенье)
-    console.log(">>>> data из (ProductsEditScreen):", data); //консоль
+    // console.log(">>>> data из (ProductsEditScreen):", data); //консоль
   }, []);
 
   useEffect(() => {
@@ -78,8 +103,8 @@ const ProductsEditScreen: FC = () => {
       setCompositions(data.compositions_id || 0);
       setPrice(data.price || 0);
     }
-    console.log(">>>>data>>>>:", data); //консоль
-    console.log(">>>>name>>>>:", name); //консоль
+    // console.log(">>>>data>>>>:", data); //консоль
+    // console.log(">>>>name>>>>:", name); //консоль
   }, [data]);
 
   return (
@@ -97,7 +122,12 @@ const ProductsEditScreen: FC = () => {
           placeholder="Наименование..."
         />
 
-        <InputVit value={price} onChange={setPrice} placeholder="Цена..." type="number" />
+        <InputVit
+          value={price}
+          onChange={setPrice}
+          placeholder="Цена..."
+          type="number"
+        />
         <SelectVit
           tableName={"compositions"}
           id={compositions}
@@ -114,6 +144,12 @@ const ProductsEditScreen: FC = () => {
           name="Сохранить"
           onClick={UpdateProducts}
           className=" btn-primary"
+        />
+
+        <ButtonVit
+          name="Удалить"
+          onClick={DeleteProducts}
+          className=" btn-danger"
         />
 
         <Accordion className="my-1">

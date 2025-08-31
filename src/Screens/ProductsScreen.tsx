@@ -30,7 +30,7 @@ const ProductsScreen: FC = () => {
 
   useEffect(() => {
     //консоль 10 Август 2025 (воскресенье)
-    console.log("products после:", products); //консоль
+    // console.log("products после:", products); //консоль
   }, [products]);
 
   return (
