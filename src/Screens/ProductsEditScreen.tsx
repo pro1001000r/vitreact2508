@@ -14,6 +14,7 @@ import {
   IProducts,
   IUpdateTableById,
 } from "../inrefaces";
+import ImageUpload from "../Components/ImageUpload";
 // import TableBarcode from "../Components/TableBarcode";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
@@ -33,6 +34,38 @@ const ProductsEditScreen: FC = () => {
 
   // console.log(">>>>params1 >>>>:", params); //консоль
 
+  const [croppedImage, setCroppedImage] = useState<string>();
+  const [fullImage, setFullImage] = useState<string>();
+  const [fileName, setFileName] = useState<string>("");
+  const [fileInput, setFileInput] = useState<any>();
+
+  function getBase64(file: any) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      setFileInput(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+
+    return reader.result;
+  }
+
+  const handleFile = async (e: any) => {
+    const file = e.currentTarget.files[0];
+    // if(props.sizeLimit && file.size > props.sizeLimit)
+    // {
+    //     setStatusMessage("File is too large.");
+    // }
+    // else
+    // {
+    console.log(file);
+    setFileName(file.name);
+    getBase64(file);
+    // }
+  };
   //данные странички
   const [data, setData] = useState<IProducts>();
   const [load, setLoad] = useState(false);
@@ -166,19 +199,27 @@ const ProductsEditScreen: FC = () => {
         <Accordion className="my-1">
           <Accordion.Item eventKey="0">
             <Accordion.Header>
-              <b>Подробнее об инвентаризации...</b>
+              <b>Подробнее о картинке...</b>
             </Accordion.Header>
             <Accordion.Body>
               {/* style={{ width: 200 }} */}
               <Row>
-                {/* <TableStocktaking
-                  tableName={"products_id"}
-                  tableId={params.id}
-                /> */}
+                <input
+                  id="image-input"
+                  type="file"
+                  accept=".png,.jpg,.jpeg,.gif"
+                  onInput={(e) => {
+                    //консоль 31 Август 2025 (воскресенье)
+                    console.log(">>>> e из (ProductsEditScreen):", e); //консоль
+                    handleFile(e)
+                  }}
+                />
+                <img src={fileInput} alt="Logo" width="50"/>
               </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+        {/* <ImageUpload setCroppedImage={setCroppedImage} setOriginalImage={setFullImage} round aspect={1} sizeLimit={150000}/> */}
       </Container>
     </>
   );
