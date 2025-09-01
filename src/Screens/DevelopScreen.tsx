@@ -25,12 +25,11 @@ import {
 import ImageUpload from "../Components/ImageUpload";
 import axios, { AxiosRequestConfig } from "axios";
 import ImageVit from "../Components/ImageVit";
-import UploadFilesVit from "../Components/UploadFilesVit";
 // import TableBarcode from "../Components/TableBarcode";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
 
-const ProductsEditScreen: FC = () => {
+const DevelopScreen: FC = () => {
   //1.Безопасность странички
   // Security();
 
@@ -52,6 +51,99 @@ const ProductsEditScreen: FC = () => {
 
   const [selectedImage, setSelectedImage] = useState<File>();
   const [progress, setProgress] = useState<number>(0);
+
+  //Работа с фото ***************************************************************
+  const UploadFiles = async (id: any, selectedImage: File) => {
+    const formData = new FormData();
+
+    formData.append("operation", "UploadImage");
+
+    const filev = {
+      // uri: files[0].uri, // e.g. 'file:///path/to/file/image123.jpg'
+      name: "image123.jpg", // e.g. 'image123.jpg',
+      type: "image/jpg", // e.g. 'image/jpg'
+    };
+
+    formData.append("file", selectedImage);
+    formData.append("tableName", "products");
+    formData.append("tableId", id);
+
+    //console.log("id сообщения для привязки фото: ", messageId); //вывод
+    //console.log("данные фото: ", file); //вывод
+    // console.log("из функции", formData); //вывод
+    // console.log('вывод',DbParams.pathFiles); //вывод
+
+    const dataRequest = formData;
+    const apiUrl = "https://pikclick.ru/vitphp/obmen/foto/";
+    const config: AxiosRequestConfig<FormData> = {
+      onUploadProgress: ({ progress }) => {
+        //консоль 01 Сентябрь 2025 (понедельник)
+        if (progress) {
+          console.log(
+            ">>>> progress из (AxiosVit):",
+            (progress * 100).toFixed(2)
+          ); //консоль
+          const pr = Number((progress * 100).toFixed(2));
+          setProgress(pr);
+        }
+      },
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
+
+    axios
+      .post(apiUrl, dataRequest, config)
+      .then(function (response) {
+        //консоль 01 Сентябрь 2025 (понедельник)
+        // console.log(
+        //   ">>>> response.data из (ProductsEditScreen):",
+        //   response.data
+        // ); //консоль
+
+        //setLoad(false);
+        setProgress(0);
+      })
+      .catch(function (error) {
+        //консоль 01 Сентябрь 2025 (понедельник)
+        console.log(">>>> error из (ProductsEditScreen):", error); //консоль
+      })
+      .finally(() => {});
+  };
+
+  function getBase64(file: any) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      console.log(reader.result);
+      setFileInput(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log("Error: ", error);
+    };
+
+    return reader.result;
+  }
+
+  const handleFile = async (e: any) => {
+    const file1 = e.currentTarget.files[0];
+    // if(props.sizeLimit && file.size > props.sizeLimit)
+    // {
+    //     setStatusMessage("File is too large.");
+    // }
+    // else
+    // {
+    console.log(file1);
+
+    //консоль 01 Сентябрь 2025 (понедельник)
+    console.log(">>>> file1 из (ProductsEditScreen):", file1); //консоль
+
+    setFileName(file1.name);
+
+    UploadFiles(params.id, e.target.files[0]);
+    //getBase64(file1);
+    // }
+  };
 
   //данные странички
   const [data, setData] = useState<IProducts>();
@@ -118,10 +210,10 @@ const ProductsEditScreen: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (load) {
+    if (progress == 100) {
       getItem();
     }
-  }, [load]);
+  }, [progress]);
 
   useEffect(() => {
     if (data) {
@@ -129,7 +221,8 @@ const ProductsEditScreen: FC = () => {
       setCompositions(data.compositions_id || 0);
       setPrice(data.price || 0);
     }
-
+    //console.log(">>>>data>>>>:", data); //консоль
+    // console.log(">>>>name>>>>:", name); //консоль
   }, [data]);
 
   return (
@@ -137,7 +230,7 @@ const ProductsEditScreen: FC = () => {
       <Container>
         <Row>
           <Col className=" text-center">
-            <h4>Товар (редактирование)</h4>
+            <h3>Товар (редактирование)</h3>
           </Col>
         </Row>
 
@@ -194,14 +287,33 @@ const ProductsEditScreen: FC = () => {
               <b>Подробнее о картинке...</b>
             </Accordion.Header>
             <Accordion.Body>
-              <UploadFilesVit tableName={"products"} tableId={Number(params.id)} setLoad={setLoad}/>
+              {/* style={{ width: 200 }} */}
+              <Row>
+                <input
+                  id="image-input"
+                  type="file"
+                  accept=".png,.jpg,.jpeg,.gif"
+                  onInput={(e) => {
+                    //консоль 31 Август 2025 (воскресенье)
+                    console.log(">>>> e из (ProductsEditScreen):", e); //консоль
+                    handleFile(e);
+                  }}
+                />
+                {progress && (
+                  <>
+                    {/* <Spinner animation="border" variant="secondary" /> */}
+                    <ProgressBar variant="success" now={progress}  label={`${progress}%`}/>
+                  </>
+                )}
+                <ImageVit foto={data?.foto} />
+              </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <ImageVit foto={data?.foto} />
+        {/* <ImageUpload setCroppedImage={setCroppedImage} setOriginalImage={setFullImage} round aspect={1} sizeLimit={150000}/> */}
       </Container>
     </>
   );
 };
 
-export default ProductsEditScreen;
+export default DevelopScreen;
