@@ -28,6 +28,8 @@ export interface IProducts extends ITableBase {
   nameNew?: string;
   price?: number;
   compositions_id?: number;
+  foto?: string;
+
 }
 
 export interface IStocktaking {

@@ -4,17 +4,40 @@ import { IDataUrl } from "../inrefaces";
 
 type AxiosProps = {
   dataUrl: IDataUrl;
-  setData?(data:any): void;
-  setLoad?(i:boolean): void;
+  setData?(data: any): void;
+  setLoad?(i: boolean): void;
+  setProgress?(i: number): void;
 };
 
 const AxiosVit = ({
   dataUrl,
   setData = undefined,
   setLoad = undefined,
-}: AxiosProps):void => {
-
+  setProgress = undefined,
+}: AxiosProps): void => {
   const config = {
+    // onUploadProgress: (progressEvent: { loaded: number; total: number }) => {
+    //   const progress = Math.round(
+    //     (100 * progressEvent.loaded) / progressEvent.total
+    //   );
+    //   if (setProgress) {
+    //     setProgress(progress);
+    //   }
+    // },
+    // onDownloadProgress: (progress: number) => {
+    //   let percentCompleted = Number((progress * 100).toFixed(2));
+    //   if (setProgress) {
+    //     setProgress(percentCompleted);
+    //   }
+    // },
+
+    // onUploadProgress: ({ progress }) => {
+            
+    //   //консоль 01 Сентябрь 2025 (понедельник)
+    //   console.log('>>>> progress из (AxiosVit):', (progress * 100).toFixed(2)); //консоль
+      
+    // },
+
     headers: {
       "Content-Type": "application/json",
     },

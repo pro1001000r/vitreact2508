@@ -1,6 +1,7 @@
 import { Nav, Table } from "react-bootstrap";
 import { useAxiosVit } from "./useAxiosVit";
 import { ICommand, IGetTable, IProducts } from "../inrefaces";
+import ImageVit from "./ImageVit";
 
 export default function TableVit() {
   const dataUrl: IGetTable = {
@@ -17,6 +18,9 @@ export default function TableVit() {
     return (
       <tr key={elem.id}>
         <td>{elem.id}</td>
+        <td>
+          <ImageVit foto={elem?.foto} />
+        </td>
         <td>
           <Nav.Link href={"/ProductsEdit/" + elem.id}>
             <b>{elem.name}</b>
@@ -36,6 +40,7 @@ export default function TableVit() {
         <thead>
           <tr>
             <th>id</th>
+            <th>Картинка</th> 
             <th>Товар</th>
             <th>Данные</th>
           </tr>
