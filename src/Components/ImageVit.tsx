@@ -8,7 +8,7 @@ interface IImageProps {
 const ImageVit: FC<IImageProps> = (props) => {
   let foto: string = "";
   let fotoFull: string = "";
-  let className = 'img-responsive img-thumbnail';
+  let className = 'img-responsive rounded ';
   if (typeof props.foto === "string") {
     foto = props.foto;
     fotoFull = foto.replace(".", "Full.");

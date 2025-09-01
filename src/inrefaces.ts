@@ -29,7 +29,6 @@ export interface IProducts extends ITableBase {
   price?: number;
   compositions_id?: number;
   foto?: string;
-
 }
 
 export interface IStocktaking {
@@ -53,6 +52,14 @@ export interface IBarcode {
   productsSize_id?: number;
 }
 
+export interface IFotos {
+  id?: number;
+  tableName: string;
+  tableId: number;
+  foto: string;
+  foto64: string;
+}
+
 export interface IUsers {
   id?: number;
   code1c?: string | null;
@@ -70,6 +77,7 @@ export interface IUsers {
 // перечисление команд для обмена
 export enum ICommand {
   GetTable = "GetTable",
+  GetFotos = "GetFotos",
   GetTableById = "GetTableById",
   test = "test",
   GetProperty = "GetProperty",
@@ -90,6 +98,10 @@ export interface IGetTable extends IDataUrl {
 
 export interface IGetTableById extends IDataUrl {
   command: ICommand.GetTableById;
+  data: { tableName: string; tableId: number };
+}
+export interface IGetFotos extends IDataUrl {
+  command: ICommand.GetFotos;
   data: { tableName: string; tableId: number };
 }
 

@@ -26,6 +26,7 @@ import ImageUpload from "../Components/ImageUpload";
 import axios, { AxiosRequestConfig } from "axios";
 import ImageVit from "../Components/ImageVit";
 import UploadFilesVit from "../Components/UploadFilesVit";
+import SliderVit from "../Components/SliderVit";
 // import TableBarcode from "../Components/TableBarcode";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
@@ -129,7 +130,6 @@ const ProductsEditScreen: FC = () => {
       setCompositions(data.compositions_id || 0);
       setPrice(data.price || 0);
     }
-
   }, [data]);
 
   return (
@@ -191,14 +191,26 @@ const ProductsEditScreen: FC = () => {
         <Accordion className="my-1">
           <Accordion.Item eventKey="0">
             <Accordion.Header>
-              <b>Подробнее о картинке...</b>
+              <b>Подробнее о картинках...</b>
             </Accordion.Header>
             <Accordion.Body>
-              <UploadFilesVit tableName={"products"} tableId={Number(params.id)} setLoad={setLoad}/>
+              <UploadFilesVit
+                tableName={"products"}
+                tableId={Number(params.id)}
+                setLoad={setLoad}
+              />
+              <br />
+              <SliderVit tableName={"products"} tableId={Number(params.id)} />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
         <ImageVit foto={data?.foto} />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </Container>
     </>
   );
