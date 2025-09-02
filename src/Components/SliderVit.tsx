@@ -6,6 +6,7 @@ import vitimg2 from "../Template/images/no-image.png";
 import {
   ICommand,
   IDataUrl,
+  IDeleteFotosById,
   IFotos,
   IGetFotos,
   IGetTableById,
@@ -25,21 +26,20 @@ const SliderVit: FC<IProps> = (props) => {
   const [data, setData] = useState<IFotos[]>([]);
   const [load, setLoad] = useState(false);
 
-  const removeFoto = (elem: IFotos) => {
+  const removeFoto = (id: number | undefined) => {
     const isrem = confirm("вы уверены что хотите удалить фото?"); //!!!!!!! confirm
-    if (isrem) {
-      const dataURL: IGetFotos = {
-        command: ICommand.GetFotos,
+    if (isrem && id) {
+      const dataURL: IDeleteFotosById = {
+        command: ICommand.DeleteFotosById,
         data: {
-          tableName: props.tableName,
-          tableId: props.tableId,
+          tableId: id,
         },
       };
-
-      //консоль 01 Сентябрь 2025 (понедельник)
-      console.log(">>>> elem на удаление из (SliderVit):", elem); //консоль
-
-      // AxiosVit({ dataUrl: dataURL, setData: setData});
+      
+      //консоль 02 Сентябрь 2025 (вторник)
+      console.log('>>>> dataURL из (SliderVit):',dataURL); //консоль
+      
+      AxiosVit({ dataUrl: dataURL });
     }
   };
 
@@ -64,7 +64,7 @@ const SliderVit: FC<IProps> = (props) => {
               "https://pikclick.ru/vitphp" + elem.foto.replace(".", "Full.")
             }
           />
-          <ButtonVit name="Удалить фото" onClick={() => removeFoto(elem)} />
+          <ButtonVit name="Удалить фото" onClick={() => removeFoto(elem.id)} />
         </Carousel.Caption>
       </Carousel.Item>
     );

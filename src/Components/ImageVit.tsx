@@ -25,7 +25,8 @@ const ImageVit: FC<IImageProps> = (props) => {
           <img
             src={"https://pikclick.ru/vitphp" + foto}
             alt="Основное фото"
-            // width="50"
+            // width="50%"
+            style={{objectFit:"contain",maxHeight:100, alignItems:"center"}}
             className = {className}
           />
         </a>

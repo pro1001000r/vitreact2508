@@ -2,6 +2,7 @@ import { Nav, Table } from "react-bootstrap";
 import { useAxiosVit } from "./useAxiosVit";
 import { ICommand, IGetTable, IProducts } from "../inrefaces";
 import ImageVit from "./ImageVit";
+import GetName from "./GetName";
 
 export default function TableVit() {
   const dataUrl: IGetTable = {
@@ -12,6 +13,11 @@ export default function TableVit() {
 
   if (data === undefined) {
     return;
+  }
+
+  interface IProps {
+    table: string;
+    id?: number;
   }
 
   let listRow = data.map((elem) => {
@@ -27,7 +33,10 @@ export default function TableVit() {
           </Nav.Link>
         </td>
         <td>
-          <div style={{ fontSize: "12px" }}>{elem.code1c}</div>
+          <div style={{ fontSize: "12px" }}>
+            <b>{elem.price} р.</b> <br />
+            <GetName table="compositions" id={elem.compositions_id} />
+          </div>
           <br />
         </td>
       </tr>
@@ -40,7 +49,7 @@ export default function TableVit() {
         <thead>
           <tr>
             <th>id</th>
-            <th>Картинка</th> 
+            <th>Картинка</th>
             <th>Товар</th>
             <th>Данные</th>
           </tr>

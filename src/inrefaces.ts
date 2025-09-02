@@ -88,6 +88,7 @@ export enum ICommand {
   CreateTableItem = "CreateTableItem",
   UpdateTableById = "UpdateTableById",
   DeleteTableById = "DeleteTableById",
+  DeleteFotosById = "DeleteFotosById",
 }
 
 export interface IDataUrl {
@@ -130,4 +131,8 @@ export interface IUpdateTableById extends IDataUrl {
 export interface IDeleteTableById extends IDataUrl {
   command: ICommand.DeleteTableById;
   data: { tableName: string; tableId: number };
+}
+export interface IDeleteFotosById extends IDataUrl {
+  command: ICommand.DeleteFotosById;
+  data: { tableId: number };
 }
