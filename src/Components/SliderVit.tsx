@@ -35,10 +35,10 @@ const SliderVit: FC<IProps> = (props) => {
           tableId: id,
         },
       };
-      
+
       //консоль 02 Сентябрь 2025 (вторник)
-      console.log('>>>> dataURL из (SliderVit):',dataURL); //консоль
-      
+      console.log(">>>> dataURL из (SliderVit):", dataURL); //консоль
+
       AxiosVit({ dataUrl: dataURL });
     }
   };
@@ -53,18 +53,17 @@ const SliderVit: FC<IProps> = (props) => {
         />
 
         <Carousel.Caption>
-          <h3>фото с сервера № {elem.id}</h3>
-          <p>здесь нужно добавить описание</p>
-          <ButtonVit />
+          {/* <h3>фото с сервера № {elem.id}</h3>
+          <p>здесь нужно добавить описание</p> */}
           <ButtonVit
             icon="Fullscreen"
             name="На весь экран"
-            className="text-light"
+            className=" btn-info"
             href={
               "https://pikclick.ru/vitphp" + elem.foto.replace(".", "Full.")
             }
           />
-          <ButtonVit name="Удалить фото" onClick={() => removeFoto(elem.id)} />
+          <ButtonVit name="Удалить фото" className="btn-danger" onClick={() => removeFoto(elem.id)} />
         </Carousel.Caption>
       </Carousel.Item>
     );
@@ -81,7 +80,7 @@ const SliderVit: FC<IProps> = (props) => {
     AxiosVit({ dataUrl: dataURL, setData: setData, setLoad: setLoad });
     return () => {};
   }, []);
-
+  const controlsview = data.length !== 1;
   return (
     <>
       <SpinnerLoadVit load={load} />
@@ -90,7 +89,7 @@ const SliderVit: FC<IProps> = (props) => {
           style={{ maxWidth: "1500px" }}
           data-bs-theme="dark"
           interval={null}
-          // controls={false}
+          controls={controlsview}
         >
           {CarouselItem}
         </Carousel>

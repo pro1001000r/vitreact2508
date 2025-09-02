@@ -140,7 +140,9 @@ const ProductsEditScreen: FC = () => {
             <h4>Товар (редактирование)</h4>
           </Col>
         </Row>
-
+        <Row className="text-end mb-3">
+          <ImageVit foto={data?.foto} />
+        </Row>
         <InputVit
           value={name}
           onChange={setName}
@@ -204,7 +206,6 @@ const ProductsEditScreen: FC = () => {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
-        <ImageVit foto={data?.foto} />
 
         <br />
         <br />

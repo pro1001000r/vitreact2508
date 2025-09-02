@@ -11,7 +11,9 @@ interface IProps {
 }
 
 const UploadFilesVit: FC<IProps> = (props) => {
+  const inputFoto = useRef<HTMLInputElement>(null);
   const inputFile = useRef<HTMLInputElement>(null);
+
   const [progress, setProgress] = useState<number | false>(false);
   const [progress1, setProgress1] = useState<number | false>(false);
 
@@ -33,7 +35,7 @@ const UploadFilesVit: FC<IProps> = (props) => {
             ">>>> выгрузка из (AxiosVit):",
             (progress * 100).toFixed(2)
           ); //консоль
-          const pr = Number((progress * 100).toFixed(2));
+          const pr = Number((progress * 100).toFixed(2))-1;
 
           setProgress(pr);
           {
@@ -82,8 +84,15 @@ const UploadFilesVit: FC<IProps> = (props) => {
     UploadFiles(props.tableId, e.target.files[0]);
   };
 
-  const hendlerInput = () => {
+  const hendlerFoto = () => {
+    inputFoto.current!.click();
+    // inputFile.current!.capture
+  };
+
+    const hendlerFile = () => {
+    // inputFile.current!.capture = "false"
     inputFile.current!.click();
+    
   };
 
   {
@@ -100,12 +109,26 @@ const UploadFilesVit: FC<IProps> = (props) => {
         type="file"
         // accept=".png,.jpg,.jpeg,.gif"
         accept="image/*"
+        // capture
+        onInput={(e) => {
+          handleFile(e);
+        }}
+      />
+      <input
+        hidden={true}
+        ref={inputFoto}
+        id="image-input"
+        className="hidden"
+        type="file"
+        // accept=".png,.jpg,.jpeg,.gif"
+        accept="image/*"
         capture
         onInput={(e) => {
           handleFile(e);
         }}
       />
-      <ButtonVit onClick={hendlerInput} name="Добавить фото" />
+      <ButtonVit onClick={hendlerFoto} name="+ фото" />
+      <ButtonVit onClick={hendlerFile} name="+ картинку" />
       {progress && (
         <>
           {/* <Spinner animation="border" variant="secondary" /> */}
