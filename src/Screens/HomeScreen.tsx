@@ -1,41 +1,14 @@
-import React, { useState, FC } from "react";
-
-import { ICommand, IGetTable, IUsers } from "../inrefaces";
+import React, { FC } from "react";
 
 // import CanvasVit from "../Components/CanvasVit";
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
-import AxiosVit from "../Components/AxiosVit";
-import ButtonVit from "../Components/ButtonVit";
-import FirstVit from "../Components/FirstVit";
 
 import Logo from "../Template/images/LogoPikclick512.png";
 import NoImg from "../Template/images/no-image.png";
 import MyFoto from "../Template/images/Fon12.png";
-import GetProperty from "../Components/GetProperty";
-import SpinnerLoadVit from "../Components/SpinnerLoadVit";
+import TestVit from "../Components/TestVit";
 
 const HometScreen: FC = () => {
-  const [data, setData] = useState<IUsers[] | undefined>([]);
-  const [user, setUser] = useState<string>("Нет данных");
-  const [load, setLoad] = useState<boolean>(true);
-
-  const login = GetProperty("users", 1, "login");
-
-  const vFunc = () => {
-    setLoad(false);
-    const dataUrl: IGetTable = {
-      command: ICommand.GetTable,
-      data: {
-        tableName: "users",
-      },
-    };
-    AxiosVit({ dataUrl, setData, setLoad });
-
-    if (data && data[0]) {
-      setUser(data[0].name);
-    }
-  };
-
   return (
     <>
       <Container>
@@ -70,27 +43,12 @@ const HometScreen: FC = () => {
               нужно точное представление о состоянии товаров на складах
             </p>
             <br />
-            <Card className=" my-2">
-              <Card.Body>
-                <p>Чтение из Базы данных</p>
-                <SpinnerLoadVit load={load} />
-                <p>
-                  {user} логин: {login}{" "}
-                </p>
-                <ButtonVit
-                  icon="Activity"
-                  name="Тестовый запрос"
-                  onClick={vFunc}
-                />
-              </Card.Body>
-            </Card>
-
-            <Card className=" mb-2">
-              <Card.Body>
-                <FirstVit />
-              </Card.Body>
-            </Card>
           </Col>
+        </Row>
+        <Row>
+          <Card className=" mb-2">
+            <Card.Body>Здесь будет обратная связь</Card.Body>
+          </Card>
         </Row>
         <br />
         <br />

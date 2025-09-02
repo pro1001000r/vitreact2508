@@ -1,3 +1,7 @@
+export interface IChildrenVit {
+  children: React.ReactNode;
+}
+
 export interface ITableBase {
   id?: number;
   name: string;
