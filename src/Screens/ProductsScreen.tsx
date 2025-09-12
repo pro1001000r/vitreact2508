@@ -5,11 +5,14 @@ import TableVit from "../Components/TableVit";
 import { Container } from "react-bootstrap";
 import InputVit from "../Components/InputVit";
 import AxiosVit from "../Components/AxiosVit";
+import ScanerVit from "../Components/ScanerVit";
 
 const ProductsScreen: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
+  const [scan, setScan] = useState<string>("Нет скана");
+  
 
-  const[newprod,setNewprod] = useState<string>('')
+  const [newprod, setNewprod] = useState<string>("");
 
   const addHandler = (title: string) => {
     const newProducts: IProducts = {
@@ -35,8 +38,11 @@ const ProductsScreen: FC = () => {
 
   return (
     <>
-      <InputVit value={newprod} onChange={setNewprod} onPressVit={addHandler}/>
+      <p>{scan}</p>
+      <InputVit value={newprod} onChange={setNewprod} onPressVit={addHandler} />
       <Container>
+        
+        <ScanerVit setScan={setScan} />
         <TableVit />
       </Container>
     </>

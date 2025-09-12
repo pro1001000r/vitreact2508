@@ -5,7 +5,7 @@ interface IProps {
   value: any;
   onChange(title: any): void;
   placeholder?: string;
-  type?:string;
+  type?: string;
   onPressVit?(value: any): void;
 }
 
@@ -16,12 +16,11 @@ const InputVit: FC<IProps> = ({
   type = "text",
   onPressVit,
 }) => {
-  //const [title, setTitle] = useState(value);
+  const [title, setTitle] = useState(value);
   // const ref = useRef<HTMLInputElement>(null); //2 способ
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
-    //console.log(">>>> changeHandler из (TodoForm):", title); //консоль
   };
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
@@ -40,11 +39,18 @@ const InputVit: FC<IProps> = ({
     }
   };
 
-  // useEffect(() => {
-  //   console.log(">>>> из value:", value); //консоль
-  //   setTitle(value)
-  //   console.log(">>>> из value:", value); //консоль
-  // }, []);
+  useEffect(() => {
+    const handler = setTimeout(() => setTitle(value), 300)
+    
+    return () => clearTimeout(handler);
+
+  }, [value]);
+
+  useEffect(() => {
+       //консоль 11 Сентябрь 2025 (четверг)
+    console.log('>>>> title из (InputVit):', title); //консоль
+       
+    }, [title]);
 
   return (
     <>
