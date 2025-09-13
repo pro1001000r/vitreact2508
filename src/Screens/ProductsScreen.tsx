@@ -6,11 +6,13 @@ import { Container } from "react-bootstrap";
 import InputVit from "../Components/InputVit";
 import AxiosVit from "../Components/AxiosVit";
 import ScanerVit from "../Components/ScanerVit";
+import ModalVit from "../Components/ModalVit";
+import ButtonVit from "../Components/ButtonVit";
 
 const ProductsScreen: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [scan, setScan] = useState<string>("Нет скана");
-  
+  const [show, setShow] = useState(false);
 
   const [newprod, setNewprod] = useState<string>("");
 
@@ -38,11 +40,22 @@ const ProductsScreen: FC = () => {
 
   return (
     <>
-      <p>{scan}</p>
-      <InputVit value={newprod} onChange={setNewprod} onPressVit={addHandler} />
       <Container>
-        
-        <ScanerVit setScan={setScan} />
+        <p>{scan}</p>
+        <ButtonVit
+                      icon="UpcScan"
+                      name="Сканировать"
+                      onClick={() => setShow(true)}
+                    />
+        <InputVit
+          value={newprod}
+          onChange={setNewprod}
+          onPressVit={addHandler}
+        />
+        <ModalVit show={show} setShow={setShow}>
+          <ScanerVit setScan={setScan} />
+        </ModalVit>
+
         <TableVit />
       </Container>
     </>
