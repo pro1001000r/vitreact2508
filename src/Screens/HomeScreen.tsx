@@ -9,7 +9,7 @@ import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
 
 const HometScreen: FC = () => {
-  const [scan, setScan] = useState<string>("Просканируйте штрихкод...");
+  const [scan, setScan] = useState<string>("");
   const [show, setShow] = useState(false);
 
   return (
@@ -26,8 +26,7 @@ const HometScreen: FC = () => {
               />
 
               <p className="vit-font-propis">
-                Скоро инвентаризация?! <br />
-                проверка
+                Инвентаризация <br />
                 <br />
                 <small> - легко и просто</small>
               </p>
@@ -39,37 +38,16 @@ const HometScreen: FC = () => {
                 <ButtonVit
                   className=" btn-primary"
                   icon="UpcScan"
-                  name="Сканер-то в руках держите уже"
+                  name="Сканер"
                   onClick={() => setShow(true)}
                 />
+
+                <ButtonVit href="/Auth" name='Войти в систему'/>
 
                 <ModalVit show={show} setShow={setShow}>
                   <ScanerVit setScan={setScan} />
                 </ModalVit>
               </Col>
-            </Row>
-            <Row>
-              <h4>Для кого этот сервис:</h4>
-              <p className="text-center vit-font-verdana">
-                для кладовщиков, маркетологов и всем, кому нужно точное
-                представление о состоянии товаров на складах
-              </p>
-            </Row>
-            <Row>
-              <h4>Для чего этот сервис:</h4>
-              <p className="text-center vit-font-verdana">
-                <b>Подсчёт товаров с мобильного</b>
-                <br />
-                (инвентаризация)
-                <br />
-                <b>Приведение в порядок карточек товаров</b>
-                <br />
-                (фото, описание, штрихкодирование, печать этикеток, ценовая
-                политика)
-                <br />
-                Создание карточки товара при Внедрение новой какой-либо учетной
-                системы (1С, Saby, Эватор) и первоначальных остатков
-              </p>
             </Row>
 
             <br />
