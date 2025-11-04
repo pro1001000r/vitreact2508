@@ -27,7 +27,7 @@ const HometScreen: FC = () => {
 
               <p className="vit-font-propis">
                 Скоро инвентаризация?! <br />
-                Как посчитать?!
+                проверка
                 <br />
                 <small> - легко и просто</small>
               </p>
