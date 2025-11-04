@@ -21,6 +21,7 @@ export function useAxiosVit<T>(dataUrl: IDataUrl) {
       //setLoad(true);
       const response = await axios.post(apiUrl, dataUrl, config);
       setData(response.data);
+      //console.log(">>>>data lj>>>>:", response.data); //консоль
       setLoad(true);
     } catch (e) {
       setLoad(false);

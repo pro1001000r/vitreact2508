@@ -1,6 +1,6 @@
 import db from "../config.json";
 import axios from "axios";
-import { IDataUrl } from "../inrefaces";
+import {IDataUrl } from "../inrefaces";
 
 type AxiosProps = {
   dataUrl: IDataUrl;
@@ -10,10 +10,7 @@ type AxiosProps = {
 };
 
 const AxiosVit = ({
-  dataUrl,
-  setData = undefined,
-  setLoad = undefined,
-  setProgress = undefined,
+  dataUrl, setData = undefined, setLoad = undefined, setProgress = undefined,
 }: AxiosProps): void => {
   const config = {
     // onUploadProgress: (progressEvent: { loaded: number; total: number }) => {
@@ -45,11 +42,17 @@ const AxiosVit = ({
 
   const apiUrl = db.pathDB;
 
+  //console.log('>>>> dataUrl из (AxiosVit):', dataUrl); //консоль
+
   async function fetchVit() {
     try {
       const response = await axios.post(apiUrl, dataUrl, config);
       if (setData) {
         setData(response.data);
+        
+        //консоль 04 Ноябрь 2025 (вторник)
+        //console.log('>>>> response.data из (AxiosVit):', response.data); //консоль
+        
       }
       if (setLoad) {
         setLoad(true);

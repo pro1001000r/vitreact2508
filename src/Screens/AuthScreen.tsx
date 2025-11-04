@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import InputVit from "../Components/InputVit";
 import Logo from "../Template/images/LogoPikclick512.png";
@@ -7,48 +7,59 @@ import axios from "axios";
 import ButtonVit from "../Components/ButtonVit";
 
 import db from "../config.json";
+import { useAxiosVit } from "../Components/useAxiosVit";
+import { IAuth, ICommand, IDataUrl, IUsers } from "../inrefaces";
+import AxiosVit from "../Components/AxiosVit";
 
 const AuthScreen: FC = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
+  const [user, setUser] = useState<IUsers>();
   const navigate = useNavigate();
 
   const getLogin = () => {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-  
-      const apiUrl = db.pathDB;
-      const data = { Auth: { login: login, pass: pass } };
-  
-      axios
-        .post(apiUrl, data, config)
-        .then(function (response) {
-          //console.log(">>>>", new Date(), " >>>>:", response.data); //консоль
-  
-          //setProducts(response.data);
-          if (response.data) {
-            sessionStorage.setItem("userId", response.data.id);
-            sessionStorage.setItem("userStorageId", response.data.storage_id);
-            sessionStorage.setItem("userPlaceId", response.data.place_id);
-            navigate("/Cabinet");
-          } else {
-            sessionStorage.clear();
-            navigate("/");
-          }
-  
-          //setLoad(true);
-        })
-        .catch(function (error) {
-          navigate("/");
-          //console.log(error);
-        })
-        .finally(() => {
-          //setLoad(true);
-        });
+    // const dataUrl: IGetTableById = {
+    //   command: ICommand.GetTableById,
+    //   data: {
+    //     tableName: "products",
+    //     tableId: Number(params.id),
+    //   },
+    // };
+    // AxiosVit({ dataUrl, setData });
+
+    // const config = {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+
+    const dataUrl: IAuth = {
+      command: ICommand.Auth,
+      data: { login: login, pass: pass },
     };
+
+    AxiosVit({ dataUrl: dataUrl, setData: setUser });
+    console.log(">>>> dataUrl из (AuthScreen):", dataUrl); //консоль
+
+    //консоль 04 Ноябрь 2025 (вторник)
+    console.log(">>>> dUser из (AuthScreen):", user); //консоль
+  };
+
+  useEffect(() => {
+    
+    //консоль 04 Ноябрь 2025 (вторник)
+    console.log('>>>> user из (AuthScreen):', user); //консоль
+    
+    if (user) {
+      sessionStorage.setItem("userId", String(user.id));
+      sessionStorage.setItem("userStorageId", String(user.storage_id));
+      sessionStorage.setItem("userPlaceId", String(user.place_id));
+      navigate("/Cabinet");
+    } else {
+      //sessionStorage.clear();
+      //navigate("/");
+    }
+  }, [user]);
 
   return (
     <Container className="text-center align-content-center">

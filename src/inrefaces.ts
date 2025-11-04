@@ -88,7 +88,8 @@ export enum ICommand {
   CreateTableItem = "CreateTableItem",
   UpdateTableById = "UpdateTableById",
   DeleteTableById = "DeleteTableById",
-  DeleteFotosById = "DeleteFotosById",
+  DeleteFotosById = "DeleteFotosById", 
+  Auth = "Auth",
 }
 
 export interface IDataUrl {
@@ -101,10 +102,17 @@ export interface IGetTable extends IDataUrl {
   data: { tableName: string };
 }
 
+export interface IAuth extends IDataUrl {
+  command: ICommand.Auth;
+  data: { login: string; pass:string };
+}
+
 export interface IGetTableById extends IDataUrl {
+  
   command: ICommand.GetTableById;
   data: { tableName: string; tableId: number };
 }
+
 export interface IGetFotos extends IDataUrl {
   command: ICommand.GetFotos;
   data: { tableName: string; tableId: number };

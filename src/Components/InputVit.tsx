@@ -48,7 +48,7 @@ const InputVit: FC<IProps> = ({
 
   useEffect(() => {
        //консоль 11 Сентябрь 2025 (четверг)
-    console.log('>>>> title из (InputVit):', title); //консоль
+    //console.log('>>>> title из (InputVit):', title); //консоль
        
     }, [title]);
 
