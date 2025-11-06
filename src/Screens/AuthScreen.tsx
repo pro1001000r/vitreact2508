@@ -3,12 +3,10 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import InputVit from "../Components/InputVit";
 import Logo from "../Template/images/LogoPikclick512.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 import ButtonVit from "../Components/ButtonVit";
 
-import db from "../config.json";
-import { useAxiosVit } from "../Components/useAxiosVit";
-import { IAuth, ICommand, IDataUrl, IUsers } from "../inrefaces";
+import { IAuth, ICommand, IUsers } from "../inrefaces";
 import AxiosVit from "../Components/AxiosVit";
 
 const AuthScreen: FC = () => {
@@ -18,46 +16,24 @@ const AuthScreen: FC = () => {
   const navigate = useNavigate();
 
   const getLogin = () => {
-    // const dataUrl: IGetTableById = {
-    //   command: ICommand.GetTableById,
-    //   data: {
-    //     tableName: "products",
-    //     tableId: Number(params.id),
-    //   },
-    // };
-    // AxiosVit({ dataUrl, setData });
-
-    // const config = {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // };
-
     const dataUrl: IAuth = {
       command: ICommand.Auth,
       data: { login: login, pass: pass },
     };
 
     AxiosVit({ dataUrl: dataUrl, setData: setUser });
-    console.log(">>>> dataUrl из (AuthScreen):", dataUrl); //консоль
-
-    //консоль 04 Ноябрь 2025 (вторник)
-    console.log(">>>> dUser из (AuthScreen):", user); //консоль
   };
 
   useEffect(() => {
-    
-    //консоль 04 Ноябрь 2025 (вторник)
-    console.log('>>>> user из (AuthScreen):', user); //консоль
-    
-    if (user) {
+    if (user?.id != undefined) {
       sessionStorage.setItem("userId", String(user.id));
       sessionStorage.setItem("userStorageId", String(user.storage_id));
       sessionStorage.setItem("userPlaceId", String(user.place_id));
       navigate("/Cabinet");
-    } else {
-      //sessionStorage.clear();
-      //navigate("/");
+    }
+    if (user === null) {
+      sessionStorage.clear();
+      navigate("/");
     }
   }, [user]);
 

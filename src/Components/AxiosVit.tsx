@@ -59,7 +59,7 @@ const AxiosVit = ({
       }
     } catch (e) {
       if (setData) {
-        setData(apiUrl);
+        setData(e);
       }
     } finally {
       // if (setLoad) {
