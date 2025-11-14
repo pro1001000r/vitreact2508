@@ -1,5 +1,5 @@
-import React, { createContext, FC, useState } from "react";
-import { IChildrenVit } from "../inrefaces";
+import React, { createContext, FC, useContext, useState } from "react";
+import { IChildrenVit, IUsers } from "../inrefaces";
 
 interface IContextVit {
   texttest?: string;
@@ -7,6 +7,15 @@ interface IContextVit {
   modal: boolean;
   open: () => void;
   close: () => void;
+  userClear?: () => void;
+  userSession: {
+    id: Number;
+    name: string;
+    status: string;
+    active: boolean;
+    storage_id: number | null;
+    place_id: number | null;
+  };
 }
 
 export const ContextVit = createContext<IContextVit>({
@@ -15,6 +24,16 @@ export const ContextVit = createContext<IContextVit>({
   modal: false,
   open: () => {},
   close: () => {},
+  userClear: () => {},
+
+  userSession: {
+    id: 0,
+    name: "",
+    status: "U",
+    active: false,
+    storage_id: null,
+    place_id: null,
+  },
 });
 
 export const ContextVitProvider: FC<IChildrenVit> = ({
@@ -25,9 +44,21 @@ export const ContextVitProvider: FC<IChildrenVit> = ({
   const [modal, setModal] = useState(false);
   const open = () => setModal(true);
   const close = () => setModal(false);
+
+  const userSession = {
+    id: 0,
+    name: "",
+    status: "U",
+    active: false,
+    storage_id: null,
+    place_id: null,
+  };
+
   return (
     <>
-      <ContextVit.Provider value={{ texttest, load, modal, open, close }}>
+      <ContextVit.Provider
+        value={{ texttest, load, modal, open, close, userSession }}
+      >
         {children}
       </ContextVit.Provider>
     </>

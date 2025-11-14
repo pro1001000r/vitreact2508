@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
 import InputVit from "../Components/InputVit";
 import Logo from "../Template/images/LogoPikclick512.png";
@@ -8,11 +8,13 @@ import ButtonVit from "../Components/ButtonVit";
 
 import { IAuth, ICommand, IUsers } from "../inrefaces";
 import AxiosVit from "../Components/AxiosVit";
+import { ContextVit } from "../Components/ContextVit";
 
 const AuthScreen: FC = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const [user, setUser] = useState<IUsers>();
+  const {userSession} = useContext(ContextVit);
   const navigate = useNavigate();
 
   const getLogin = () => {
@@ -27,8 +29,12 @@ const AuthScreen: FC = () => {
   useEffect(() => {
     if (user?.id != undefined) {
       sessionStorage.setItem("userId", String(user.id));
+      userSession.id = user.id;
+      userSession.name= user.name;
       sessionStorage.setItem("userStorageId", String(user.storage_id));
+      userSession.storage_id = Number(user.storage_id);
       sessionStorage.setItem("userPlaceId", String(user.place_id));
+      userSession.storage_id = Number(user.storage_id);
       navigate("/Cabinet");
     }
     if (user === null) {

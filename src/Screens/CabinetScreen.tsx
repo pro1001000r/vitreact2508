@@ -1,15 +1,21 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
 import { useAxiosVit } from "../Components/useAxiosVit";
 import { ICommand, IGetTableById, IUsers } from "../inrefaces";
 import InputVit from "../Components/InputVit";
-import GetName from "../Components/GetName";
+
 import SelectVit from "../Components/SelectVit";
 import ButtonVit from "../Components/ButtonVit";
-import AxiosVit from "../Components/AxiosVit";
+import { ContextVit } from "../Components/ContextVit";
+
 
 const CabinetScreen: FC = () => {
   let id = sessionStorage.userId;
+const{userSession} = useContext(ContextVit);
+
+//консоль 14 Ноябрь 2025 (пятница)
+console.log('>>>> userSession из (CabinetScreen):', userSession); //консоль
+
 
   const [usersname, setUsersname] = useState("");
   const [storage, setStorage] = useState();
