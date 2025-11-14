@@ -7,6 +7,7 @@ import InputVit from "../Components/InputVit";
 import SelectVit from "../Components/SelectVit";
 import ButtonVit from "../Components/ButtonVit";
 import { ContextVit } from "../Components/ContextVit";
+import GetName from "../Components/GetName";
 
 
 const CabinetScreen: FC = () => {
@@ -85,12 +86,12 @@ console.log('>>>> userSession из (CabinetScreen):', userSession); //консо
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <p>
-              {/* <b>{user!.name} </b> */}
+              <b>{userSession.name} </b>
               {status}
               <br />
               место проведения инвентаризации:{" "}
               <b>
-                {/* <GetName table="place" id={user.place_id} /> */}
+                <GetName table="place" id={userSession.place_id} />
               </b>
               <br />
               {/* склад: <GetName table="storage" id={user.storage_id} /> */}

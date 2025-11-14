@@ -34,7 +34,7 @@ const AuthScreen: FC = () => {
       sessionStorage.setItem("userStorageId", String(user.storage_id));
       userSession.storage_id = Number(user.storage_id);
       sessionStorage.setItem("userPlaceId", String(user.place_id));
-      userSession.storage_id = Number(user.storage_id);
+      userSession.place_id = Number(user.place_id);
       navigate("/Cabinet");
     }
     if (user === null) {

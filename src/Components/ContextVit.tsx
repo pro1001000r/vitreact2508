@@ -13,8 +13,8 @@ interface IContextVit {
     name: string;
     status: string;
     active: boolean;
-    storage_id: number | null;
-    place_id: number | null;
+    storage_id: number | undefined;
+    place_id: number | undefined;
   };
 }
 
@@ -31,8 +31,8 @@ export const ContextVit = createContext<IContextVit>({
     name: "",
     status: "U",
     active: false,
-    storage_id: null,
-    place_id: null,
+    storage_id: undefined,
+    place_id: undefined,
   },
 });
 
@@ -50,8 +50,8 @@ export const ContextVitProvider: FC<IChildrenVit> = ({
     name: "",
     status: "U",
     active: false,
-    storage_id: null,
-    place_id: null,
+    storage_id: undefined,
+    place_id: undefined,
   };
 
   return (
