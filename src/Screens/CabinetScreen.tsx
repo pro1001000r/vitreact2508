@@ -1,22 +1,27 @@
 import React, { FC, useContext, useState } from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
 import { useAxiosVit } from "../Components/useAxiosVit";
-import { ICommand, IGetTableById, IUsers } from "../inrefaces";
+import {
+  ICommand,
+  IDataUrl,
+  IGetTableById,
+  IUpdateTableById,
+  IUsers,
+} from "../inrefaces";
 import InputVit from "../Components/InputVit";
 
 import SelectVit from "../Components/SelectVit";
 import ButtonVit from "../Components/ButtonVit";
 import { ContextVit } from "../Components/ContextVit";
 import GetName from "../Components/GetName";
-
+import AxiosVit from "../Components/AxiosVit";
 
 const CabinetScreen: FC = () => {
   let id = sessionStorage.userId;
-const{userSession} = useContext(ContextVit);
+  const { userSession } = useContext(ContextVit);
 
-//консоль 14 Ноябрь 2025 (пятница)
-console.log('>>>> userSession из (CabinetScreen):', userSession); //консоль
-
+  //консоль 14 Ноябрь 2025 (пятница)
+  // console.log(">>>> userSession из (CabinetScreen):", userSession); //консоль
 
   const [usersname, setUsersname] = useState("");
   const [storage, setStorage] = useState();
@@ -50,8 +55,21 @@ console.log('>>>> userSession из (CabinetScreen):', userSession); //консо
     //консоль 12 Май 2025 (понедельник)
     console.log(">>>> dataUrl из (CabinetScreen):", dataUrl1); //консоль
 
-    //AxiosVit(dataUrl1);
+    const dataUrl2:IDataUrl = {
+      command: ICommand.UpdateTableById,
+      data: {
+        tableName: "users",
+        tableId: id,
+        vp: {
+          place_id: place,
+        },
+      },
+    };
 
+    //консоль 14 Ноябрь 2025 (пятница)
+    console.log(">>>> dataUrl2 из (CabinetScreen):", dataUrl2); //консоль
+
+    AxiosVit( {dataUrl:dataUrl2} );
   };
 
   if (user != undefined) {

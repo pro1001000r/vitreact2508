@@ -24,8 +24,7 @@ export const ContextVit = createContext<IContextVit>({
   modal: false,
   open: () => {},
   close: () => {},
-  userClear: () => {},
-
+  
   userSession: {
     id: 0,
     name: "",
