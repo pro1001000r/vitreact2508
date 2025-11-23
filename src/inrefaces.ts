@@ -78,6 +78,17 @@ export interface IUsers {
   place_id?: number;
 }
 
+export interface IUserSession{
+    id: number | undefined;
+    name: string;
+    status: string;
+    active: boolean;
+    storage_id: number | undefined;
+    place_id: number | undefined;
+}
+
+
+
 // перечисление команд для обмена
 export enum ICommand {
   GetTable = "GetTable",

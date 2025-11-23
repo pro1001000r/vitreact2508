@@ -6,15 +6,20 @@ import { useNavigate } from "react-router-dom";
 
 import ButtonVit from "../Components/ButtonVit";
 
-import { IAuth, ICommand, IUsers } from "../inrefaces";
+import { IAuth, ICommand, IUsers, IUserSession } from "../inrefaces";
 import AxiosVit from "../Components/AxiosVit";
 import { ContextVit } from "../Components/ContextVit";
+import {
+  useSetUserSession,
+  useUserSession,
+} from "../Components/useStoreZustandVit";
 
 const AuthScreen: FC = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const [user, setUser] = useState<IUsers>();
-  const {userSession} = useContext(ContextVit);
+  //const { userSession } = useContext(ContextVit);
+  const userSession = useUserSession();
   const navigate = useNavigate();
 
   const getLogin = () => {
@@ -23,23 +28,50 @@ const AuthScreen: FC = () => {
       data: { login: login, pass: pass },
     };
 
-    AxiosVit({ dataUrl: dataUrl, setData: setUser });
+    AxiosVit({ dataUrl, setData: setUser });
+  };
+
+  const SetUser = (user: IUsers) => {
+    let iu: IUserSession ={
+      id: user.id,
+      name: user.name,
+      status: user.status,
+      active: user.active,
+      storage_id: user.storage_id,
+      place_id: user.place_id
+    }
+   
+
+    //консоль 22 Ноябрь 2025 (суббота)
+    console.log(">>>> iu из (AuthScreen):", iu); //консоль
+
+    useSetUserSession(iu);
   };
 
   useEffect(() => {
     if (user?.id != undefined) {
-      sessionStorage.setItem("userId", String(user.id));
+      //sessionStorage.setItem("userId", String(user.id));
+      //sessionStorage.setItem("userStorageId", String(user.storage_id));
+      //sessionStorage.setItem("userPlaceId", String(user.place_id));
+      SetUser(user);
       userSession.id = user.id;
-      userSession.name= user.name;
-      sessionStorage.setItem("userStorageId", String(user.storage_id));
+      userSession.name = user.name;
+      userSession.status = user.status;
+      userSession.active = user.active;
       userSession.storage_id = Number(user.storage_id);
-      sessionStorage.setItem("userPlaceId", String(user.place_id));
       userSession.place_id = Number(user.place_id);
+
+      //консоль 22 Ноябрь 2025 (суббота)
+      console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
+
       navigate("/Cabinet");
     }
     if (user === null) {
-      sessionStorage.clear();
-      navigate("/");
+      //консоль 22 Ноябрь 2025 (суббота)
+      console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
+
+      //sessionStorage.clear();
+      //navigate("/");
     }
   }, [user]);
 

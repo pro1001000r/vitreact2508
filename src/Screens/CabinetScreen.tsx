@@ -12,28 +12,30 @@ import InputVit from "../Components/InputVit";
 
 import SelectVit from "../Components/SelectVit";
 import ButtonVit from "../Components/ButtonVit";
-import { ContextVit } from "../Components/ContextVit";
+// import { ContextVit } from "../Components/ContextVit";
 import GetName from "../Components/GetName";
 import AxiosVit from "../Components/AxiosVit";
+import { useUserSession } from "../Components/useStoreZustandVit";
 
 const CabinetScreen: FC = () => {
-  let id = sessionStorage.userId;
-  const { userSession } = useContext(ContextVit);
+  //let id = sessionStorage.userId;
 
+  const user = useUserSession();
+  //const { userSession } = useContext(ContextVit);
   //консоль 14 Ноябрь 2025 (пятница)
   // console.log(">>>> userSession из (CabinetScreen):", userSession); //консоль
 
-  const [usersname, setUsersname] = useState("");
-  const [storage, setStorage] = useState();
-  const [place, setPlace] = useState();
+  const [usersname, setUsersname] = useState(user.name);
+  const [storage, setStorage] = useState(user.storage_id);
+  const [place, setPlace] = useState(user.place_id);
   const [telefon, setTelefon] = useState();
 
-  const dUser = useAxiosVit<IGetTableById>({
-    command: ICommand.GetTableById,
-    data: { tableName: "users", tableId: id },
-  });
+  // const dUser = useAxiosVit<IGetTableById>({
+  //   command: ICommand.GetTableById,
+  //   data: { tableName: "users", tableId: userSession.id },
+  // });
 
-  let user: any = dUser.data;
+  // let user: any = dUser.data;
 
   let status = "";
 
@@ -42,7 +44,7 @@ const CabinetScreen: FC = () => {
     const dataUrl1 = {
       UpdateTableById: {
         tableName: "users",
-        tableId: id,
+        tableId: user.id,
         vp: {
           name: usersname,
           storage_id: storage,
@@ -55,11 +57,11 @@ const CabinetScreen: FC = () => {
     //консоль 12 Май 2025 (понедельник)
     console.log(">>>> dataUrl из (CabinetScreen):", dataUrl1); //консоль
 
-    const dataUrl2:IDataUrl = {
+    const dataUrl2: IDataUrl = {
       command: ICommand.UpdateTableById,
       data: {
         tableName: "users",
-        tableId: id,
+        tableId: user.id,
         vp: {
           place_id: place,
         },
@@ -69,7 +71,7 @@ const CabinetScreen: FC = () => {
     //консоль 14 Ноябрь 2025 (пятница)
     console.log(">>>> dataUrl2 из (CabinetScreen):", dataUrl2); //консоль
 
-    AxiosVit( {dataUrl:dataUrl2} );
+    AxiosVit({ dataUrl: dataUrl2 });
   };
 
   if (user != undefined) {
@@ -104,12 +106,12 @@ const CabinetScreen: FC = () => {
         <Accordion.Item eventKey="0">
           <Accordion.Header>
             <p>
-              <b>{userSession.name} </b>
+              <b>{user.name} </b>
               {status}
               <br />
               место проведения инвентаризации:{" "}
               <b>
-                <GetName table="place" id={userSession.place_id} />
+                <GetName table="place" id={user.place_id} />
               </b>
               <br />
               {/* склад: <GetName table="storage" id={user.storage_id} /> */}
@@ -157,6 +159,18 @@ const CabinetScreen: FC = () => {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
+      <ButtonVit
+        className="m-2"
+        icon="CardChecklist"
+        name="Инвентаризация"
+        href="/Stocktaking"
+      />
+      <ButtonVit
+        className="m-2"
+        icon="Inboxes"
+        name="Каталог"
+        href="/Products"
+      />
     </Container>
   );
 };

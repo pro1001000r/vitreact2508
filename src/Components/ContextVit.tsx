@@ -1,15 +1,9 @@
-import React, { createContext, FC, useContext, useState } from "react";
-import { IChildrenVit, IUsers } from "../inrefaces";
+import React, { createContext, FC, useState } from "react";
+import { IChildrenVit } from "../inrefaces";
 
 interface IContextVit {
-  texttest?: string;
-  load: boolean;
-  modal: boolean;
-  open: () => void;
-  close: () => void;
-  userClear?: () => void;
   userSession: {
-    id: Number;
+    id: number | undefined;
     name: string;
     status: string;
     active: boolean;
@@ -19,14 +13,8 @@ interface IContextVit {
 }
 
 export const ContextVit = createContext<IContextVit>({
-  texttest: "",
-  load: false,
-  modal: false,
-  open: () => {},
-  close: () => {},
-  
   userSession: {
-    id: 0,
+    id: undefined,
     name: "",
     status: "U",
     active: false,
@@ -38,28 +26,20 @@ export const ContextVit = createContext<IContextVit>({
 export const ContextVitProvider: FC<IChildrenVit> = ({
   children,
 }: IChildrenVit) => {
-  let texttest;
-  let load = false;
-  const [modal, setModal] = useState(false);
-  const open = () => setModal(true);
-  const close = () => setModal(false);
-
-  const userSession = {
-    id: 0,
-    name: "",
-    status: "U",
-    active: false,
-    storage_id: undefined,
-    place_id: undefined,
+  const conVit: IContextVit = {
+    userSession: {
+      id: undefined,
+      name: "",
+      status: "",
+      active: false,
+      storage_id: undefined,
+      place_id: undefined,
+    },
   };
 
   return (
     <>
-      <ContextVit.Provider
-        value={{ texttest, load, modal, open, close, userSession }}
-      >
-        {children}
-      </ContextVit.Provider>
+      <ContextVit.Provider value={conVit}>{children}</ContextVit.Provider>
     </>
   );
 };

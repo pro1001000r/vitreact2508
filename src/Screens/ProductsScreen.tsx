@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 
 import { ICommand, ICreateTableItem, IProducts } from "../inrefaces";
 import TableVit from "../Components/TableVit";
@@ -8,6 +8,8 @@ import AxiosVit from "../Components/AxiosVit";
 import ScanerVit from "../Components/ScanerVit";
 import ModalVit from "../Components/ModalVit";
 import ButtonVit from "../Components/ButtonVit";
+import { ContextVit } from "../Components/ContextVit";
+import { useUserSession } from "../Components/useStoreZustandVit";
 
 const ProductsScreen: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
@@ -16,6 +18,11 @@ const ProductsScreen: FC = () => {
 
   const [newprod, setNewprod] = useState<string>("");
 
+  const userSession = useUserSession()
+  //консоль 22 Ноябрь 2025 (суббота)
+  console.log('>>>> userSession из (ProductsScreen):', userSession); //консоль
+  
+  
   const addHandler = (title: string) => {
     const newProducts: IProducts = {
       name: title,

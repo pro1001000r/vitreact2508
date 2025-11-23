@@ -13,11 +13,12 @@ import ProductsEditScreen from "./Screens/ProductsEditScreen";
 import { ContextVit, ContextVitProvider } from "./Components/ContextVit";
 import AuthScreen from "./Screens/AuthScreen";
 import CabinetScreen from "./Screens/CabinetScreen";
+import StocktakingScreen from "./Screens/StocktakingScreen";
 
 const App: React.FC = () => {
   return (
     <>
-      <ContextVitProvider>
+      {/* <ContextVitProvider> */}
         <Router>
           <NavBar />
           <NavBottomVit />
@@ -27,9 +28,10 @@ const App: React.FC = () => {
             <Route path="/ProductsEdit/:id" element={<ProductsEditScreen />} />
             <Route path="/Auth" element={<AuthScreen />} />
             <Route path="/Cabinet" element={<CabinetScreen />} />
+            <Route path="/Stocktaking" element={<StocktakingScreen />} />
           </Routes>
         </Router>
-      </ContextVitProvider>
+      {/* </ContextVitProvider> */}
     </>
   );
 };

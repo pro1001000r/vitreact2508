@@ -23,7 +23,7 @@ const TestVit: FC = () => {
       },
     };
     AxiosVit({ dataUrl, setData, setLoad });
-    cont.texttest = "Сработал клик";
+    //cont.texttest = "Сработал клик";
     
     //консоль 02 Сентябрь 2025 (вторник)
     console.log('>>>> cont из (TestVit):', cont); //консоль
@@ -47,7 +47,7 @@ const TestVit: FC = () => {
         </Card.Body>
       </Card>
       <Card className=" mb-2">
-        <Card.Body>Контекст = {cont.texttest} </Card.Body>
+        {/* <Card.Body>Контекст = {cont.texttest} </Card.Body> */}
       </Card>
     </>
   );
