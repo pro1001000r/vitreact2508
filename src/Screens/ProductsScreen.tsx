@@ -60,7 +60,7 @@ const ProductsScreen: FC = () => {
           onPressVit={addHandler}
         />
         <ModalVit show={show} setShow={setShow}>
-          <ScanerVit setScan={setScan} />
+          <ScanerVit setScan={setScan} setShow={undefined} />
         </ModalVit>
 
         <TableVit />

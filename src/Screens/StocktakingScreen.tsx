@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
 import { useUserSession } from "../Components/useStoreZustandVit";
 import ModalVit from "../Components/ModalVit";
@@ -6,18 +6,58 @@ import ScanerVit from "../Components/ScanerVit";
 import ButtonVit from "../Components/ButtonVit";
 import SelectVit from "../Components/SelectVit";
 import Stocktaking from "../Components/Stocktaking";
-import { IStocktaking } from "../inrefaces";
+import { IDataUrl, IStocktaking } from "../inrefaces";
 import TableStocktaking from "../Components/TableStocktaking";
-
+import AxiosVit from "../Components/AxiosVit";
+import InputVit from "../Components/InputVit";
+interface IScan {
+  products_id: number;
+  productsColor_id: number;
+  productsSize_id: number;
+}
 const StocktakingScreen: FC = () => {
   const User = useUserSession();
-  const [show, setShow] = useState(false);
-  const [scan, setScan] = useState<string>("Нет скана");
-  
+  const [show, setShow] = useState<boolean>(false);
+  const [scan, setScan] = useState<string>("");
 
-  const [color, setColor] = useState(0);
-  const [size, setSize] = useState(0);
-  const [prod, setProd] = useState(0);
+  const [color, setColor] = useState<number>(0);
+  const [size, setSize] = useState<number>(0);
+  const [prod, setProd] = useState<number>(0);
+
+  const [data, setData] = useState<IScan>();
+
+  const GetProductByBarcode = () => {
+    if (scan) {
+      const dataUrl: IDataUrl = {
+        command: "GetProductByBarcode",
+        data: scan,
+      };
+
+      AxiosVit({ dataUrl, setData });
+
+      //консоль 24 Ноябрь 2025 (понедельник)
+      console.log(">>>> data111 из (StocktakingScreen):", data); //консоль
+      if (data?.products_id) {
+        console.log("работает", data); //консоль
+        setProd(Number(data.products_id));
+        setColor(Number(data.productsColor_id));
+        setSize(Number(data.productsSize_id));
+        
+        const item: IStocktaking = {
+          products_id: data.products_id,
+          productsColor_id: data.productsColor_id,
+          productsSize_id: data.productsSize_id,
+          count: 1,
+          users_id: User.id,
+          storage_id: User.storage_id,
+          place_id: User.place_id,
+        };
+
+        //Stocktaking(item);
+        //setScan("")
+      }
+    }
+  };
 
   const UpdateStocktaking = (count: number) => {
     const item: IStocktaking = {
@@ -31,16 +71,21 @@ const StocktakingScreen: FC = () => {
     };
 
     Stocktaking(item);
-   
   };
+
+  useEffect(() => {
+    GetProductByBarcode();
+  }, [scan]);
 
   return (
     <>
       <ModalVit show={show} setShow={setShow}>
-        <ScanerVit setScan={setScan} />
+        <ScanerVit setScan={setScan} setShow={setShow}/>
       </ModalVit>
       <Container>
         <h3 className=" text-center">Инвентаризация ({User.name})</h3>
+
+        <InputVit value={scan} onChange={setScan} />
 
         <p>{scan}</p>
         <ButtonVit

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 import { Col, Row } from "react-bootstrap";
 
-const ScanerVit = ({ setScan, setShow = undefined }) => {
+const ScanerVit = ({ setScan, setShow }) => {
   const [isEnabled, setEnabled] = useState(true);
   const [qrMessage, setQrMessage] = useState("");
   const [qrErr, setQrErr] = useState("");
@@ -25,7 +25,7 @@ const ScanerVit = ({ setScan, setShow = undefined }) => {
       if (setShow) {
         setShow(false);
       }
-      //setEnabled(false);
+      // setEnabled(false);
     };
 
     const qrCodeErr = (err) => {

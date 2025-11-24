@@ -45,7 +45,7 @@ const HometScreen: FC = () => {
                 <ButtonVit href="/Auth" name='Войти в систему'/>
 
                 <ModalVit show={show} setShow={setShow}>
-                  <ScanerVit setScan={setScan} />
+                  <ScanerVit setScan={setScan} setShow={undefined} />
                 </ModalVit>
               </Col>
             </Row>
