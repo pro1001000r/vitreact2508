@@ -12,14 +12,14 @@ import TableStocktaking from "../Components/TableStocktaking";
 const StocktakingScreen: FC = () => {
   const User = useUserSession();
   const [show, setShow] = useState(false);
-   const [load, setLoad] = useState(0);
   const [scan, setScan] = useState<string>("Нет скана");
+  
 
   const [color, setColor] = useState(0);
   const [size, setSize] = useState(0);
   const [prod, setProd] = useState(0);
 
-  const UpdateStocktaking = (count:number) => {
+  const UpdateStocktaking = (count: number) => {
     const item: IStocktaking = {
       products_id: prod,
       productsColor_id: color,
@@ -29,11 +29,9 @@ const StocktakingScreen: FC = () => {
       storage_id: User.storage_id,
       place_id: User.place_id,
     };
-    
-    //консоль 24 Ноябрь 2025 (понедельник)
-    console.log('>>>> item из (StocktakingScreen):', item); //консоль
-    
+
     Stocktaking(item);
+   
   };
 
   return (
@@ -88,12 +86,6 @@ const StocktakingScreen: FC = () => {
                       UpdateStocktaking(1);
                     }}
                   ></ButtonVit>
-                  <ButtonVit
-                    name={"- не надо добавить"}
-                    onClick={() => {
-                      // UpdateStocktaking(-1);
-                    }}
-                  ></ButtonVit>
                 </Col>
               </Row>
             </Accordion.Body>
@@ -101,11 +93,10 @@ const StocktakingScreen: FC = () => {
         </Accordion>
 
         <TableStocktaking
-                  tableName={"place_id"}
-                  tableId={User.place_id}
-                  invent={true}
-                  counter={load}
-                />
+          tableName={"place_id"}
+          tableId={User.place_id}
+          invent={true}
+        />
       </Container>
     </>
   );

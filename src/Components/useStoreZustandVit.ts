@@ -6,6 +6,8 @@ import { IUserSession } from "../inrefaces";
 interface IContextVit {
   userSession: IUserSession;
   setUserSession: (i: IUserSession) => void;
+  counterUpdate: number;
+  setUpdate: () => void;
 }
 
 const FVit: StateCreator<IContextVit, [["zustand/persist", unknown]], []> = (
@@ -20,6 +22,8 @@ const FVit: StateCreator<IContextVit, [["zustand/persist", unknown]], []> = (
     place_id: undefined,
   },
   setUserSession: (userSession) => set(() => ({ userSession })),
+  counterUpdate: 0,
+  setUpdate: () => set((state) => ({ counterUpdate: state.counterUpdate + 1 })),
 });
 
 const useStoreZustandVit = create<IContextVit, [["zustand/persist", unknown]]>(
@@ -31,3 +35,7 @@ export const useUserSession = () =>
   useStoreZustandVit((state) => state.userSession);
 export const useSetUserSession = (i: IUserSession) =>
   useStoreZustandVit.getState().setUserSession(i);
+export const useCounterUpdate = () =>
+  useStoreZustandVit((state) => state.counterUpdate);
+export const useSetCounterUpdate = () =>
+  useStoreZustandVit.getState().setUpdate();
