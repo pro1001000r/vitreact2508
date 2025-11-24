@@ -2,12 +2,19 @@ export interface IChildrenVit {
   children: React.ReactNode;
 }
 
+export interface IObmen {
+  id: number;
+  tableName: string;
+  tableId: number;
+}
+
 export interface ITableBase {
   id?: number;
   name: string;
   code1c?: string | null;
 }
 
+//интерфейсы таблиц
 export interface ICompositions extends ITableBase {}
 
 export interface IStorage extends ITableBase {}
@@ -18,12 +25,6 @@ export interface IProductsSize extends ITableBase {}
 
 export interface IPlace extends ITableBase {
   storage_id?: number;
-}
-
-export interface IObmen {
-  id: number;
-  tableName: string;
-  tableId: number;
 }
 
 export interface IProducts extends ITableBase {
@@ -38,14 +39,14 @@ export interface IProducts extends ITableBase {
 export interface IStocktaking {
   id?: number;
   code1c?: string | null;
-  date: string;
-  products_id: number;
-  productsColor_id?: number;
-  productsSize_id?: number;
-  count: number;
-  users_id: number;
+  date?: string;
+  products_id?: number;
+  productsColor_id?: number | undefined;
+  productsSize_id?: number | undefined;
+  count?: number;
+  users_id?: number;
   storage_id?: number;
-  place_id?: number;
+  place_id?: number | undefined;
 }
 
 export interface IBarcode {
@@ -78,16 +79,14 @@ export interface IUsers {
   place_id?: number;
 }
 
-export interface IUserSession{
-    id: number | undefined;
-    name: string;
-    status: string;
-    active: boolean;
-    storage_id: number | undefined;
-    place_id: number | undefined;
+export interface IUserSession {
+  id: number | undefined;
+  name: string;
+  status: string;
+  active: boolean;
+  storage_id: number | undefined;
+  place_id: number | undefined;
 }
-
-
 
 // перечисление команд для обмена
 export enum ICommand {
@@ -99,12 +98,12 @@ export enum ICommand {
   CreateTableItem = "CreateTableItem",
   UpdateTableById = "UpdateTableById",
   DeleteTableById = "DeleteTableById",
-  DeleteFotosById = "DeleteFotosById", 
+  DeleteFotosById = "DeleteFotosById",
   Auth = "Auth",
 }
 
 export interface IDataUrl {
-  command: ICommand;
+  command: ICommand | string;
   data: {};
 }
 
@@ -115,11 +114,10 @@ export interface IGetTable extends IDataUrl {
 
 export interface IAuth extends IDataUrl {
   command: ICommand.Auth;
-  data: { login: string; pass:string };
+  data: { login: string; pass: string };
 }
 
 export interface IGetTableById extends IDataUrl {
-  
   command: ICommand.GetTableById;
   data: { tableName: string; tableId: number };
 }
@@ -136,7 +134,7 @@ export interface IGetProperty extends IDataUrl {
 
 export interface ICreateTableItem extends IDataUrl {
   command: ICommand.CreateTableItem;
-  data: { tableName: string; vp: IProducts | IUsers };
+  data: { tableName: string; vp: IProducts | IUsers | IStocktaking };
 }
 
 export interface IUpdateTableById extends IDataUrl {
