@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { Form, InputGroup } from "react-bootstrap";
 
 interface IProps {
-  value: any;
-  onChange(title: any): void;
+  value: any; // Тип изменен на string, т.к. input работает со строками
+  onChange(title: any): void; // Тип изменен на string
   placeholder?: string;
   type?: string;
-  onPressVit?(value: any): void;
+  onPressVit?(value: string): void; // Тип изменен на string
 }
 
 const InputVit: FC<IProps> = ({
@@ -16,48 +16,33 @@ const InputVit: FC<IProps> = ({
   type = "text",
   onPressVit,
 }) => {
-  const [title, setTitle] = useState(value);
-  // const ref = useRef<HTMLInputElement>(null); //2 способ
+  // УДАЛЯЕМ ЛОКАЛЬНОЕ СОСТОЯНИЕ:
+  // const [title, setTitle] = useState(value); 
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    // Просто вызываем onChange, чтобы обновить родительское состояние
+    onChange(event.target.value); 
   };
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      // console.log(">>>> ref из (TodoForm):", ref.current!.value); //2 способ
-
       if (onPressVit) {
-        //передаем во внешку!!!!!
-        onPressVit(value);
+        // Передаем текущее значение пропса во внешнюю функцию
+        onPressVit(value); 
 
-        //очищаем
-        // ref.current!.value = ""; //2 способ
-        onChange("");
-        // console.log(">>>> после обнуления:", title); //консоль
+        // Очищаем через родительский onChange
+        onChange(""); 
       }
     }
   };
-
-  useEffect(() => {
-    const handler = setTimeout(() => setTitle(value), 300)
-    
-    return () => clearTimeout(handler);
-
-  }, [value]);
-
-  useEffect(() => {
-       //консоль 11 Сентябрь 2025 (четверг)
-    //console.log('>>>> title из (InputVit):', title); //консоль
-       
-    }, [title]);
+  
+  // УДАЛЯЕМ ВСЕ useEffect, так как синхронизация больше не нужна
 
   return (
     <>
       <InputGroup className="mb-3">
         <Form.Control
-          // ref={ref} //2 способ
-          value={value}
+          value={value} // Всегда используем пропс value
           type={type}
           onChange={changeHandler}
           onKeyPress={keyPressHandler}

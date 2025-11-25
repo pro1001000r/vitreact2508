@@ -10,6 +10,7 @@ import { IDataUrl, IStocktaking } from "../inrefaces";
 import TableStocktaking from "../Components/TableStocktaking";
 import AxiosVit from "../Components/AxiosVit";
 import InputVit from "../Components/InputVit";
+import GetName from "../Components/GetName";
 interface IScan {
   products_id: number;
   productsColor_id: number;
@@ -34,30 +35,35 @@ const StocktakingScreen: FC = () => {
       };
 
       AxiosVit({ dataUrl, setData });
-
-      //консоль 24 Ноябрь 2025 (понедельник)
-      console.log(">>>> data111 из (StocktakingScreen):", data); //консоль
-      if (data?.products_id) {
-        console.log("работает", data); //консоль
-        setProd(Number(data.products_id));
-        setColor(Number(data.productsColor_id));
-        setSize(Number(data.productsSize_id));
-        
-        const item: IStocktaking = {
-          products_id: data.products_id,
-          productsColor_id: data.productsColor_id,
-          productsSize_id: data.productsSize_id,
-          count: 1,
-          users_id: User.id,
-          storage_id: User.storage_id,
-          place_id: User.place_id,
-        };
-
-        //Stocktaking(item);
-        //setScan("")
-      }
     }
   };
+
+  useEffect(() => {
+    // Эта логика сработает только после того, как состояние 'data' будет успешно обновлено
+    console.log(">>>> data обновлено в useEffect:", data); 
+
+    if (data?.products_id) {
+      console.log("работает, данные актуальны:", data); //консоль
+
+      // Обновляем связанные состояния
+      setProd(Number(data.products_id));
+      setColor(Number(data.productsColor_id));
+      setSize(Number(data.productsSize_id));
+
+      const item: IStocktaking = {
+        products_id: data.products_id,
+        productsColor_id: data.productsColor_id,
+        productsSize_id: data.productsSize_id,
+        count: 1,
+        users_id: User.id,
+        storage_id: User.storage_id,
+        place_id: User.place_id,
+      };
+
+      //Stocktaking(item);
+      //setScan("") // Очистка скана должна происходить здесь, если это нужно
+    }
+  }, [data, User]); // Зависимость: от data и User
 
   const UpdateStocktaking = (count: number) => {
     const item: IStocktaking = {
@@ -80,14 +86,17 @@ const StocktakingScreen: FC = () => {
   return (
     <>
       <ModalVit show={show} setShow={setShow}>
-        <ScanerVit setScan={setScan} setShow={setShow}/>
+        <ScanerVit setScan={setScan} setShow={setShow} />
       </ModalVit>
       <Container>
         <h3 className=" text-center">Инвентаризация ({User.name})</h3>
 
-        <InputVit value={scan} onChange={setScan} />
+        <InputVit value={scan} onChange={(prev)=>setScan(prev)} />
 
         <p>{scan}</p>
+        <p>{prod}</p>
+
+         <p><GetName table={"products"} id={prod} /></p>
         <ButtonVit
           icon="UpcScan"
           name="Сканировать"

@@ -19,8 +19,10 @@ const ScanerVit = ({ setScan, setShow }) => {
     };
 
     const qrCodeSuccess = (decodedText) => {
-      setQrMessage(decodedText);
       setScan(decodedText);
+     
+      setQrMessage(decodedText);
+     
       setQrErr("");
       if (setShow) {
         setShow(false);
