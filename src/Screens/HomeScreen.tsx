@@ -34,13 +34,13 @@ const HometScreen: FC = () => {
 
             <Row className="text-center">
               <Col>
-                <p>{scan}</p>
-                <ButtonVit
+                {/* <p>{scan}</p> */}
+                {/* <ButtonVit
                   className=" btn-primary"
                   icon="UpcScan"
                   name="Сканер"
                   onClick={() => setShow(true)}
-                />
+                /> */}
 
                 <ButtonVit href="/Auth" name='Войти в систему'/>
 
