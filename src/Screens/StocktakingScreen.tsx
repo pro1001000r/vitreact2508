@@ -40,7 +40,7 @@ const StocktakingScreen: FC = () => {
 
   useEffect(() => {
     // Эта логика сработает только после того, как состояние 'data' будет успешно обновлено
-    console.log(">>>> data обновлено в useEffect:", data); 
+    // console.log(">>>> data обновлено в useEffect:", data); 
 
     if (data?.products_id) {
       console.log("работает, данные актуальны:", data); //консоль
@@ -60,7 +60,7 @@ const StocktakingScreen: FC = () => {
         place_id: User.place_id,
       };
 
-      //Stocktaking(item);
+      Stocktaking(item);
       //setScan("") // Очистка скана должна происходить здесь, если это нужно
     }
   }, [data, User]); // Зависимость: от data и User
@@ -92,9 +92,6 @@ const StocktakingScreen: FC = () => {
         <h3 className=" text-center">Инвентаризация ({User.name})</h3>
 
         <InputVit value={scan} onChange={(prev)=>setScan(prev)} />
-
-        <p>{scan}</p>
-        <p>{prod}</p>
 
          <p><GetName table={"products"} id={prod} /></p>
         <ButtonVit

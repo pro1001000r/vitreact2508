@@ -26,7 +26,7 @@ const FVit: StateCreator<IContextVit, [["zustand/persist", unknown]], []> = (
   setUpdate: () => set((state) => ({ counterUpdate: state.counterUpdate + 1 })),
 });
 
-const useStoreZustandVit = create<IContextVit, [["zustand/persist", unknown]]>(
+export const useStoreZustandVit = create<IContextVit, [["zustand/persist", unknown]]>(
   persist(FVit, { name: "userSession" })
 );
 

@@ -15,7 +15,11 @@ import ButtonVit from "../Components/ButtonVit";
 // import { ContextVit } from "../Components/ContextVit";
 import GetName from "../Components/GetName";
 import AxiosVit from "../Components/AxiosVit";
-import { useUserSession } from "../Components/useStoreZustandVit";
+import {
+  useSetUserSession,
+  useUserSession,
+} from "../Components/useStoreZustandVit";
+import { UpdatePlaceId } from "../Components/UpdatePlaceId";
 
 const CabinetScreen: FC = () => {
   //let id = sessionStorage.userId;
@@ -72,6 +76,10 @@ const CabinetScreen: FC = () => {
     console.log(">>>> dataUrl2 из (CabinetScreen):", dataUrl2); //консоль
 
     AxiosVit({ dataUrl: dataUrl2 });
+
+    if (place) {
+      UpdatePlaceId(place);
+    }
   };
 
   if (user != undefined) {

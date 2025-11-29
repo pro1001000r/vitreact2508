@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Html5Qrcode } from "html5-qrcode";
+import { Html5Qrcode,Html5QrcodeSupportedFormats } from "html5-qrcode";
 import { Col, Row } from "react-bootstrap";
 
 const ScanerVit = ({ setScan, setShow }) => {
@@ -8,7 +8,17 @@ const ScanerVit = ({ setScan, setShow }) => {
   const [qrErr, setQrErr] = useState("");
 
   useEffect(() => {
-    const config = { fps: 10, qrbox: { width: 200, height: 200 } };
+    const config = {
+      fps: 20,
+      qrbox: { width: 200, height: 200 },
+      formatsToSupport: [
+        Html5QrcodeSupportedFormats.QR_CODE,
+        Html5QrcodeSupportedFormats.CODE_128,
+        Html5QrcodeSupportedFormats.EAN_13,
+        Html5QrcodeSupportedFormats.EAN_8,
+        // Добавьте другие нужные вам форматы
+      ],
+    };
 
     const html5QrCode = new Html5Qrcode("qrCodeContainer");
 
@@ -20,9 +30,9 @@ const ScanerVit = ({ setScan, setShow }) => {
 
     const qrCodeSuccess = (decodedText) => {
       setScan(decodedText);
-     
+
       setQrMessage(decodedText);
-     
+
       setQrErr("");
       if (setShow) {
         setShow(false);
