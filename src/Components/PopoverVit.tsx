@@ -21,7 +21,7 @@ const PopoverVit: FC<PopoverVitProps> = ({ children, id, invent = false }) => {
         <OverlayTrigger
           placement="left"
           delay={{ show: 250, hide: 400 }}
-          trigger={["click"]}
+          trigger={["focus"]}
           overlay={
             <Popover id={String(id)}>
               <Popover.Header>Инв. запись № {id}</Popover.Header>

@@ -6,11 +6,13 @@ import ScanerVit from "../Components/ScanerVit";
 import ButtonVit from "../Components/ButtonVit";
 import SelectVit from "../Components/SelectVit";
 import Stocktaking from "../Components/Stocktaking";
-import { IDataUrl, IStocktaking } from "../inrefaces";
+import { ICommand, IDataUrl, IStocktaking } from "../inrefaces";
 import TableStocktaking from "../Components/TableStocktaking";
 import AxiosVit from "../Components/AxiosVit";
 import InputVit from "../Components/InputVit";
 import GetName from "../Components/GetName";
+import NavBottomStocktakingVit from "../Components/NavBottomStocktakingVit";
+import { UpdatePlaceId } from "../Components/UpdatePlaceId";
 interface IScan {
   products_id: number;
   productsColor_id: number;
@@ -40,7 +42,7 @@ const StocktakingScreen: FC = () => {
 
   useEffect(() => {
     // Эта логика сработает только после того, как состояние 'data' будет успешно обновлено
-    // console.log(">>>> data обновлено в useEffect:", data); 
+    // console.log(">>>> data обновлено в useEffect:", data);
 
     if (data?.products_id) {
       console.log("работает, данные актуальны:", data); //консоль
@@ -61,7 +63,7 @@ const StocktakingScreen: FC = () => {
       };
 
       Stocktaking(item);
-      //setScan("") // Очистка скана должна происходить здесь, если это нужно
+      setScan(""); // Очистка скана должна происходить здесь, если это нужно
     }
   }, [data, User]); // Зависимость: от data и User
 
@@ -80,20 +82,46 @@ const StocktakingScreen: FC = () => {
   };
 
   useEffect(() => {
-    GetProductByBarcode();
-  }, [scan]);
+    if (scan) {
+      GetProductByBarcode();
+    }
+  }, [scan, User]);
+
+  const setPlace = (i: number) => {
+    if (i) {
+      UpdatePlaceId(i);
+      
+      const dataUrl2: IDataUrl = {
+        command: ICommand.UpdateTableById,
+        data: {
+          tableName: "users",
+          tableId: User.id,
+          vp: {
+            place_id: i,
+          },
+        },
+      };
+
+      AxiosVit({ dataUrl: dataUrl2 });
+     
+    }
+  };
 
   return (
     <>
       <ModalVit show={show} setShow={setShow}>
         <ScanerVit setScan={setScan} setShow={setShow} />
       </ModalVit>
+      <NavBottomStocktakingVit setShow={setShow} />
       <Container>
         <h3 className=" text-center">Инвентаризация ({User.name})</h3>
+        <SelectVit
+          tableName={"place"}
+          id={User.place_id!}
+          setId={setPlace}
+          placeholder="Место проведения инвентаризации..."
+        />
 
-        <InputVit value={scan} onChange={(prev)=>setScan(prev)} />
-
-         <p><GetName table={"products"} id={prod} /></p>
         <ButtonVit
           icon="UpcScan"
           name="Сканировать"
