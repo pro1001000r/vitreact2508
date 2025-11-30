@@ -29,7 +29,7 @@ const StocktakingScreen: FC = () => {
 
   const [data, setData] = useState<IScan>();
 
-  const GetProductByBarcode = () => {
+  const GetProductByBarcode = (scan:string) => {
     if (scan) {
       const dataUrl: IDataUrl = {
         command: "GetProductByBarcode",
@@ -83,9 +83,9 @@ const StocktakingScreen: FC = () => {
 
   useEffect(() => {
     if (scan) {
-      GetProductByBarcode();
+      GetProductByBarcode(scan);
     }
-  }, [scan, User]);
+  }, [scan]);
 
   const setPlace = (i: number) => {
     if (i) {

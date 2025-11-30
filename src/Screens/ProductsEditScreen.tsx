@@ -27,6 +27,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import ImageVit from "../Components/ImageVit";
 import UploadFilesVit from "../Components/UploadFilesVit";
 import SliderVit from "../Components/SliderVit";
+import TableStocktaking from "../Components/TableStocktaking";
 // import TableBarcode from "../Components/TableBarcode";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
@@ -155,12 +156,13 @@ const ProductsEditScreen: FC = () => {
           placeholder="Цена..."
           type="number"
         />
-        <SelectVit
+        {/* <SelectVit
           tableName={"compositions"}
           id={compositions}
           setId={setCompositions}
           placeholder="Выберите состав..."
-        />
+        /> */}
+        
         <br />
         <ButtonVit
           name="Назад"
@@ -173,11 +175,11 @@ const ProductsEditScreen: FC = () => {
           className=" btn-primary"
         />
 
-        <ButtonVit
+        {/* <ButtonVit
           name="Удалить"
           onClick={DeleteProducts}
           className=" btn-danger"
-        />
+        /> */}
 
         <Accordion className="my-1">
           <Accordion.Item eventKey="0">
@@ -191,7 +193,7 @@ const ProductsEditScreen: FC = () => {
         </Accordion>
 
         <Accordion className="my-1">
-          <Accordion.Item eventKey="0">
+          <Accordion.Item eventKey="1">
             <Accordion.Header>
               <b>Подробнее о картинках...</b>
             </Accordion.Header>
@@ -203,6 +205,20 @@ const ProductsEditScreen: FC = () => {
               />
               <br />
               <SliderVit tableName={"products"} tableId={Number(params.id)} />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+
+        <Accordion className="my-1">
+          <Accordion.Item eventKey="2">
+            <Accordion.Header>
+              <b>Подробнее об инвентаризации...</b>
+            </Accordion.Header>
+            <Accordion.Body>
+              <TableStocktaking
+                      tableName={"products_id"}
+                      tableId={Number(params.id)}
+                    />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

@@ -20,6 +20,7 @@ import {
   useUserSession,
 } from "../Components/useStoreZustandVit";
 import { UpdatePlaceId } from "../Components/UpdatePlaceId";
+import TableStocktaking from "../Components/TableStocktaking";
 
 const CabinetScreen: FC = () => {
   //let id = sessionStorage.userId;
@@ -178,6 +179,10 @@ const CabinetScreen: FC = () => {
         icon="Inboxes"
         name="Каталог"
         href="/Products"
+      />
+      <TableStocktaking
+        tableName={"users_id"}
+        tableId={user.id}
       />
     </Container>
   );

@@ -21,7 +21,8 @@ const PopoverVit: FC<PopoverVitProps> = ({ children, id, invent = false }) => {
         <OverlayTrigger
           placement="left"
           delay={{ show: 250, hide: 400 }}
-          trigger={["focus"]}
+          trigger={["click"]}
+          rootClose // Закрывает при клике за пределами оверлея
           overlay={
             <Popover id={String(id)}>
               <Popover.Header>Инв. запись № {id}</Popover.Header>
