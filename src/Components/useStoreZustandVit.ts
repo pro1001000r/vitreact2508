@@ -33,9 +33,9 @@ export const useStoreZustandVit = create<IContextVit, [["zustand/persist", unkno
 //Селекторы
 export const useUserSession = () =>
   useStoreZustandVit((state) => state.userSession);
-export const useSetUserSession = (i: IUserSession) =>
-  useStoreZustandVit.getState().setUserSession(i);
+// export const useSetUserSession = (i: IUserSession) =>
+//   useStoreZustandVit.getState().setUserSession(i);
 export const useCounterUpdate = () =>
   useStoreZustandVit((state) => state.counterUpdate);
-export const useSetCounterUpdate = () =>
-  useStoreZustandVit.getState().setUpdate();
+// export const useSetCounterUpdate = () =>
+//   useStoreZustandVit.getState().setUpdate();

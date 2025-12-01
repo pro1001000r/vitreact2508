@@ -16,7 +16,7 @@ import ButtonVit from "../Components/ButtonVit";
 import GetName from "../Components/GetName";
 import AxiosVit from "../Components/AxiosVit";
 import {
-  useSetUserSession,
+  useStoreZustandVit,
   useUserSession,
 } from "../Components/useStoreZustandVit";
 import { UpdatePlaceId } from "../Components/UpdatePlaceId";
@@ -30,6 +30,7 @@ const CabinetScreen: FC = () => {
   //консоль 14 Ноябрь 2025 (пятница)
   // console.log(">>>> userSession из (CabinetScreen):", userSession); //консоль
 
+  // const {setUserSession} = useStoreZustandVit();
   const [usersname, setUsersname] = useState(user.name);
   const [storage, setStorage] = useState(user.storage_id);
   const [place, setPlace] = useState(user.place_id);

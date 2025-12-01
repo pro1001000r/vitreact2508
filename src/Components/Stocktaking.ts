@@ -1,9 +1,15 @@
 import axios from "axios";
 import { IDataUrl, IStocktaking } from "../inrefaces";
-import { useSetCounterUpdate } from "./useStoreZustandVit";
+import { useStoreZustandVit } from "./useStoreZustandVit";
 import db from "../config.json";
 
 const Stocktaking = (item: IStocktaking): void => {
+
+  // !!! ИСПРАВЛЕНИЕ ОШИБКИ !!!
+  // Получаем функцию обновления состояния через getState()
+  const setUpdate = useStoreZustandVit.getState().setUpdate;
+
+  
   //удаление пустых значений
   const deleteNullVit = <T extends object>(obj: T): Partial<T> => {
     return Object.fromEntries(
@@ -42,7 +48,7 @@ const Stocktaking = (item: IStocktaking): void => {
   };
 
   createStocktakindItem();
-  useSetCounterUpdate();
+  setUpdate();
 
 };
 

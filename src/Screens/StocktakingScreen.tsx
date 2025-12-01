@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
-import { useUserSession } from "../Components/useStoreZustandVit";
+import { useCounterUpdate, useUserSession } from "../Components/useStoreZustandVit";
 import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
 import ButtonVit from "../Components/ButtonVit";
@@ -9,8 +9,6 @@ import Stocktaking from "../Components/Stocktaking";
 import { ICommand, IDataUrl, IStocktaking } from "../inrefaces";
 import TableStocktaking from "../Components/TableStocktaking";
 import AxiosVit from "../Components/AxiosVit";
-import InputVit from "../Components/InputVit";
-import GetName from "../Components/GetName";
 import NavBottomStocktakingVit from "../Components/NavBottomStocktakingVit";
 import { UpdatePlaceId } from "../Components/UpdatePlaceId";
 interface IScan {
@@ -20,6 +18,7 @@ interface IScan {
 }
 const StocktakingScreen: FC = () => {
   const User = useUserSession();
+  const counterUpdate = useCounterUpdate();
   const [show, setShow] = useState<boolean>(false);
   const [scan, setScan] = useState<string>("");
 
@@ -29,7 +28,7 @@ const StocktakingScreen: FC = () => {
 
   const [data, setData] = useState<IScan>();
 
-  const GetProductByBarcode = (scan:string) => {
+  const GetProductByBarcode = (scan: string) => {
     if (scan) {
       const dataUrl: IDataUrl = {
         command: "GetProductByBarcode",
@@ -90,7 +89,14 @@ const StocktakingScreen: FC = () => {
   const setPlace = (i: number) => {
     if (i) {
       UpdatePlaceId(i);
-      
+
+      setData({
+        ...data,
+        products_id: 0,
+        productsColor_id: 0,
+        productsSize_id: 0,
+      });
+
       const dataUrl2: IDataUrl = {
         command: ICommand.UpdateTableById,
         data: {
@@ -103,7 +109,6 @@ const StocktakingScreen: FC = () => {
       };
 
       AxiosVit({ dataUrl: dataUrl2 });
-     
     }
   };
 
@@ -121,12 +126,15 @@ const StocktakingScreen: FC = () => {
           setId={setPlace}
           placeholder="Место проведения инвентаризации..."
         />
+        <Row>
+          <b>{counterUpdate}</b>
+          <ButtonVit
+            icon="UpcScan"
+            name="Сканировать"
+            onClick={() => setShow(true)}
+          />
+        </Row>
 
-        <ButtonVit
-          icon="UpcScan"
-          name="Сканировать"
-          onClick={() => setShow(true)}
-        />
         <Accordion className="mb-1">
           <Accordion.Item eventKey="0">
             <Accordion.Header>

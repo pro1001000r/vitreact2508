@@ -10,7 +10,8 @@ import { IAuth, ICommand, IUsers, IUserSession } from "../inrefaces";
 import AxiosVit from "../Components/AxiosVit";
 import { ContextVit } from "../Components/ContextVit";
 import {
-  useSetUserSession,
+  
+  useStoreZustandVit,
   useUserSession,
 } from "../Components/useStoreZustandVit";
 
@@ -21,6 +22,8 @@ const AuthScreen: FC = () => {
   //const { userSession } = useContext(ContextVit);
   const userSession = useUserSession();
   const navigate = useNavigate();
+
+  const {setUserSession} = useStoreZustandVit();
 
   const getLogin = () => {
     const dataUrl: IAuth = {
@@ -45,7 +48,7 @@ const AuthScreen: FC = () => {
     //консоль 22 Ноябрь 2025 (суббота)
     console.log(">>>> iu из (AuthScreen):", iu); //консоль
 
-    useSetUserSession(iu);
+    setUserSession(iu);
   };
 
   useEffect(() => {
