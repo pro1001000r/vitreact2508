@@ -10,7 +10,7 @@ const ScanerVit = ({ setScan, setShow }) => {
   useEffect(() => {
     const config = {
       fps: 20,
-      qrbox: { width: 200, height: 200 },
+      qrbox: { width: 300, height: 200 },
       formatsToSupport: [
         Html5QrcodeSupportedFormats.QR_CODE,
         Html5QrcodeSupportedFormats.CODE_128,
@@ -47,7 +47,7 @@ const ScanerVit = ({ setScan, setShow }) => {
 
     if (isEnabled) {
       html5QrCode
-        .start({ facingMode: "environment" }, config, qrCodeSuccess)
+        .start({ facingMode: { exact: "environment" } }, config, qrCodeSuccess)
         .then((ignore) => console.log("Scaner stop"))
         .catch(qrCodeErr);
       setQrMessage("");
