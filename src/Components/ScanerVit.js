@@ -9,8 +9,8 @@ const ScanerVit = ({ setScan, setShow }) => {
 
   useEffect(() => {
     const config = {
-      fps: 20,
-      qrbox: { width: 300, height: 200 },
+      fps: 5,
+      qrbox: { width: 250, height: 250 },
       formatsToSupport: [
         Html5QrcodeSupportedFormats.QR_CODE,
         Html5QrcodeSupportedFormats.CODE_128,
