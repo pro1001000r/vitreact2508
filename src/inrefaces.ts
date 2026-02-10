@@ -83,6 +83,7 @@ export interface IUserSession {
   id: number | undefined;
   name: string;
   status: string;
+  telefon: string | undefined;
   active: boolean;
   storage_id: number | undefined;
   place_id: number | undefined;

@@ -8,10 +8,19 @@ interface IImageProps {
 const ImageVit: FC<IImageProps> = (props) => {
   let foto: string = "";
   let fotoFull: string = "";
-  let className = 'img-responsive rounded ';
+  let fotolocal: string = "https://pikclick.ru/vitphp";
+  let className = "img-responsive rounded ";
   if (typeof props.foto === "string") {
     foto = props.foto;
     fotoFull = foto.replace(".", "Full.");
+
+    //если внешняя фотка
+    if (props.foto.includes("https")) {
+      fotolocal = "";
+      foto = foto + '.jpg';
+      fotoFull = foto;
+    }
+
   }
 
   if (props.className === "string") {
@@ -21,13 +30,17 @@ const ImageVit: FC<IImageProps> = (props) => {
   return (
     <>
       {props.foto && (
-        <a href={"https://pikclick.ru/vitphp" + fotoFull}>
+        <a href={fotolocal + fotoFull} target="_blank">
           <img
-            src={"https://pikclick.ru/vitphp" + foto}
+            src={fotolocal + foto}
             alt="Основное фото"
             // width="50%"
-            style={{objectFit:"contain",maxHeight:100, alignItems:"center"}}
-            className = {className}
+            style={{
+              objectFit: "contain",
+              maxHeight: 100,
+              alignItems: "center",
+            }}
+            className={className}
           />
         </a>
       )}

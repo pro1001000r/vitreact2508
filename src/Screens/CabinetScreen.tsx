@@ -34,7 +34,7 @@ const CabinetScreen: FC = () => {
   const [usersname, setUsersname] = useState(user.name);
   const [storage, setStorage] = useState(user.storage_id);
   const [place, setPlace] = useState(user.place_id);
-  const [telefon, setTelefon] = useState();
+  const [telefon, setTelefon] = useState(user.telefon);
 
   // const dUser = useAxiosVit<IGetTableById>({
   //   command: ICommand.GetTableById,
@@ -69,7 +69,10 @@ const CabinetScreen: FC = () => {
         tableName: "users",
         tableId: user.id,
         vp: {
+          name: usersname,
+          storage_id: storage,
           place_id: place,
+          telefon: telefon,
         },
       },
     };
@@ -181,10 +184,7 @@ const CabinetScreen: FC = () => {
         name="Каталог"
         href="/Products"
       />
-      <TableStocktaking
-        tableName={"users_id"}
-        tableId={user.id}
-      />
+      <TableStocktaking tableName={"users_id"} tableId={user.id} />
     </Container>
   );
 };

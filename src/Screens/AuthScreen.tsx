@@ -39,6 +39,7 @@ const AuthScreen: FC = () => {
       id: user.id,
       name: user.name,
       status: user.status,
+      telefon: user.telefon,
       active: user.active,
       storage_id: user.storage_id,
       place_id: user.place_id
@@ -59,6 +60,7 @@ const AuthScreen: FC = () => {
       SetUser(user);
       userSession.id = user.id;
       userSession.name = user.name;
+      userSession.telefon = user.telefon;
       userSession.status = user.status;
       userSession.active = user.active;
       userSession.storage_id = Number(user.storage_id);

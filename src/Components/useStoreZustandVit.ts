@@ -17,6 +17,7 @@ const FVit: StateCreator<IContextVit, [["zustand/persist", unknown]], []> = (
     id: undefined,
     name: "",
     status: "U",
+    telefon: "",
     active: false,
     storage_id: undefined,
     place_id: undefined,

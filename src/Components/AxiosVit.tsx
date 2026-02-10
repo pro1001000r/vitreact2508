@@ -2,6 +2,8 @@ import db from "../config.json";
 import axios from "axios";
 import {IDataUrl } from "../inrefaces";
 
+// аксиос  лучше не прогать библиотека хорошая
+
 type AxiosProps = {
   dataUrl: IDataUrl;
   setData?(data: any): void;
