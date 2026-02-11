@@ -1,15 +1,15 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 
-import { ICommand, ICreateTableItem, IProducts } from "../inrefaces";
-import TableVit from "../Components/TableVit";
+import { ICommand, ICreateTableItem, IProducts } from "../../inrefaces";
+import TableVit from "../../Components/TableVit";
 import { Container } from "react-bootstrap";
-import InputVit from "../Components/InputVit";
-import AxiosVit from "../Components/AxiosVit";
-import ScanerVit from "../Components/ScanerVit";
-import ModalVit from "../Components/ModalVit";
-import ButtonVit from "../Components/ButtonVit";
-import { ContextVit } from "../Components/ContextVit";
-import { useUserSession } from "../Components/useStoreZustandVit";
+import InputVit from "../../Components/InputVit";
+import AxiosVit from "../../Components/AxiosVit";
+import ScanerVit from "../../Components/ScanerVit";
+import ModalVit from "../../Components/ModalVit";
+import ButtonVit from "../../Components/ButtonVit";
+import { ContextVit } from "../../Components/ContextVit";
+import { useUserSession } from "../../Components/useStoreZustandVit";
 
 const ProductsScreen: FC = () => {
   const [products, setProducts] = useState<IProducts[]>([]);

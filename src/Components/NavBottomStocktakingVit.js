@@ -2,7 +2,7 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { IconVit } from "./IconVit";
 
-const NavBottomStocktakingVit = ({setShow}) => {
+const NavBottomStocktakingVit = ({ setShow }) => {
   const handleScan = () => {
     setShow(true);
   };
@@ -16,6 +16,9 @@ const NavBottomStocktakingVit = ({setShow}) => {
           {/* <Nav.Link href="/">
             <IconVit name="House" size={32} />
           </Nav.Link> */}
+          <div onClick={handleScan}>
+            <IconVit name="UpcScan" size={32} />
+          </div>
           <Nav.Link href="/Products">
             <IconVit name="Inboxes" size={32} />
           </Nav.Link>

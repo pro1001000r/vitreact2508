@@ -59,6 +59,7 @@ const StocktakingScreen: FC = () => {
         users_id: User.id,
         storage_id: User.storage_id,
         place_id: User.place_id,
+        barcode: scan,
       };
 
       Stocktaking(item);
@@ -75,6 +76,7 @@ const StocktakingScreen: FC = () => {
       users_id: User.id,
       storage_id: User.storage_id,
       place_id: User.place_id,
+      barcode: scan,
     };
 
     Stocktaking(item);

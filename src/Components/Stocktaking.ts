@@ -26,7 +26,7 @@ const Stocktaking = (item: IStocktaking): void => {
     };
 
     //консоль 05 Июнь 2025 (четверг)
-    console.log(">>>> dataUrl из (Stocktaking):", dataUrl); //консоль
+    //console.log(">>>> dataUrl из (Stocktaking):", dataUrl); //консоль
 
     const config = {
       headers: {

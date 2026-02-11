@@ -47,6 +47,7 @@ export interface IStocktaking {
   users_id?: number;
   storage_id?: number;
   place_id?: number | undefined;
+  barcode?: string | undefined;
 }
 
 export interface IBarcode {
@@ -135,7 +136,7 @@ export interface IGetProperty extends IDataUrl {
 
 export interface ICreateTableItem extends IDataUrl {
   command: ICommand.CreateTableItem;
-  data: { tableName: string; vp: IProducts | IUsers | IStocktaking };
+  data: { tableName: string; vp: IProducts | IUsers | IStocktaking | IPlace};
 }
 
 export interface IUpdateTableById extends IDataUrl {
@@ -143,7 +144,7 @@ export interface IUpdateTableById extends IDataUrl {
   data: {
     tableName: string;
     tableId: number;
-    vp: IProducts | IUsers | unknown;
+    vp: IProducts | IUsers | IPlace ;
   };
 }
 export interface IDeleteTableById extends IDataUrl {

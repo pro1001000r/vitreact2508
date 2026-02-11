@@ -11,4 +11,5 @@ if (id) {
     const name = GetProperty(table, id, "name");
     return <>{name}</>;}
 }
+
 export default GetName

@@ -10,24 +10,24 @@ import {
   Spinner,
 } from "react-bootstrap";
 
-import AxiosVit from "../Components/AxiosVit";
-import SelectVit from "../Components/SelectVit";
+import AxiosVit from "../../Components/AxiosVit";
+import SelectVit from "../../Components/SelectVit";
 // import TableStocktaking from "../Components/TableStocktaking";
-import InputVit from "../Components/InputVit";
-import ButtonVit from "../Components/ButtonVit";
+import InputVit from "../../Components/InputVit";
+import ButtonVit from "../../Components/ButtonVit";
 import {
   ICommand,
   IDeleteTableById,
   IGetTableById,
   IProducts,
   IUpdateTableById,
-} from "../inrefaces";
-import ImageUpload from "../Components/ImageUpload";
+} from "../../inrefaces";
+import ImageUpload from "../../Components/ImageUpload";
 import axios, { AxiosRequestConfig } from "axios";
-import ImageVit from "../Components/ImageVit";
-import UploadFilesVit from "../Components/UploadFilesVit";
-import SliderVit from "../Components/SliderVit";
-import TableStocktaking from "../Components/TableStocktaking";
+import ImageVit from "../../Components/ImageVit";
+import UploadFilesVit from "../../Components/UploadFilesVit";
+import SliderVit from "../../Components/SliderVit";
+import TableStocktaking from "../../Components/TableStocktaking";
 // import TableBarcode from "../Components/TableBarcode";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
@@ -162,7 +162,7 @@ const ProductsEditScreen: FC = () => {
           setId={setCompositions}
           placeholder="Выберите состав..."
         /> */}
-        
+
         <br />
         <ButtonVit
           name="Назад"
@@ -216,9 +216,9 @@ const ProductsEditScreen: FC = () => {
             </Accordion.Header>
             <Accordion.Body>
               <TableStocktaking
-                      tableName={"products_id"}
-                      tableId={Number(params.id)}
-                    />
+                tableName={"products_id"}
+                tableId={Number(params.id)}
+              />
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
