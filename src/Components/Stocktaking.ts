@@ -39,6 +39,7 @@ const Stocktaking = (item: IStocktaking): void => {
     async function fetchVit() {
       try {
         const response = await axios.post(apiUrl, dataUrl, config);
+        setUpdate();
       } catch (e) {
       } finally {
       }

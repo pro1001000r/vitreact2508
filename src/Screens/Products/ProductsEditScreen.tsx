@@ -28,7 +28,8 @@ import ImageVit from "../../Components/ImageVit";
 import UploadFilesVit from "../../Components/UploadFilesVit";
 import SliderVit from "../../Components/SliderVit";
 import TableStocktaking from "../../Components/TableStocktaking";
-// import TableBarcode from "../Components/TableBarcode";
+import TableBarcode from "../../Components/TableBarcode";
+
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
 
@@ -187,7 +188,7 @@ const ProductsEditScreen: FC = () => {
               <b>Штрихкоды...</b>
             </Accordion.Header>
             <Accordion.Body>
-              <Row>{/* <TableBarcode productsId={params.id} /> */}</Row>
+              <Row> <TableBarcode products_id={Number(params.id)} /> </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

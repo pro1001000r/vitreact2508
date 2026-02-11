@@ -52,10 +52,13 @@ export interface IStocktaking {
 
 export interface IBarcode {
   id?: number;
-  name: string;
+  barcode: string;
   products_id: number;
+  productsname?: string;
   productsColor_id?: number;
+  colorname?: string;
   productsSize_id?: number;
+  sizename?: string;
 }
 
 export interface IFotos {
@@ -136,7 +139,7 @@ export interface IGetProperty extends IDataUrl {
 
 export interface ICreateTableItem extends IDataUrl {
   command: ICommand.CreateTableItem;
-  data: { tableName: string; vp: IProducts | IUsers | IStocktaking | IPlace};
+  data: { tableName: string; vp: IProducts | IUsers | IStocktaking | IPlace };
 }
 
 export interface IUpdateTableById extends IDataUrl {
@@ -144,7 +147,7 @@ export interface IUpdateTableById extends IDataUrl {
   data: {
     tableName: string;
     tableId: number;
-    vp: IProducts | IUsers | IPlace ;
+    vp: IProducts | IUsers | IPlace;
   };
 }
 export interface IDeleteTableById extends IDataUrl {
@@ -154,4 +157,9 @@ export interface IDeleteTableById extends IDataUrl {
 export interface IDeleteFotosById extends IDataUrl {
   command: ICommand.DeleteFotosById;
   data: { tableId: number };
+}
+
+export interface IListBarcodeProducts extends IDataUrl {
+  command: "ListBarcodeProducts";
+  data: { products_id: number };
 }

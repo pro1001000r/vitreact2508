@@ -49,10 +49,9 @@ export default function TableStocktaking({
 
   useEffect(() => {
     AxiosVit({ dataUrl, setData, setLoad });
-    
+
     //консоль 24 Ноябрь 2025 (понедельник)
     //console.log('>>>> counterUpdate из (TableStocktaking):', counterUpdate); //консоль
-    
   }, [counter]);
 
   let listRowStocktaking: any;
@@ -68,7 +67,9 @@ export default function TableStocktaking({
             <br />
             {elem.storagename}
             <br />
-            <b>{elem.placename}</b>
+            <Nav.Link href={"/PlaceEdit/" + elem.place_id}>
+              <b>{elem.placename}</b>
+            </Nav.Link>
           </td>
           <td>
             <Nav.Link href={"/ProductsEdit/" + elem.products_id}>

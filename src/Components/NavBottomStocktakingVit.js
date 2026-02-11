@@ -16,8 +16,8 @@ const NavBottomStocktakingVit = ({ setShow }) => {
           {/* <Nav.Link href="/">
             <IconVit name="House" size={32} />
           </Nav.Link> */}
-          <div onClick={handleScan}>
-            <IconVit name="UpcScan" size={32} />
+          <div onClick={handleScan} className="btn btn-success">
+            <IconVit name="UpcScan"  size={32} color="white"/>
           </div>
           <Nav.Link href="/Products">
             <IconVit name="Inboxes" size={32} />
@@ -25,8 +25,8 @@ const NavBottomStocktakingVit = ({ setShow }) => {
           <Nav.Link href="/Cabinet">
             <IconVit name="PersonCircle" size={32} />
           </Nav.Link>
-          <div onClick={handleScan}>
-            <IconVit name="UpcScan" size={32} />
+          <div onClick={handleScan} className="btn btn-success">
+            <IconVit name="UpcScan" size={32} color="white" />
           </div>
         </div>
       </nav>

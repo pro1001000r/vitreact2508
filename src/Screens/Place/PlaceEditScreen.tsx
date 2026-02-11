@@ -6,6 +6,7 @@ import { ICommand, IGetTableById, IPlace, IUpdateTableById } from "../../inrefac
 import { Container } from "react-bootstrap";
 import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";
+import TableStocktaking from "../../Components/TableStocktaking";
 
 const PlaceEditScreen: FC = () => {
   const [data, setData] = useState<IPlace>();
@@ -67,6 +68,10 @@ const PlaceEditScreen: FC = () => {
         <SelectVit tableName={"storage"} id={storage} setId={setStorage} />
         <ButtonVit name="Назад" onClick={() => navigate(-1)} />
         <ButtonVit name="Сохранить" onClick={UpdatePlace} />
+        <TableStocktaking
+                        tableName={"place_id"}
+                        tableId={Number(params.id)}
+                      />
       </Container>
     </>
   );

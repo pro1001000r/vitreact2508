@@ -67,13 +67,13 @@ const AuthScreen: FC = () => {
       userSession.place_id = Number(user.place_id);
 
       //консоль 22 Ноябрь 2025 (суббота)
-      console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
+      //console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
 
       navigate("/Cabinet");
     }
     if (user === null) {
       //консоль 22 Ноябрь 2025 (суббота)
-      console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
+      //console.log(">>>> userSession из (AuthScreen):", userSession); //консоль
 
       //sessionStorage.clear();
       //navigate("/");

@@ -25,8 +25,11 @@ interface IScan {
 const StocktakingScreen: FC = () => {
   const User = useUserSession();
   const counterUpdate = useCounterUpdate();
+
   const [show, setShow] = useState<boolean>(false);
-  const [scan, setScan] = useState<string>("");
+  const [scan, setScan] = useState<string>(
+    sessionStorage.getItem("scan") || "",
+  );
 
   const [color, setColor] = useState<number>(0);
   const [size, setSize] = useState<number>(0);
@@ -70,6 +73,12 @@ const StocktakingScreen: FC = () => {
 
       Stocktaking(item);
       setScan(""); // Очистка скана должна происходить здесь, если это нужно
+      sessionStorage.setItem("scan", "");
+    }
+
+    if (data?.errorScan) {
+      SpeakVit(counterUpdate);
+      sessionStorage.setItem("scan", scan);
     }
   }, [data, User]); // Зависимость: от data и User
 
@@ -128,7 +137,7 @@ const StocktakingScreen: FC = () => {
       </ModalVit>
       <NavBottomStocktakingVit setShow={setShow} />
       <Container>
-        <h3 className=" text-center">Инвентаризация ({User.name})</h3>
+        <h4 className=" text-center">Инвентаризация ({User.name})</h4>
         <SelectVit
           tableName={"place"}
           id={User.place_id!}
@@ -136,28 +145,26 @@ const StocktakingScreen: FC = () => {
           placeholder="Место проведения инвентаризации..."
         />
         <Row>
-          <b>{counterUpdate}</b>
-          {data?.errorScan && (
-            <span style={{color: 'red'}}>
-              <b>Штрихкод не найден {scan}</b>
-              <SpeakVit text={'Штрихкод не найден. скан ' + counterUpdate} />
-            </span>
-            
-          )}
-          {/* <InputVit value={scan} onChange={setScan} placeholder="штрихкод..." /> */}
-          <ButtonVit
-            icon="UpcScan"
-            name="Сканировать"
-            onClick={() => setShow(true)}
-          />
+          <Col>
+            {/* <b>{counterUpdate}</b> */}
+            {data?.errorScan && (
+              <span style={{ color: "red" }}>
+                <b>Штрихкод не найден: {scan}</b>
+              </span>
+            )}
+            <ButtonVit
+              color="white"
+              className="btn-success mb-1 d-flex justify-content-center"
+              icon="UpcScan"
+              name="Сканировать"
+              onClick={() => setShow(true)}
+            />
+          </Col>
         </Row>
 
         <Accordion className="mb-1">
           <Accordion.Item eventKey="0">
-            <Accordion.Header>
-              Внести вручную...
-              <br />
-            </Accordion.Header>
+            <Accordion.Header><b>Внести вручную...</b></Accordion.Header>
             <Accordion.Body>
               <SelectVit
                 className="mb-1"
@@ -181,10 +188,19 @@ const StocktakingScreen: FC = () => {
                 setId={setSize}
                 placeholder="Введите размер..."
               />
-              <Row>
+              <Row className="mt-1">
+                <Col>
+                  {" "}
+                  <InputVit
+                    value={scan}
+                    onChange={setScan}
+                    placeholder="штрихкод..."
+                  />
+                </Col>
                 <Col className="text-end">
                   {" "}
                   <ButtonVit
+                    className="btn-success"
                     name={"+ добавить"}
                     onClick={() => {
                       UpdateStocktaking(1);

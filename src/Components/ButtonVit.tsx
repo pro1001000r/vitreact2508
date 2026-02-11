@@ -8,6 +8,7 @@ interface IButtonVit {
   onClick?(): void;
   icon?: string;
   className?: string;
+  color?: string;
 }
 
 const ButtonVit: React.FC<IButtonVit> = ({
@@ -16,6 +17,7 @@ const ButtonVit: React.FC<IButtonVit> = ({
   onClick = undefined,
   icon = "",
   className = "",
+  color="",
 }) => {
   
   if (onClick) {
@@ -24,7 +26,7 @@ const ButtonVit: React.FC<IButtonVit> = ({
         className={"vShadowButton btn vit-button " + className}
         onClick={onClick}
       >
-        {icon && <IconVit name={icon} size={24} />} {name}
+        {icon && <IconVit name={icon} size={24} color={color}/>} {name}
       </div>
     );
   } else {
