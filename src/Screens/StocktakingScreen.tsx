@@ -1,6 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { Accordion, Col, Container, Row } from "react-bootstrap";
-import { useCounterUpdate, useUserSession } from "../Components/useStoreZustandVit";
+import {
+  useCounterUpdate,
+  useUserSession,
+} from "../Components/useStoreZustandVit";
 import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
 import ButtonVit from "../Components/ButtonVit";
@@ -11,10 +14,13 @@ import TableStocktaking from "../Components/TableStocktaking";
 import AxiosVit from "../Components/AxiosVit";
 import NavBottomStocktakingVit from "../Components/NavBottomStocktakingVit";
 import { UpdatePlaceId } from "../Components/UpdatePlaceId";
+import InputVit from "../Components/InputVit";
+import { SpeakVit } from "../Components/SpeakVit";
 interface IScan {
   products_id: number;
   productsColor_id: number;
   productsSize_id: number;
+  errorScan: boolean;
 }
 const StocktakingScreen: FC = () => {
   const User = useUserSession();
@@ -41,10 +47,10 @@ const StocktakingScreen: FC = () => {
 
   useEffect(() => {
     // Эта логика сработает только после того, как состояние 'data' будет успешно обновлено
-    // console.log(">>>> data обновлено в useEffect:", data);
+    console.log(">>>> data обновлено в useEffect:", data);
 
     if (data?.products_id) {
-      console.log("работает, данные актуальны:", data); //консоль
+      //console.log("работает, данные актуальны:", data); //консоль
 
       // Обновляем связанные состояния
       setProd(Number(data.products_id));
@@ -97,6 +103,7 @@ const StocktakingScreen: FC = () => {
         products_id: 0,
         productsColor_id: 0,
         productsSize_id: 0,
+        errorScan: false,
       });
 
       const dataUrl2: IDataUrl = {
@@ -130,6 +137,14 @@ const StocktakingScreen: FC = () => {
         />
         <Row>
           <b>{counterUpdate}</b>
+          {data?.errorScan && (
+            <span style={{color: 'red'}}>
+              <b>Штрихкод не найден {scan}</b>
+              <SpeakVit text={'Штрихкод не найден. скан ' + counterUpdate} />
+            </span>
+            
+          )}
+          {/* <InputVit value={scan} onChange={setScan} placeholder="штрихкод..." /> */}
           <ButtonVit
             icon="UpcScan"
             name="Сканировать"
@@ -185,6 +200,7 @@ const StocktakingScreen: FC = () => {
           tableName={"place_id"}
           tableId={User.place_id}
           invent={true}
+          counter={counterUpdate}
         />
       </Container>
     </>

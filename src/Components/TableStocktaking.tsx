@@ -3,7 +3,7 @@ import { Nav, Spinner, Table } from "react-bootstrap";
 import AxiosVit from "./AxiosVit";
 
 import PopoverVit from "./PopoverVit";
-import { useCounterUpdate } from "./useStoreZustandVit";
+
 import { IDataUrl } from "../inrefaces";
 
 interface ITableStocktaking {
@@ -34,10 +34,10 @@ export default function TableStocktaking({
   tableName = "",
   tableId = 0,
   invent = false,
+  counter = 0,
 }) {
   const [data, setData] = useState<ITableStocktaking[]>([]);
   const [load, setLoad] = useState(false);
-  const counterUpdate = useCounterUpdate();
   const dataUrl: IDataUrl = {
     command: "GetStocktaking",
     data: { tableName: tableName, tableId: tableId },
@@ -51,9 +51,9 @@ export default function TableStocktaking({
     AxiosVit({ dataUrl, setData, setLoad });
     
     //консоль 24 Ноябрь 2025 (понедельник)
-    console.log('>>>> counterUpdate из (TableStocktaking):', counterUpdate); //консоль
+    //console.log('>>>> counterUpdate из (TableStocktaking):', counterUpdate); //консоль
     
-  }, [counterUpdate]);
+  }, [counter]);
 
   let listRowStocktaking: any;
 
