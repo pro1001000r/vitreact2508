@@ -146,7 +146,13 @@ const StocktakingScreen: FC = () => {
         />
         <Row>
           <Col>
-            {/* <b>{counterUpdate}</b> */}
+            
+            {/* <b>счетчик {counterUpdate}</b> 
+            <br/>
+            <b>цвет {data?.productsColor_id}</b>
+            <br/>
+            <b>размер {data?.productsSize_id}</b> */}
+
             {data?.errorScan && (
               <span style={{ color: "red" }}>
                 <b>Штрихкод не найден: {scan}</b>

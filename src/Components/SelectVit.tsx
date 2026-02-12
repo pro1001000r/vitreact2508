@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { FilterOptionOption } from "react-select";
 import AxiosVit from "./AxiosVit";
 import { ICommand, IGetTable } from "../inrefaces";
 
@@ -10,6 +10,12 @@ interface IProps {
 
   placeholder?: string;
   className?: string;
+}
+
+// 1. Описываем интерфейс для опции
+interface MyOption {
+  value: string;
+  label: string;
 }
 
 const SelectVit: FC<IProps> = ({
@@ -24,6 +30,20 @@ const SelectVit: FC<IProps> = ({
   const [isClearable, setIsClearable] = useState(true);
 
   let items: any = [];
+
+  function customFilterOption(
+    option: FilterOptionOption<MyOption>,
+    rawInput: string,
+  ) {
+    // Разбиваем ввод на отдельные слова и убираем лишние пробелы
+    const words = rawInput
+      .toLowerCase()
+      .split(" ")
+      .filter((word) => word.length > 0);
+
+    // Проверяем, что КАЖДОЕ слово из поиска есть в лейбле опции
+    return words.every((word) => option.label.toLowerCase().includes(word));
+  }
 
   const Func = (arg: any) => {
     arg.map((elem: any) => {
@@ -77,6 +97,7 @@ const SelectVit: FC<IProps> = ({
       <Select
         className={className}
         options={data}
+        filterOption={customFilterOption}
         isClearable
         value={data.filter(({ value }) => value === id)}
         onChange={getValue}
