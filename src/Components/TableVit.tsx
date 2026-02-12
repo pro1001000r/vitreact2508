@@ -23,9 +23,9 @@ export default function TableVit() {
   let listRow = data.map((elem) => {
     return (
       <tr key={elem.id}>
-        <td>{elem.id}</td>
+        {/* <td>{elem.id}</td> */}
         <td>
-          <ImageVit foto={elem?.foto} />
+          <ImageVit foto={elem?.foto} width={'50px'}/>
         </td>
         <td>
           <Nav.Link href={"/ProductsEdit/" + elem.id}>
@@ -48,7 +48,7 @@ export default function TableVit() {
       <Table striped hover size="sm">
         <thead>
           <tr>
-            <th>id</th>
+            {/* <th>id</th> */}
             <th>Картинка</th>
             <th>Товар</th>
             <th>Данные</th>

@@ -127,7 +127,7 @@ const CabinetScreen: FC = () => {
                 <GetName table="place" id={user.place_id} />
               </b>
               <br />
-              {/* склад: <GetName table="storage" id={user.storage_id} /> */}
+              склад: <GetName table="storage" id={user.storage_id} />
               <br />
               {/* телефон: {user.telefon} */}
               <br />

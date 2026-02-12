@@ -30,7 +30,6 @@ import SliderVit from "../../Components/SliderVit";
 import TableStocktaking from "../../Components/TableStocktaking";
 import TableBarcode from "../../Components/TableBarcode";
 
-
 declare var confirm: (q: string) => boolean; //объявление типа confirm
 
 const ProductsEditScreen: FC = () => {
@@ -139,42 +138,57 @@ const ProductsEditScreen: FC = () => {
       <Container>
         <Row>
           <Col className=" text-center">
-            <h4>Товар (редактирование)</h4>
+            <h4>{name}</h4>
           </Col>
         </Row>
-        <Row className="text-end mb-3">
-          <ImageVit foto={data?.foto} />
-        </Row>
-        <InputVit
-          value={name}
-          onChange={setName}
-          placeholder="Наименование..."
-        />
+        <Accordion className="my-1">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>
+              <Row className="w-100">
+                <Col>
+                  {data?.description}
+                  <br />
+                  {price}
+                </Col>
+                <Col className="d-flex justify-content-end">
+                  <ImageVit foto={data?.foto} />
+                </Col>
+              </Row>
+            </Accordion.Header>
+            <Accordion.Body>
+              {" "}
+              <InputVit
+                value={name}
+                onChange={setName}
+                placeholder="Наименование..."
+              />
+              <InputVit
+                value={price}
+                onChange={setPrice}
+                placeholder="Цена..."
+                type="number"
+              />
+              <br />
+              <ButtonVit
+                name="Назад"
+                onClick={() => navigate(-1)}
+                className=" btn-primary"
+              />
+              <ButtonVit
+                name="Сохранить"
+                onClick={UpdateProducts}
+                className=" btn-primary"
+              />
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
 
-        <InputVit
-          value={price}
-          onChange={setPrice}
-          placeholder="Цена..."
-          type="number"
-        />
         {/* <SelectVit
           tableName={"compositions"}
           id={compositions}
           setId={setCompositions}
           placeholder="Выберите состав..."
         /> */}
-
-        <br />
-        <ButtonVit
-          name="Назад"
-          onClick={() => navigate(-1)}
-          className=" btn-primary"
-        />
-        <ButtonVit
-          name="Сохранить"
-          onClick={UpdateProducts}
-          className=" btn-primary"
-        />
 
         {/* <ButtonVit
           name="Удалить"
@@ -183,20 +197,23 @@ const ProductsEditScreen: FC = () => {
         /> */}
 
         <Accordion className="my-1">
-          <Accordion.Item eventKey="0">
+          <Accordion.Item eventKey="1">
             <Accordion.Header>
               <b>Штрихкоды...</b>
             </Accordion.Header>
             <Accordion.Body>
-              <Row> <TableBarcode products_id={Number(params.id)} /> </Row>
+              <Row>
+                {" "}
+                <TableBarcode products_id={Number(params.id)} />{" "}
+              </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
 
         <Accordion className="my-1">
-          <Accordion.Item eventKey="1">
+          <Accordion.Item eventKey="2">
             <Accordion.Header>
-              <b>Подробнее о картинках...</b>
+              <b>Картинки</b>
             </Accordion.Header>
             <Accordion.Body>
               <UploadFilesVit
@@ -210,20 +227,10 @@ const ProductsEditScreen: FC = () => {
           </Accordion.Item>
         </Accordion>
 
-        <Accordion className="my-1">
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>
-              <b>Подробнее об инвентаризации...</b>
-            </Accordion.Header>
-            <Accordion.Body>
-              <TableStocktaking
-                tableName={"products_id"}
-                tableId={Number(params.id)}
-              />
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-
+        <TableStocktaking
+          tableName={"products_id"}
+          tableId={Number(params.id)}
+        />
         <br />
         <br />
         <br />

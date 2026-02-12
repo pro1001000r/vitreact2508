@@ -5,6 +5,7 @@ import AxiosVit from "./AxiosVit";
 import PopoverVit from "./PopoverVit";
 
 import { IDataUrl } from "../inrefaces";
+import ImageVit from "./ImageVit";
 
 interface ITableStocktaking {
   id: number;
@@ -16,8 +17,8 @@ interface ITableStocktaking {
   price: number;
   productsname: number;
   code1c: number;
-  compositions_id: number;
-  compositionsname: number;
+  foto: string;
+  description: string;
   productsColor_id: number;
   colorname: number;
   productsSize_id: number;
@@ -79,6 +80,7 @@ export default function TableStocktaking({
               <br />
               <b>{elem.sizename}</b>
             </Nav.Link>
+            <ImageVit foto={elem?.foto} width={'50px'}/>
           </td>
           <PopoverVit id={elem.id} invent={invent}>
             <td>
@@ -90,7 +92,7 @@ export default function TableStocktaking({
               {elem.price}
               <br />
               <div style={{ fontSize: "12px" }}>арт: {elem.article}</div>
-              <div style={{ fontSize: "12px" }}>{elem.compositionsname}</div>
+              <div style={{ fontSize: "12px" }}>{elem.description}</div>
               <div style={{ fontSize: "12px" }}>{elem.barcode}</div>
             </td>
           </PopoverVit>
@@ -124,6 +126,20 @@ export default function TableStocktaking({
           <Table striped hover size="sm">
             <tbody>{listRowStocktaking}</tbody>
           </Table>
+          <br/>
+          <br/>
+          <p>Тут могла быть ваша реклама :) но облом - ей здесь не место</p>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          
         </>
       )}
     </>
