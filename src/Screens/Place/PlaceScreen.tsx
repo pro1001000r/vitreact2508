@@ -4,6 +4,7 @@ import { ICommand, IGetTable, IPlace } from "../../inrefaces";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
 import GetName from "../../Components/GetName";
 import { useNavigate } from "react-router-dom";
+import StocktakingCount from "../../Components/StocktakingCount";
 
 const PlaceScreen = () => {
   const [data, setData] = useState<IPlace[]>([]);
@@ -35,7 +36,13 @@ const PlaceScreen = () => {
             <GetName table={"storage"} id={item.storage_id} />
 
             <Card.Text className="small">
-              <Col> код: {item.id} </Col>
+              <Row>
+                {" "}
+                <Col> код: {item.id} </Col>
+                <Col>
+                  позиций: <b><StocktakingCount tableName={"place_id"} tableId={item.id} /></b>
+                </Col>
+              </Row>
             </Card.Text>
           </Card.Body>
         </Card>

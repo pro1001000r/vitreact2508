@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";
 import TableStocktaking from "../../Components/TableStocktaking";
+import StocktakingCount from "../../Components/StocktakingCount";
 
 const PlaceEditScreen: FC = () => {
   const [data, setData] = useState<IPlace>();
@@ -64,6 +65,10 @@ const PlaceEditScreen: FC = () => {
     <>
       <Container>
         <h3>Место хранения</h3>
+        <StocktakingCount
+                                      tableName={"place_id"}
+                                      tableId={Number(params.id)}
+                                    />
         <InputVit value={name} onChange={setName} />
         <SelectVit tableName={"storage"} id={storage} setId={setStorage} />
         <ButtonVit name="Назад" onClick={() => navigate(-1)} />

@@ -34,7 +34,7 @@ export interface IProducts extends ITableBase {
   price?: number;
   compositions_id?: number;
   foto?: string;
-  description?:string;
+  description?: string;
 }
 
 export interface IStocktaking {
@@ -159,7 +159,10 @@ export interface IDeleteFotosById extends IDataUrl {
   command: ICommand.DeleteFotosById;
   data: { tableId: number };
 }
-
+export interface IStocktakingCount extends IDataUrl {
+  command: "GetStocktakingCount";
+  data: { tableName: string; tableId: number };
+}
 export interface IListBarcodeProducts extends IDataUrl {
   command: "ListBarcodeProducts";
   data: { products_id: number };

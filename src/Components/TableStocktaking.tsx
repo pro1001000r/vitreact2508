@@ -128,7 +128,7 @@ export default function TableStocktaking({
           </Table>
           <br/>
           <br/>
-          <p>Тут могла быть ваша реклама :) но облом - ей здесь не место</p>
+          
           <br/>
           <br/>
           <br/>
