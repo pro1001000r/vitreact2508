@@ -1,24 +1,24 @@
 /* import vstyles from 'VitCSS.module.css'; */
 
 @font-face {
-  font-family: 'NinaCTT';
+  font-family: "NinaCTT";
   /* шрифт прописью */
   src: url("/src/Template/fonts/NinaCTT.ttf");
   /* Путь к файлу со шрифтом */
 }
 .vit-font-propis {
-  font-family: 'NinaCTT';
+  font-family: "NinaCTT";
   /* font-size: 96px; */
 }
 
 @font-face {
-	font-family: 'EanGnivc';
-	src: url("/src/Template/fonts/EanGnivc.ttf"); 
+  font-family: "EanGnivc";
+  src: url("/src/Template/fonts/EanGnivc.ttf");
 }
- 
+
 .barcode {
-	font-family: 'EanGnivc';
-	font-size: 96px;
+  font-family: "EanGnivc";
+  font-size: 96px;
 }
 
 /****************переменные цвета*************/
@@ -45,16 +45,16 @@
 /* **************************************изображения ***************************************/
 
 .vitcenter {
-    position: "fixed";
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: "flex";
-    justify-content: "center";
-    align-items: "center";
-    height: "100%";
-  };
+  position: "fixed";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+  height: "100%";
+}
 
 .vitright {
   display: flex;
@@ -112,15 +112,66 @@
 
 /* **************************************текст************************************************************ */
 
-
-
 .vit-font-verdana {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .vit-color-gold-logo {
   opacity: 1;
-  text-shadow: black 0px 10px 20px, black 1px 1px 3px;
+  text-shadow:
+    black 0px 10px 20px,
+    black 1px 1px 3px;
   color: hsl(43, 89%, 52%);
   /* font-family: BirchCTT; */
+}
+
+.vit-background-image {
+  /* Путь к вашей картинке */
+  /* background-image: url('../images/FonVit.png');  */
+
+  /* Свойства для отображения картинки */
+  /* background-size: cover;
+    background-attachment: fixed;
+    background-position: center; */
+
+  /* Размеры на весь экран */
+  /* width: 100vw;
+    height: 100vh;  */
+
+  /* Позиционирование */
+  position: relative;
+
+  /* --- НОВОЕ: Добавляем полупрозрачный черный слой --- */
+  background: rgba(0, 0, 0, 0.5);  
+  /* Объяснение: Черный цвет (0,0,0) с прозрачностью 0.5 (50%).
+       Вы можете заменить 0,0,0 на любой другой цвет. */
+  z-index: 1;
+  /* opacity: 0.7; */
+  /* color:black; */
+}
+
+.vit-background-image::before {
+  content: ""; /* Обязательное свойство для псевдоэлементов */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+   /* filter: brightness(50%); */
+
+  /* Путь к вашей картинке */
+  background-image: url("../images/FonVit.png");
+
+  /* Картинка должна покрывать весь блок */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  /* Создаем эффект прозрачности (затемнения) */
+  /* background-color: rgba(8, 4, 4, 0.123); */
+  /* Черный цвет с прозрачностью 50%. Меняйте последнее число (от 0 до 1) */
+
+  /* Уводим фон под текст */
+  z-index: -1;
 }
