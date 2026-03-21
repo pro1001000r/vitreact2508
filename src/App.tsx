@@ -18,10 +18,12 @@ import PlaceScreen from "./Screens/Place/PlaceScreen";
 import PlaceNewScreen from "./Screens/Place/PlaceNewScreen";
 import PlaceEditScreen from "./Screens/Place/PlaceEditScreen";
 
+
 const App: React.FC = () => {
   return (
     <>
       {/* <ContextVitProvider> */}
+     
       <Router>
         <NavBar />
         <NavBottomVit />

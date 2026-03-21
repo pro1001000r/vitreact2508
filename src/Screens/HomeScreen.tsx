@@ -7,6 +7,7 @@ import Logo from "../Template/images/LogoPikclick512.png";
 import ButtonVit from "../Components/ButtonVit";
 import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
+import { Helmet } from 'react-helmet';
 
 const HometScreen: FC = () => {
   const [scan, setScan] = useState<string>("");
@@ -14,6 +15,10 @@ const HometScreen: FC = () => {
 
   return (
     <div>
+      <Helmet>
+       {/* Основные теги для поисковиков */}
+      
+      </Helmet>
       <Container>
         {/* //<div className="vit-background-image"></div> */}
         <Row>
