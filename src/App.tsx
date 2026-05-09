@@ -17,6 +17,8 @@ import StocktakingScreen from "./Screens/StocktakingScreen";
 import PlaceScreen from "./Screens/Place/PlaceScreen";
 import PlaceNewScreen from "./Screens/Place/PlaceNewScreen";
 import PlaceEditScreen from "./Screens/Place/PlaceEditScreen";
+import UsersScreen from "./Screens/Users/UsersScreen";
+import UserEditScreen from "./Screens/Users/UserEditScreen";
 
 
 const App: React.FC = () => {
@@ -37,6 +39,8 @@ const App: React.FC = () => {
           <Route path="/Place" element={<PlaceScreen />} />
           <Route path="/PlaceNew" element={<PlaceNewScreen />} />
           <Route path="/PlaceEdit/:id" element={<PlaceEditScreen />} />
+          <Route path="/Users" element={<UsersScreen />} />
+          <Route path="/UserEdit/:id" element={<UserEditScreen />} />
         </Routes>
       </Router>
       {/* </ContextVitProvider> */}

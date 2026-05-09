@@ -22,21 +22,22 @@ const HometScreen: FC = () => {
       <Container>
         {/* //<div className="vit-background-image"></div> */}
         <Row>
-          <Col className="vit-background-image">
+          {/* <Col className="vit-background-image"> */}
+         <Col>
             <br />
             <h1 className="text-center">
               <Image src={Logo} alt="Логотип" className="vitImageContain " />
 
               <p className="vit-font-propis">
                 <b>
-                  Инвентаризация <br />
+                  Инвентаризация
                   <br />
-                  <small> - легко и просто</small>
+                  <small> - быстро и просто</small>
                 </b>
               </p>
             </h1>
             <h2 className="text-center">
-              <p>Сканируй. Считай. Управляй.</p>
+              <p>Сканируй. <br />     Считай. <br />    Управляй.</p>
             </h2>
 
             <Row className="text-center">
@@ -50,6 +51,7 @@ const HometScreen: FC = () => {
                 /> */}
 
                 <ButtonVit href="/Auth" name="Войти в систему" />
+                <ButtonVit href="/Users" name="Пользователи" />
 
                 <ModalVit show={show} setShow={setShow}>
                   <ScanerVit setScan={setScan} setShow={undefined} />
