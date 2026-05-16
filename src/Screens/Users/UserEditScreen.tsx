@@ -70,6 +70,28 @@ export default function UsersEditScreen() {
     AxiosVit({ dataUrl: dataUrl });
   };
 
+  //Сохраняем изменения и уходим со странички
+  const CreateUser = () => {
+    const dataUrl: IDataUrl = {
+      command: ICommand.CreateTableItem,
+      data: {
+        tableName: "users",
+        vp: {
+          name: user.name,
+          storage_id: user.storage_id,
+          place_id: user.place_id,
+          telefon: user.telefon,
+          login: user.name,
+          password: user.name,
+          active: true,
+          status: "U",
+        },
+      },
+    };
+
+    AxiosVit({ dataUrl: dataUrl });
+  };
+
   useEffect(() => {
     GetUser();
   }, []);
@@ -115,7 +137,7 @@ export default function UsersEditScreen() {
               <p>
                 <b>{user.name} </b>
                 <br />
-                место проведения инвентаризации:{" "}
+                место проведения инвентаризации:
                 <b>
                   <GetName table="place" id={user.place_id} />
                 </b>
@@ -168,7 +190,7 @@ export default function UsersEditScreen() {
               {!user.id && (
                 <ButtonVit
                   name="Создать"
-                  onClick={UpdateUser}
+                  onClick={CreateUser}
                   className=" btn-primary"
                 />
               )}
