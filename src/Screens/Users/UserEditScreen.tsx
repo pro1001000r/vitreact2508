@@ -32,10 +32,10 @@ export default function UsersEditScreen() {
   //   setUser((prev) =>{...prev, data1})
   // }
 
-  const [usersname, setUsersname] = useState(user.name);
-  const [storage, setStorage] = useState(user.storage_id);
-  const [place, setPlace] = useState(user.place_id);
-  const [telefon, setTelefon] = useState(user.telefon);
+  // const [usersname, setUsersname] = useState(user.name);
+  // const [storage, setStorage] = useState(user.storage_id);
+  // const [place, setPlace] = useState(user.place_id);
+  // const [telefon, setTelefon] = useState(user.telefon);
 
   //Собираем данные из базы
   const GetUser = () => {
@@ -59,10 +59,10 @@ export default function UsersEditScreen() {
         tableName: "users",
         tableId: user.id,
         vp: {
-          name: usersname,
-          storage_id: storage,
-          place_id: place,
-          telefon: telefon,
+          name: user.name,
+          storage_id: user.storage_id,
+          place_id: user.place_id,
+          telefon: user.telefon,
         },
       },
     };
@@ -75,8 +75,7 @@ export default function UsersEditScreen() {
   }, []);
 
   useEffect(() => {
-    //консоль 16 Май 2026 (суббота)
-    console.log(">>>> setUser2 из (UserEditScreen):", user); //консоль
+    console.log(">>>> setUser из (UserEditScreen):", user); //консоль
   }, [user]);
 
   const handleChange = (
@@ -103,76 +102,80 @@ export default function UsersEditScreen() {
 
   return (
     <>
-      {user && (
-        <Container>
-          <h3>Пользователь</h3>
-          {user?.name}
-          <br />
-
-          {user?.status}
-          <br />
-          <StatusUser status={user?.status} />
-          <br />
-          {user?.name}
-          {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
-          <Accordion className="mb-1">
-            <Accordion.Item eventKey="0">
-              <Accordion.Header>
-                <p>
-                  <b>{user.name} </b>
-                  <br />
-                  место проведения инвентаризации:{" "}
-                  <b>
-                    <GetName table="place" id={user.place_id} />
-                  </b>
-                  <br />
-                  склад: <GetName table="storage" id={user.storage_id} />
-                  <br />
-                  {/* телефон: {user.telefon} */}
-                  <br />
-                  {/* логин: {user.login} */}
-                </p>
-              </Accordion.Header>
-              <Accordion.Body>
-                {/* className="d-flex small justify-content-end align-items-end" */}
-                <Row>
-                  <InputVit
-                    value={user.name}
-                    onChange={(value) => handleChange("name", value)}
-                    placeholder="Имя..."
-                  />
-
-                  <InputVit
-                    value={user.telefon}
-                    onChange={(value) => handleChange("telefon", value)}
-                    placeholder="Телефон..."
-                  />
-
-                  {/* Вносим изменения по складу */}
-                  <SelectVit
-                    className="mb-3"
-                    tableName={"storage"}
-                    id={Number(user.storage_id)}
-                    setId={(value) => handleChange("storage_id", value)}
-                  />
-                  {/* Вносим изменения по месту инвентаризации */}
-                  <SelectVit
-                    className="mb-3"
-                    tableName={"place"}
-                    id={Number(user.place_id)}
-                    setId={(value) => handleChange("place_id", value)}
-                  />
-                </Row>
-                {/* <ButtonVit
+      <Container>
+        <h3>{user?.name} </h3>
+        {user?.status}
+        <br />
+        <StatusUser status={user?.status} />
+        <br />
+        {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
+        <Accordion className="mb-1">
+          <Accordion.Item eventKey="0">
+            <Accordion.Header>
+              <p>
+                <b>{user.name} </b>
+                <br />
+                место проведения инвентаризации:{" "}
+                <b>
+                  <GetName table="place" id={user.place_id} />
+                </b>
+                <br />
+                склад: <GetName table="storage" id={user.storage_id} />
+                <br />
+                {/* телефон: {user.telefon} */}
+                <br />
+                {/* логин: {user.login} */}
+              </p>
+            </Accordion.Header>
+            <Accordion.Body>
+              {/* className="d-flex small justify-content-end align-items-end" */}
+              <Row>
+                <InputVit
+                  value={user.name}
+                  onChange={(value) => handleChange("name", value)}
+                  placeholder="Имя..."
+                />
+                <p>телефон:</p>
+                <InputVit
+                  value={user.telefon}
+                  onChange={(value) => handleChange("telefon", value)}
+                  placeholder="Телефон..."
+                />
+                <p>склад:</p>
+                {/* Вносим изменения по складу */}
+                <SelectVit
+                  className="mb-3"
+                  tableName={"storage"}
+                  id={Number(user.storage_id)}
+                  setId={(value) => handleChange("storage_id", value)}
+                />
+                <p>место инвентаризации:</p>
+                {/* Вносим изменения по месту инвентаризации */}
+                <SelectVit
+                  className="mb-3"
+                  tableName={"place"}
+                  id={Number(user.place_id)}
+                  setId={(value) => handleChange("place_id", value)}
+                />
+              </Row>
+              {user.id && (
+                <ButtonVit
                   name="Сохранить"
                   onClick={UpdateUser}
                   className=" btn-primary"
-                /> */}
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
-        </Container>
-      )}
+                />
+              )}
+              {!user.id && (
+                <ButtonVit
+                  name="Создать"
+                  onClick={UpdateUser}
+                  className=" btn-primary"
+                />
+              )}
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </Container>
     </>
   );
 }
