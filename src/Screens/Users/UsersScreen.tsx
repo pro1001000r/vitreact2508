@@ -66,6 +66,7 @@ export default function UsersScreen() {
       <Row>
         <Col>Пользователи</Col>
       </Row>{" "}
+      <ButtonVit name="Создать +" href={"/UserEdit/0"} />
       <Row>{listUsers}</Row>
     </>
   );
