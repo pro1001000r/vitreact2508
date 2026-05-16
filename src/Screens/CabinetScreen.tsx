@@ -190,6 +190,7 @@ const CabinetScreen: FC = () => {
         name="Места хранения"
         href="/Place"
       />
+      <ButtonVit href="/Users" name="Пользователи" />
 
       <TableStocktaking tableName={"users_id"} tableId={user.id} />
     </Container>

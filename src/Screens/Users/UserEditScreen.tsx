@@ -1,46 +1,178 @@
 import { useEffect, useState } from "react";
-import { ICommand, IGetTableById, IUsers } from "../../inrefaces";
-import { Container } from "react-bootstrap";
+import { ICommand, IDataUrl, IGetTableById, IUsers } from "../../inrefaces";
+import { Accordion, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import AxiosVit from "../../Components/AxiosVit";
 import TableStocktaking from "../../Components/TableStocktaking";
+import StatusUser from "../../Components/StatusUser";
+import GetName from "../../Components/GetName";
+import InputVit from "../../Components/InputVit";
+import SelectVit from "../../Components/SelectVit";
+import { useUserSession } from "../../Components/useStoreZustandVit";
+import ButtonVit from "../../Components/ButtonVit";
+import { Prev } from "react-bootstrap/cjs/PageItem";
 
-export default function UsersScreen() {
-  const [data, setData] = useState<IUsers>();
+export default function UsersEditScreen() {
+  // const [data, setData] = useState<IUsers>();
   const params = useParams();
 
-//консоль 09 Май 2026 (суббота)
-console.log('>>>> params из (UserEditScreen):', params); //консоль
+  // пустые значения
+  const [user, setUser] = useState<IUsers>({
+    name: "",
+    login: "",
+    password: "",
+    active: false,
+    status: "U",
+    storage_id: undefined,
+    place_id: undefined,
+    telefon: undefined,
+  });
+
+  // function setUser1(data1) {
+  //   setUser((prev) =>{...prev, data1})
+  // }
+
+  const [usersname, setUsersname] = useState(user.name);
+  const [storage, setStorage] = useState(user.storage_id);
+  const [place, setPlace] = useState(user.place_id);
+  const [telefon, setTelefon] = useState(user.telefon);
 
   //Собираем данные из базы
   const GetUser = () => {
-    const dataUrl: IGetTableById = {
-      command: ICommand.GetTableById,
+    if (params.id) {
+      const dataUrl: IGetTableById = {
+        command: ICommand.GetTableById,
+        data: {
+          tableName: "users",
+          tableId: Number(params.id),
+        },
+      };
+      AxiosVit({ dataUrl, setData: setUser });
+    }
+  };
+
+  //Сохраняем изменения и уходим со странички
+  const UpdateUser = () => {
+    const dataUrl: IDataUrl = {
+      command: ICommand.UpdateTableById,
       data: {
         tableName: "users",
-        tableId: Number(params.id),
+        tableId: user.id,
+        vp: {
+          name: usersname,
+          storage_id: storage,
+          place_id: place,
+          telefon: telefon,
+        },
       },
     };
-    AxiosVit({ dataUrl, setData });
+
+    AxiosVit({ dataUrl: dataUrl });
   };
 
   useEffect(() => {
     GetUser();
   }, []);
 
-   //консоль 09 Май 2026 (суббота)
-  console.log(">>>> users из (UsersScreen):", data); //консоль
+  useEffect(() => {
+    //консоль 16 Май 2026 (суббота)
+    console.log(">>>> setUser2 из (UserEditScreen):", user); //консоль
+  }, [user]);
+
+  const handleChange = (
+    field: keyof IUsers,
+    value: string | number | boolean | null,
+  ) => {
+    setUser((prev) => {
+      if (!prev) {
+        return {
+          name: "",
+          login: "",
+          password: "",
+          active: false,
+          status: "U",
+          storage_id: undefined,
+          place_id: undefined,
+          telefon: undefined,
+          [field]: value,
+        };
+      }
+      return { ...prev, [field]: value };
+    });
+  };
 
   return (
     <>
-      <Container>
-        <h3>Пользователь</h3>
-        {data?.name} {data?.status} {data?.name} {data?.name}
-        <TableStocktaking
-                                tableName={"users_id"}
-                                tableId={Number(data?.id)}
-                              />
-      </Container>
+      {user && (
+        <Container>
+          <h3>Пользователь</h3>
+          {user?.name}
+          <br />
+
+          {user?.status}
+          <br />
+          <StatusUser status={user?.status} />
+          <br />
+          {user?.name}
+          {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
+          <Accordion className="mb-1">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>
+                <p>
+                  <b>{user.name} </b>
+                  <br />
+                  место проведения инвентаризации:{" "}
+                  <b>
+                    <GetName table="place" id={user.place_id} />
+                  </b>
+                  <br />
+                  склад: <GetName table="storage" id={user.storage_id} />
+                  <br />
+                  {/* телефон: {user.telefon} */}
+                  <br />
+                  {/* логин: {user.login} */}
+                </p>
+              </Accordion.Header>
+              <Accordion.Body>
+                {/* className="d-flex small justify-content-end align-items-end" */}
+                <Row>
+                  <InputVit
+                    value={user.name}
+                    onChange={(value) => handleChange("name", value)}
+                    placeholder="Имя..."
+                  />
+
+                  <InputVit
+                    value={user.telefon}
+                    onChange={(value) => handleChange("telefon", value)}
+                    placeholder="Телефон..."
+                  />
+
+                  {/* Вносим изменения по складу */}
+                  <SelectVit
+                    className="mb-3"
+                    tableName={"storage"}
+                    id={Number(user.storage_id)}
+                    setId={(value) => handleChange("storage_id", value)}
+                  />
+                  {/* Вносим изменения по месту инвентаризации */}
+                  <SelectVit
+                    className="mb-3"
+                    tableName={"place"}
+                    id={Number(user.place_id)}
+                    setId={(value) => handleChange("place_id", value)}
+                  />
+                </Row>
+                {/* <ButtonVit
+                  name="Сохранить"
+                  onClick={UpdateUser}
+                  className=" btn-primary"
+                /> */}
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        </Container>
+      )}
     </>
   );
 }

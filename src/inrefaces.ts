@@ -70,6 +70,10 @@ export interface IFotos {
   foto64: string;
 }
 
+export interface IUserStatus {
+  status: 'U' | 'W' | 'A' | 'S' | undefined;
+}
+
 export interface IUsers {
   id?: number;
   code1c?: string | null;
@@ -83,6 +87,9 @@ export interface IUsers {
   storage_id?: number;
   place_id?: number;
 }
+
+
+
 
 export interface IUserSession {
   id: number | undefined;

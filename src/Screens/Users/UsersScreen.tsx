@@ -5,12 +5,10 @@ import TableVit from "../../Components/TableVit";
 import AxiosVit from "../../Components/AxiosVit";
 import StocktakingCount from "../../Components/StocktakingCount";
 import ButtonVit from "../../Components/ButtonVit";
+import StatusUser, { STATUS_DISPLAY } from "../../Components/StatusUser";
 
 export default function UsersScreen() {
   const [users, setUsers] = useState<IUsers[]>([]);
-
-  //консоль 09 Май 2026 (суббота)
-  console.log(">>>> users из (UsersScreen):", users); //консоль
 
   useEffect(() => {
     const GetUsers = () => {
@@ -29,6 +27,9 @@ export default function UsersScreen() {
 
   //показ самой таблицы в отдельной компоненте
   let listUsers = users.map((item) => {
+    // let status: string = item.status ?? "unknown";
+
+    let status = StatusUser(item.status);
     //мапим массив
     return (
       <div key={item.id}>
@@ -37,7 +38,8 @@ export default function UsersScreen() {
             <Card.Title>
               <Nav.Link href={"/UserEdit/" + item.id}>{item.name}</Nav.Link>
             </Card.Title>
-
+            {status}
+            <StatusUser status={item.status} />
             <Row>
               <Col>
                 {" "}
@@ -45,7 +47,7 @@ export default function UsersScreen() {
                 <p>{item.active && "Активный"}</p>
               </Col>
               <Col>
-                <ButtonVit name="edit" href="#" />
+                <ButtonVit name="ред." href={"/UserEdit/" + item.id} />
                 <br />
                 проинвентаризировано:{" "}
                 <b>
