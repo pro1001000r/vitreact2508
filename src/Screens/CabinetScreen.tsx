@@ -203,7 +203,7 @@ const CabinetScreen: FC = () => {
             </p>
           </Accordion.Header>
           <Accordion.Body>
-            <TableStocktaking tableName={"users_id"} tableId={user.id} />
+            {/* <TableStocktaking tableName={"users_id"} tableId={user.id} /> */}
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>

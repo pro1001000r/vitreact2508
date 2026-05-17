@@ -64,8 +64,9 @@ export default function TableStocktaking({
           <td style={{ fontSize: "12px" }}>
             {elem.date}
             <br />
-            {elem.usersname}
-            <br />
+            <Nav.Link href={"/UserEdit/" + elem.users_id}>
+              {elem.usersname}
+            </Nav.Link>
             {elem.storagename}
             <br />
             <Nav.Link href={"/PlaceEdit/" + elem.place_id}>
@@ -80,7 +81,7 @@ export default function TableStocktaking({
               <br />
               <b>{elem.sizename}</b>
             </Nav.Link>
-            <ImageVit foto={elem?.foto} width={'50px'}/>
+            <ImageVit foto={elem?.foto} width={"50px"} />
           </td>
           <PopoverVit id={elem.id} invent={invent}>
             <td>
@@ -126,20 +127,18 @@ export default function TableStocktaking({
           <Table striped hover size="sm">
             <tbody>{listRowStocktaking}</tbody>
           </Table>
-          <br/>
-          <br/>
-          
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
         </>
       )}
     </>

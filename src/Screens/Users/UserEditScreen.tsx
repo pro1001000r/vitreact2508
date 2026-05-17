@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import { ICommand, IDataUrl, IGetTableById, IUsers } from "../../inrefaces";
-import { Accordion, Container, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import AxiosVit from "../../Components/AxiosVit";
 import TableStocktaking from "../../Components/TableStocktaking";
 import StatusUser from "../../Components/StatusUser";
 import GetName from "../../Components/GetName";
 import InputVit from "../../Components/InputVit";
 import SelectVit from "../../Components/SelectVit";
-import { useUserSession } from "../../Components/useStoreZustandVit";
 import ButtonVit from "../../Components/ButtonVit";
-import { Prev } from "react-bootstrap/cjs/PageItem";
 import StocktakingCount from "../../Components/StocktakingCount";
 
 export default function UsersEditScreen() {
   // const [data, setData] = useState<IUsers>();
   const params = useParams();
+  const navigate = useNavigate();
 
   // пустые значения
   const [user, setUser] = useState<IUsers>({
@@ -29,6 +28,9 @@ export default function UsersEditScreen() {
     place_id: undefined,
     telefon: undefined,
   });
+
+  //
+  const [notS, setNotS] = useState(true);
 
   // function setUser1(data1) {
   //   setUser((prev) =>{...prev, data1})
@@ -62,6 +64,8 @@ export default function UsersEditScreen() {
         tableId: user.id,
         vp: {
           name: user.name,
+          active: user.active,
+          status: user.status,
           login: user.login,
           password: user.password,
           storage_id: user.storage_id,
@@ -72,6 +76,7 @@ export default function UsersEditScreen() {
     };
 
     AxiosVit({ dataUrl: dataUrl });
+    navigate("/UserEdit/" + user.id);
   };
 
   //Сохраняем изменения и уходим со странички
@@ -94,6 +99,9 @@ export default function UsersEditScreen() {
     };
 
     AxiosVit({ dataUrl: dataUrl });
+    if (user.id) {
+      navigate("/UserEdit/" + user.id);
+    }
   };
 
   useEffect(() => {
@@ -103,6 +111,10 @@ export default function UsersEditScreen() {
   useEffect(() => {
     // console.log(">>>> setUser из (UserEditScreen):", user); //консоль
     // console.log(">>>> id из (UserEditScreen):", user.id); //консоль
+    setNotS(true);
+    if (user?.status === "S") {
+      setNotS(false);
+    }
   }, [user]);
 
   const handleChange = (
@@ -136,6 +148,16 @@ export default function UsersEditScreen() {
         <br />
         <StatusUser status={user?.status} />
         <br />
+        <ButtonVit
+          name="Назад"
+          onClick={() => navigate(-1)}
+          className=" btn-primary"
+        />
+        <ButtonVit
+          name="Пользователи"
+          onClick={() => navigate("/Users/")}
+          className=" btn-primary"
+        />
         {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
         <Accordion className="mb-1">
           <Accordion.Item eventKey="0">
@@ -163,6 +185,33 @@ export default function UsersEditScreen() {
                   onChange={(value) => handleChange("name", value)}
                   placeholder="Имя..."
                 />
+                {notS && (
+                  <>
+                    <Col>
+                      <Form.Check // prettier-ignore
+                        style={{ left: "1" }}
+                        type="switch"
+                        label="Активный"
+                        checked={user.active}
+                        onChange={(e) => {
+                          // console.log("Новое состояние:", e.target.checked);
+                          handleChange("active", e.target.checked);
+                        }}
+                      />
+                    </Col>
+
+                    <Form.Select
+                      aria-label="Выберите статус"
+                      value={user?.status}
+                      onChange={(e) => handleChange("status", e.target.value)}
+                    >
+                      <option value="A">Администратор</option>
+                      <option value="W">Сотрудник</option>
+                      <option value="U">Пользователь</option>
+                    </Form.Select>
+                  </>
+                )}
+
                 <p>login:</p>
                 <InputVit
                   value={user.login ?? ""}
