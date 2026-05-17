@@ -32,6 +32,7 @@ export function useAxiosVit<T>(
 
     try {
       const response = await axios.post(apiUrl, dataUrl, config);
+      
       setData(response.data);
     } catch (err) {
       const error = err as Error;
