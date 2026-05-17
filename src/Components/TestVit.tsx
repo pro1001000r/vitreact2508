@@ -2,7 +2,7 @@ import React, { FC, useContext, useState } from "react";
 import { Card } from "react-bootstrap";
 import SpinnerLoadVit from "./SpinnerLoadVit";
 import ButtonVit from "./ButtonVit";
-import { ICommand, IGetTable, IUsers } from "../inrefaces";
+import { ICommand, IGetTable, IUsers } from "../interfaces";
 import GetProperty from "./GetProperty";
 import AxiosVit from "./AxiosVit";
 import { ContextVit } from "./ContextVit";

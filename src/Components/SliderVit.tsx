@@ -10,7 +10,7 @@ import {
   IFotos,
   IGetFotos,
   IGetTableById,
-} from "../inrefaces";
+} from "../interfaces";
 import AxiosVit from "./AxiosVit";
 import SpinnerLoadVit from "./SpinnerLoadVit";
 import ButtonVit from "./ButtonVit";

@@ -21,7 +21,7 @@ import {
   IGetTableById,
   IProducts,
   IUpdateTableById,
-} from "../../inrefaces";
+} from "../../interfaces";
 import ImageUpload from "../../Components/ImageUpload";
 import axios, { AxiosRequestConfig } from "axios";
 import ImageVit from "../../Components/ImageVit";
@@ -29,6 +29,7 @@ import UploadFilesVit from "../../Components/UploadFilesVit";
 import SliderVit from "../../Components/SliderVit";
 import TableStocktaking from "../../Components/TableStocktaking";
 import TableBarcode from "../../Components/TableBarcode";
+import StocktakingCount from "../../Components/StocktakingCount";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
 
@@ -149,6 +150,8 @@ const ProductsEditScreen: FC = () => {
                   {data?.description}
                   <br />
                   {price}
+                  <br />
+                  инв: {data && <StocktakingCount tableName="products_id" tableId={data.id} />}
                 </Col>
                 <Col className="d-flex justify-content-end">
                   <ImageVit foto={data?.foto} />

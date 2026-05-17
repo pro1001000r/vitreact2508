@@ -1,6 +1,6 @@
 import db from "../config.json";
 import axios from "axios";
-import {IDataUrl } from "../inrefaces";
+import {IDataUrl } from "../interfaces";
 
 // аксиос  лучше не прогать библиотека хорошая
 
@@ -53,7 +53,7 @@ const AxiosVit = ({
         setData(response.data);
         
         //консоль 04 Ноябрь 2025 (вторник)
-        //console.log('>>>> response.data из (AxiosVit):', response.data); //консоль
+        // console.log('>>>> response.data из (AxiosVit):', response.data); //консоль
         
       }
       if (setLoad) {
@@ -61,7 +61,7 @@ const AxiosVit = ({
       }
     } catch (e) {
       if (setData) {
-        setData(e);
+        // setData(e);
       }
     } finally {
       // if (setLoad) {

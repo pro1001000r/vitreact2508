@@ -21,7 +21,7 @@ import {
   IGetTableById,
   IProducts,
   IUpdateTableById,
-} from "../inrefaces";
+} from "../interfaces";
 import ImageUpload from "../Components/ImageUpload";
 import axios, { AxiosRequestConfig } from "axios";
 import ImageVit from "../Components/ImageVit";

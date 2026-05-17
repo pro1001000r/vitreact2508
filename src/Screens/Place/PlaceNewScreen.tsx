@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import AxiosVit from "../../Components/AxiosVit";
-import { ICommand, ICreateTableItem, IPlace } from "../../inrefaces";
+import { ICommand, ICreateTableItem, IPlace } from "../../interfaces";
 import { useUserSession } from "../../Components/useStoreZustandVit";
 import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";

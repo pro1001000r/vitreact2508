@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 
-import { ICommand, ICreateTableItem, IProducts } from "../../inrefaces";
+import { ICommand, ICreateTableItem, IProducts } from "../../interfaces";
 import TableVit from "../../Components/TableVit";
 import { Container } from "react-bootstrap";
 import InputVit from "../../Components/InputVit";
@@ -20,7 +20,7 @@ const ProductsScreen: FC = () => {
 
   const userSession = useUserSession()
   //консоль 22 Ноябрь 2025 (суббота)
-  console.log('>>>> userSession из (ProductsScreen):', userSession); //консоль
+  // console.log('>>>> userSession из (ProductsScreen):', userSession); //консоль
   
   
   const addHandler = (title: string) => {
@@ -40,6 +40,8 @@ const ProductsScreen: FC = () => {
     setProducts((prev) => [newProducts, ...prev]);
   };
 
+
+
   useEffect(() => {
     //консоль 10 Август 2025 (воскресенье)
     // console.log("products после:", products); //консоль
@@ -48,7 +50,7 @@ const ProductsScreen: FC = () => {
   return (
     <>
       <Container>
-        <p>{scan}</p>
+        {/* <p>{scan}</p>
         <ButtonVit
                       icon="UpcScan"
                       name="Сканировать"
@@ -61,7 +63,7 @@ const ProductsScreen: FC = () => {
         />
         <ModalVit show={show} setShow={setShow}>
           <ScanerVit setScan={setScan} setShow={undefined} />
-        </ModalVit>
+        </ModalVit> */}
 
         <TableVit />
       </Container>

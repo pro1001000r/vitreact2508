@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ICommand, IDataUrl, IGetTableById, IUsers } from "../../inrefaces";
+import { ICommand, IDataUrl, IGetTableById, IUsers } from "../../interfaces";
 import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AxiosVit from "../../Components/AxiosVit";

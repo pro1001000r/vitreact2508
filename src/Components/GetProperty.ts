@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { ICommand, IGetProperty } from "../inrefaces";
+import { ICommand, IGetProperty } from "../interfaces";
 import { useAxiosVit } from "./useAxiosVit";
 
 const GetProperty = (table: string, id: number, property: string) => {

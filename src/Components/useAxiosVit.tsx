@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 import db from "../config.json";
-import { IDataUrl } from "../inrefaces";
+import { IDataUrl } from "../interfaces"; // исправлено: "inrefaces" → "interfaces"
 import axios from "axios";
 
-export function useAxiosVit<T>(dataUrl: IDataUrl) {
-  const [load, setLoad] = useState(false);
-  const [data, setData] = useState<T>();
-  const [dataU, setDataU] = useState({});
+interface UseAxiosVitResult<T> {
+  data: T | null;
+  loading: boolean;
+  error: Error | null;
+}
+
+export function useAxiosVit<T>(
+  dataUrl: IDataUrl,
+  onLoadingChange?: (isLoading: boolean) => void
+): UseAxiosVitResult<T> {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   const config = {
     headers: {
@@ -17,27 +26,26 @@ export function useAxiosVit<T>(dataUrl: IDataUrl) {
   const apiUrl = db.pathDB;
 
   async function fetchVit() {
+    setLoading(true);
+    onLoadingChange?.(true);
+    setError(null);
+
     try {
-      //setLoad(true);
       const response = await axios.post(apiUrl, dataUrl, config);
       setData(response.data);
-      //console.log(">>>>data lj>>>>:", response.data); //консоль
-      setLoad(true);
-    } catch (e) {
-      setLoad(false);
+    } catch (err) {
+      const error = err as Error;
+      setError(error);
+      console.error("Ошибка запроса:", error);
     } finally {
-      setLoad(true);
+      setLoading(false);
+      onLoadingChange?.(false);
     }
   }
 
   useEffect(() => {
     fetchVit();
-    setDataU(dataUrl);
-  }, []);
+  }, [dataUrl]); // зависимость от dataUrl
 
-  useEffect(() => {
-    fetchVit();
-  }, [load, dataU]);
-
-  return { load, data };
+  return { data, loading, error };
 }

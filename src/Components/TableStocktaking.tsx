@@ -4,7 +4,7 @@ import AxiosVit from "./AxiosVit";
 
 import PopoverVit from "./PopoverVit";
 
-import { IDataUrl } from "../inrefaces";
+import { IDataUrl } from "../interfaces";
 import ImageVit from "./ImageVit";
 
 interface ITableStocktaking {

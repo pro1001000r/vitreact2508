@@ -1,15 +1,16 @@
-import { Nav, Table } from "react-bootstrap";
+import { Nav, Spinner, Table } from "react-bootstrap";
 import { useAxiosVit } from "./useAxiosVit";
-import { ICommand, IGetTable, IProducts } from "../inrefaces";
+import { ICommand, IGetTable, IProducts } from "../interfaces";
 import ImageVit from "./ImageVit";
 import GetName from "./GetName";
+import StocktakingCount from "./StocktakingCount";
 
 export default function TableVit() {
   const dataUrl: IGetTable = {
     command: ICommand.GetTable,
     data: { tableName: "products" },
   };
-  const { data } = useAxiosVit<IProducts[]>(dataUrl);
+  const { data, loading } = useAxiosVit<IProducts[]>(dataUrl);
 
   if (data === undefined) {
     return;
@@ -19,13 +20,15 @@ export default function TableVit() {
     table: string;
     id?: number;
   }
+  // <pre>{JSON.stringify(data, null, 2)}</pre>;
 
-  let listRow = data.map((elem) => {
+  let listRow = data?.map((elem) => {
+    //let count = StocktakingCount({tableName:"products_id",tableId: elem.id})
     return (
       <tr key={elem.id}>
         {/* <td>{elem.id}</td> */}
         <td>
-          <ImageVit foto={elem?.foto} width={'50px'}/>
+          <ImageVit foto={elem?.foto} width={"50px"} />
         </td>
         <td>
           <Nav.Link href={"/ProductsEdit/" + elem.id}>
@@ -35,7 +38,8 @@ export default function TableVit() {
         <td>
           <div style={{ fontSize: "12px" }}>
             <b>{elem.price} р.</b> <br />
-            <GetName table="compositions" id={elem.compositions_id} />
+            {/* <GetName table="compositions" id={elem.compositions_id} /> */}
+            {/* <StocktakingCount tableName="products_id" tableId={elem.id} />  */}
           </div>
           <br />
         </td>
@@ -43,8 +47,30 @@ export default function TableVit() {
     );
   });
 
+  const wrapperStyle: React.CSSProperties = {
+    position: "fixed",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  };
+  
+  //консоль 17 Май 2026 (воскресенье)
+  console.log('>>>> loading из (TableVit):', loading); //консоль
+  
+
   return (
     <>
+      {!loading && (
+        <div style={wrapperStyle}>
+          <Spinner animation="border" variant="secondary" />
+          <p>Загрузка...</p>
+        </div>
+      )}
       <Table striped hover size="sm">
         <thead>
           <tr>

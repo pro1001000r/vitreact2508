@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IDataUrl, IStocktaking } from "../inrefaces";
+import { IDataUrl, IStocktaking } from "../interfaces";
 import { useStoreZustandVit } from "./useStoreZustandVit";
 import db from "../config.json";
 

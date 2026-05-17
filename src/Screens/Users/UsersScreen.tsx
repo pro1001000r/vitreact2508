@@ -1,6 +1,6 @@
 import React, { useEffect, useState, FC } from "react";
 import { Card, Col, Container, Nav, Row } from "react-bootstrap";
-import { ICommand, IGetTable, IUsers } from "../../inrefaces";
+import { ICommand, IGetTable, IUsers } from "../../interfaces";
 import TableVit from "../../Components/TableVit";
 import AxiosVit from "../../Components/AxiosVit";
 import StocktakingCount from "../../Components/StocktakingCount";
@@ -33,7 +33,7 @@ export default function UsersScreen() {
     //мапим массив
     return (
       <div key={item.id}>
-        <Card className="m-2 vShadow">
+        <Card className="m-2 vShadow small">
           <Card.Body>
             <Card.Title>
               <Nav.Link href={"/UserEdit/" + item.id}>{item.name}</Nav.Link>
@@ -44,7 +44,8 @@ export default function UsersScreen() {
               <Col>
                 {" "}
                 код: {item.id}
-                <p>{item.active && "Активный"}</p>
+                {item.active && <p style={{color: 'green'}}>Активный</p>}
+                {!item.active && <p style={{color: 'red'}}>Отключен</p>}
               </Col>
               <Col>
                 <ButtonVit name="ред." href={"/UserEdit/" + item.id} />

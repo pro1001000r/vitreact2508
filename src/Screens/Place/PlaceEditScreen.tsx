@@ -2,7 +2,7 @@ import React, { useEffect, useState, FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AxiosVit from "../../Components/AxiosVit";
 import SelectVit from "../../Components/SelectVit";
-import { ICommand, IGetTableById, IPlace, IUpdateTableById } from "../../inrefaces";
+import { ICommand, IGetTableById, IPlace, IUpdateTableById } from "../../interfaces";
 import { Container } from "react-bootstrap";
 import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";

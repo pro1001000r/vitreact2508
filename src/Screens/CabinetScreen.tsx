@@ -7,7 +7,7 @@ import {
   IGetTableById,
   IUpdateTableById,
   IUsers,
-} from "../inrefaces";
+} from "../interfaces";
 import InputVit from "../Components/InputVit";
 
 import SelectVit from "../Components/SelectVit";

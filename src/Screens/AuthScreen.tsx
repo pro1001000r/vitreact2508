@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import ButtonVit from "../Components/ButtonVit";
 
-import { IAuth, ICommand, IUsers, IUserSession } from "../inrefaces";
+import { IAuth, ICommand, IUsers, IUserSession } from "../interfaces";
 import AxiosVit from "../Components/AxiosVit";
 import { ContextVit } from "../Components/ContextVit";
 import {

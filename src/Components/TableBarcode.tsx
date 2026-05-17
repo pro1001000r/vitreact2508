@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC } from "react";
-import { IBarcode, IListBarcodeProducts } from "../inrefaces";
+import { IBarcode, IListBarcodeProducts } from "../interfaces";
 import AxiosVit from "./AxiosVit";
 import { Table } from "react-bootstrap";
 

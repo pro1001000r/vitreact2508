@@ -9,7 +9,7 @@ import ScanerVit from "../Components/ScanerVit";
 import ButtonVit from "../Components/ButtonVit";
 import SelectVit from "../Components/SelectVit";
 import Stocktaking from "../Components/Stocktaking";
-import { ICommand, IDataUrl, IStocktaking } from "../inrefaces";
+import { ICommand, IDataUrl, IStocktaking } from "../interfaces";
 import TableStocktaking from "../Components/TableStocktaking";
 import AxiosVit from "../Components/AxiosVit";
 import NavBottomStocktakingVit from "../Components/NavBottomStocktakingVit";

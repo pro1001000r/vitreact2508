@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AxiosVit from "../../Components/AxiosVit";
-import { ICommand, IGetTable, IPlace } from "../../inrefaces";
+import { ICommand, IGetTable, IPlace } from "../../interfaces";
 import { Button, Card, Col, Container, Nav, Row } from "react-bootstrap";
 import GetName from "../../Components/GetName";
 import { useNavigate } from "react-router-dom";

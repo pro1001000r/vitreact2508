@@ -1,5 +1,5 @@
 import React, { createContext, FC, useContext, useState } from "react";
-import { IChildrenVit, IUsers } from "../inrefaces";
+import { IChildrenVit, IUsers } from "../interfaces";
 
 interface IContextVit {
   texttest?: string;

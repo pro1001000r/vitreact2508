@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import Select, { FilterOptionOption } from "react-select";
 import AxiosVit from "./AxiosVit";
-import { ICommand, IGetTable } from "../inrefaces";
+import { ICommand, IGetTable } from "../interfaces";
 
 interface IProps {
   tableName: string;

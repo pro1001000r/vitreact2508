@@ -168,7 +168,7 @@ export interface IDeleteFotosById extends IDataUrl {
 }
 export interface IStocktakingCount extends IDataUrl {
   command: "GetStocktakingCount";
-  data: { tableName: string; tableId: number };
+  data: { tableName: string; tableId: number | undefined };
 }
 export interface IListBarcodeProducts extends IDataUrl {
   command: "ListBarcodeProducts";

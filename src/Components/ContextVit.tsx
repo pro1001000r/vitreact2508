@@ -1,5 +1,5 @@
 import React, { createContext, FC, useState } from "react";
-import { IChildrenVit } from "../inrefaces";
+import { IChildrenVit } from "../interfaces";
 
 interface IContextVit {
   userSession: {

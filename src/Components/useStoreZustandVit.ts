@@ -1,7 +1,7 @@
 // import React, { FC } from "react";
 import { create, StateCreator } from "zustand";
 import { persist } from "zustand/middleware";
-import { IUserSession } from "../inrefaces";
+import { IUserSession } from "../interfaces";
 
 interface IContextVit {
   userSession: IUserSession;
