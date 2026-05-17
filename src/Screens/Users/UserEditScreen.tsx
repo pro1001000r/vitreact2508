@@ -11,6 +11,7 @@ import SelectVit from "../../Components/SelectVit";
 import { useUserSession } from "../../Components/useStoreZustandVit";
 import ButtonVit from "../../Components/ButtonVit";
 import { Prev } from "react-bootstrap/cjs/PageItem";
+import StocktakingCount from "../../Components/StocktakingCount";
 
 export default function UsersEditScreen() {
   // const [data, setData] = useState<IUsers>();
@@ -18,6 +19,7 @@ export default function UsersEditScreen() {
 
   // пустые значения
   const [user, setUser] = useState<IUsers>({
+    id: 0,
     name: "",
     login: "",
     password: "",
@@ -60,6 +62,8 @@ export default function UsersEditScreen() {
         tableId: user.id,
         vp: {
           name: user.name,
+          login: user.login,
+          password: user.password,
           storage_id: user.storage_id,
           place_id: user.place_id,
           telefon: user.telefon,
@@ -78,13 +82,13 @@ export default function UsersEditScreen() {
         tableName: "users",
         vp: {
           name: user.name,
+          login: user.login,
+          password: user.password,
+          status: "U",
+          active: true,
           storage_id: user.storage_id,
           place_id: user.place_id,
           telefon: user.telefon,
-          login: user.name,
-          password: user.name,
-          active: true,
-          status: "U",
         },
       },
     };
@@ -97,7 +101,8 @@ export default function UsersEditScreen() {
   }, []);
 
   useEffect(() => {
-    console.log(">>>> setUser из (UserEditScreen):", user); //консоль
+    // console.log(">>>> setUser из (UserEditScreen):", user); //консоль
+    // console.log(">>>> id из (UserEditScreen):", user.id); //консоль
   }, [user]);
 
   const handleChange = (
@@ -107,6 +112,7 @@ export default function UsersEditScreen() {
     setUser((prev) => {
       if (!prev) {
         return {
+          id: 0,
           name: "",
           login: "",
           password: "",
@@ -153,13 +159,25 @@ export default function UsersEditScreen() {
               {/* className="d-flex small justify-content-end align-items-end" */}
               <Row>
                 <InputVit
-                  value={user.name}
+                  value={user.name ?? ""}
                   onChange={(value) => handleChange("name", value)}
                   placeholder="Имя..."
                 />
+                <p>login:</p>
+                <InputVit
+                  value={user.login ?? ""}
+                  onChange={(value) => handleChange("login", value)}
+                  placeholder="login..."
+                />
+                <p>password:</p>
+                <InputVit
+                  value={user.password ?? ""}
+                  onChange={(value) => handleChange("password", value)}
+                  placeholder="password..."
+                />
                 <p>телефон:</p>
                 <InputVit
-                  value={user.telefon}
+                  value={user.telefon ?? ""}
                   onChange={(value) => handleChange("telefon", value)}
                   placeholder="Телефон..."
                 />
@@ -197,6 +215,26 @@ export default function UsersEditScreen() {
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
+        {user?.id && (
+          <Accordion className="mb-1">
+            <Accordion.Item eventKey="1">
+              <Accordion.Header>
+                <p>
+                  проинвентаризировано:{" "}
+                  <b>
+                    <StocktakingCount
+                      tableName={"users_id"}
+                      tableId={user.id}
+                    />
+                  </b>
+                </p>
+              </Accordion.Header>
+              <Accordion.Body>
+                <TableStocktaking tableName={"users_id"} tableId={user.id} />
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        )}
       </Container>
     </>
   );

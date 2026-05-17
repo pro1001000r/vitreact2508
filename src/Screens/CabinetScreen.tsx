@@ -21,6 +21,7 @@ import {
 } from "../Components/useStoreZustandVit";
 import { UpdatePlaceId } from "../Components/UpdatePlaceId";
 import TableStocktaking from "../Components/TableStocktaking";
+import StocktakingCount from "../Components/StocktakingCount";
 
 const CabinetScreen: FC = () => {
   //let id = sessionStorage.userId;
@@ -191,8 +192,22 @@ const CabinetScreen: FC = () => {
         href="/Place"
       />
       <ButtonVit href="/Users" name="Пользователи" />
-
-      <TableStocktaking tableName={"users_id"} tableId={user.id} />
+      <Accordion className="mb-1">
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>
+            <p>
+              проинвентаризировано:{" "}
+              <b>
+                <StocktakingCount tableName={"users_id"} tableId={user.id} />
+              </b>
+            </p>
+          </Accordion.Header>
+          <Accordion.Body>
+            <TableStocktaking tableName={"users_id"} tableId={user.id} />
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    
     </Container>
   );
 };

@@ -39,7 +39,7 @@ export default function UsersScreen() {
               <Nav.Link href={"/UserEdit/" + item.id}>{item.name}</Nav.Link>
             </Card.Title>
             {status}
-            <StatusUser status={item.status} />
+            {/* <StatusUser status={item.status} /> */}
             <Row>
               <Col>
                 {" "}
