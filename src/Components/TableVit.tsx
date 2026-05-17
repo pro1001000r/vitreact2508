@@ -126,18 +126,20 @@ export default function TableVit() {
   return (
     <div>
       {/* Панель поиска и сортировки */}
-      <div className="d-flex justify-content-between align-items-center mb-3">
+      {/* <div className="d-flex justify-content-between align-items-center mb-3"> */}
+      <div className="mb-1">
+        <div className="mb-1">
         {/* Строка поиска */}
         <Form.Control
           type="text"
           placeholder="Поиск по названию или описанию..."
           value={searchTerm}
           onChange={handleSearchChange}
-          style={{ width: "300px" }}
-        />
+          
+        /></div>
 
         {/* Выбор сортировки */}
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-1">
           <Dropdown>
             <Dropdown.Toggle variant="outline-secondary">
               Сортировка: {sortBy}
