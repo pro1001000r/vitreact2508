@@ -19,6 +19,7 @@ import PlaceNewScreen from "./Screens/Place/PlaceNewScreen";
 import PlaceEditScreen from "./Screens/Place/PlaceEditScreen";
 import UsersScreen from "./Screens/Users/UsersScreen";
 import UserEditScreen from "./Screens/Users/UserEditScreen";
+import ProductsEditScreen2 from "./Screens/Products/productsEditScreen2";
 
 
 const App: React.FC = () => {
@@ -32,7 +33,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/Products" element={<ProductsScreen />} />
-          <Route path="/ProductsEdit/:id" element={<ProductsEditScreen />} />
+          <Route path="/ProductsEdit/:id" element={<ProductsEditScreen2 />} />
           <Route path="/Auth" element={<AuthScreen />} />
           <Route path="/Cabinet" element={<CabinetScreen />} />
           <Route path="/Stocktaking" element={<StocktakingScreen />} />

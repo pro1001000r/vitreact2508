@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ICommand, IDataUrl, IGetTableById, IUsers } from "../../interfaces";
+import { ICommand, IDataUrl, IDeleteTableById, IGetTableById, IUsers } from "../../interfaces";
 import { Accordion, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import AxiosVit from "../../Components/AxiosVit";
@@ -11,10 +11,14 @@ import SelectVit from "../../Components/SelectVit";
 import ButtonVit from "../../Components/ButtonVit";
 import StocktakingCount from "../../Components/StocktakingCount";
 
+declare var confirm: (q: string) => boolean; //объявление типа confirm
+
 export default function UsersEditScreen() {
-  // const [data, setData] = useState<IUsers>();
+  
   const params = useParams();
   const navigate = useNavigate();
+
+  const [id, setId] = useState<number>(Number(params.id));
 
   // пустые значения
   const [user, setUser] = useState<IUsers>({
@@ -51,7 +55,7 @@ export default function UsersEditScreen() {
           tableId: Number(params.id),
         },
       };
-      AxiosVit({ dataUrl, setData: setUser });
+      AxiosVit({ dataUrl, setData:setUser});
     }
   };
 
@@ -98,12 +102,35 @@ export default function UsersEditScreen() {
       },
     };
 
-    AxiosVit({ dataUrl: dataUrl });
-    if (user.id) {
-      navigate("/UserEdit/" + user.id);
-    }
+    AxiosVit({ dataUrl: dataUrl , setData: setId });
   };
 
+  useEffect(() => {
+    if (id) {
+      navigate("/UserEdit/" + id);
+    }
+    
+    //консоль 22 Май 2026 (пятница)
+    console.log('>>>> id из (UserEditScreen):', id); //консоль
+    
+  }, [id]);
+
+  const DeleteUser = () => {
+    const isrem = confirm("вы уверены что хотите удалить?"); //!!!!!!! confirm
+    if (isrem) {
+      const dataUrl: IDeleteTableById = {
+        command: ICommand.DeleteTableById,
+        data: {
+          tableName: "users",
+          tableId: Number(params.id),
+        },
+      };
+      AxiosVit({ dataUrl });
+
+      //Пока не уходим
+      navigate("/Users/");
+    }
+  };
   useEffect(() => {
     GetUser();
   }, []);
@@ -114,6 +141,9 @@ export default function UsersEditScreen() {
     setNotS(true);
     if (user?.status === "S") {
       setNotS(false);
+    }
+    if (user?.id) {
+      navigate("/UserEdit/" + user.id);
     }
   }, [user]);
 
@@ -143,6 +173,7 @@ export default function UsersEditScreen() {
   return (
     <>
       <Container>
+         №<b>{id} </b>
         <h3>{user?.name} </h3>
         {user?.status}
         <br />
@@ -158,11 +189,17 @@ export default function UsersEditScreen() {
           onClick={() => navigate("/Users/")}
           className=" btn-primary"
         />
+         <ButtonVit
+          name="Удалить"
+          onClick={DeleteUser}
+          className=" btn-danger"
+        />
         {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
         <Accordion className="mb-1">
           <Accordion.Item eventKey="0">
             <Accordion.Header>
               <p>
+               
                 <b>{user.name} </b>
                 <br />
                 место проведения инвентаризации:
@@ -247,14 +284,14 @@ export default function UsersEditScreen() {
                   setId={(value) => handleChange("place_id", value)}
                 />
               </Row>
-              {user.id && (
+              {id && (
                 <ButtonVit
                   name="Сохранить"
                   onClick={UpdateUser}
                   className=" btn-primary"
                 />
               )}
-              {!user.id && (
+              {!id && (
                 <ButtonVit
                   name="Создать"
                   onClick={CreateUser}

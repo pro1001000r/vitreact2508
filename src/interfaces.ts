@@ -73,7 +73,7 @@ export interface IFotos {
 }
 
 export interface IUserStatus {
-  status: 'U' | 'W' | 'A' | 'S' | undefined;
+  status: "U" | "W" | "A" | "S" | undefined;
 }
 
 export interface IUsers {
@@ -89,9 +89,6 @@ export interface IUsers {
   storage_id?: number;
   place_id?: number;
 }
-
-
-
 
 export interface IUserSession {
   id: number | undefined;
@@ -123,37 +120,37 @@ export interface IDataUrl {
 }
 
 export interface IGetTable extends IDataUrl {
-  command: ICommand.GetTable;
+  command: "GetTable";
   data: { tableName: string };
 }
 
 export interface IAuth extends IDataUrl {
-  command: ICommand.Auth;
+  command: "Auth";
   data: { login: string; pass: string };
 }
 
 export interface IGetTableById extends IDataUrl {
-  command: ICommand.GetTableById;
+  command: "GetTableById";
   data: { tableName: string; tableId: number };
 }
 
 export interface IGetFotos extends IDataUrl {
-  command: ICommand.GetFotos;
+  command: "GetFotos";
   data: { tableName: string; tableId: number };
 }
 
 export interface IGetProperty extends IDataUrl {
-  command: ICommand.GetProperty;
+  command: "GetProperty";
   data: { tableName: string; tableId: number; property: string };
 }
 
 export interface ICreateTableItem extends IDataUrl {
-  command: ICommand.CreateTableItem;
+  command: "CreateTableItem";
   data: { tableName: string; vp: IProducts | IUsers | IStocktaking | IPlace };
 }
 
 export interface IUpdateTableById extends IDataUrl {
-  command: ICommand.UpdateTableById;
+  command: "UpdateTableById";
   data: {
     tableName: string;
     tableId: number;
@@ -161,11 +158,11 @@ export interface IUpdateTableById extends IDataUrl {
   };
 }
 export interface IDeleteTableById extends IDataUrl {
-  command: ICommand.DeleteTableById;
+  command: "DeleteTableById";
   data: { tableName: string; tableId: number };
 }
 export interface IDeleteFotosById extends IDataUrl {
-  command: ICommand.DeleteFotosById;
+  command: "DeleteFotosById";
   data: { tableId: number };
 }
 export interface IStocktakingCount extends IDataUrl {

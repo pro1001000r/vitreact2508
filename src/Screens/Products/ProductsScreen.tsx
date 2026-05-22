@@ -64,6 +64,7 @@ const ProductsScreen: FC = () => {
         <ModalVit show={show} setShow={setShow}>
           <ScanerVit setScan={setScan} setShow={undefined} />
         </ModalVit> */}
+        <ButtonVit name="Создать +" href={"/ProductsEdit/0"} />
 
         <TableVit />
       </Container>

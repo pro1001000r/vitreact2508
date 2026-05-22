@@ -151,7 +151,13 @@ const ProductsEditScreen: FC = () => {
                   <br />
                   {price}
                   <br />
-                  инв: {data && <StocktakingCount tableName="products_id" tableId={data.id} />}
+                  инв:{" "}
+                  {data && (
+                    <StocktakingCount
+                      tableName="products_id"
+                      tableId={data.id}
+                    />
+                  )}
                 </Col>
                 <Col className="d-flex justify-content-end">
                   <ImageVit foto={data?.foto} />
