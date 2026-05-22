@@ -11,6 +11,8 @@ import { Accordion, Col, Container, Row } from "react-bootstrap";
 import ImageVit from "../../Components/ImageVit";
 import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";
+import SliderVit from "../../Components/SliderVit";
+import UploadFilesVit from "../../Components/UploadFilesVit";
 
 export default function ProductsEditScreen2() {
   const params = useParams();
@@ -150,11 +152,13 @@ export default function ProductsEditScreen2() {
               className=" btn-primary"
             />
             {id && (
-              <ButtonVit
-                name="Сохранить"
-                onClick={UpdateProduct}
-                className=" btn-primary"
-              />
+              <>
+                <ButtonVit
+                  name="Сохранить"
+                  onClick={UpdateProduct}
+                  className=" btn-primary"
+                />
+              </>
             )}
             {!id && (
               <ButtonVit
@@ -165,7 +169,25 @@ export default function ProductsEditScreen2() {
             )}
           </Accordion.Body>
         </Accordion.Item>
+
+        {id && (
+          <>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header></Accordion.Header>
+              <Accordion.Body>
+                <UploadFilesVit tableName={"products"} tableId={id} />
+                <SliderVit tableName={"products"} tableId={id} />
+              </Accordion.Body>
+            </Accordion.Item>
+          </>
+        )}
       </Accordion>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </Container>
   );
 }
