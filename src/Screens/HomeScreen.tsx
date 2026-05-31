@@ -7,7 +7,7 @@ import Logo from "../Template/images/LogoPikclick512.png";
 import ButtonVit from "../Components/ButtonVit";
 import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
 
 const HometScreen: FC = () => {
   const [scan, setScan] = useState<string>("");
@@ -15,15 +15,12 @@ const HometScreen: FC = () => {
 
   return (
     <div>
-      <Helmet>
-       {/* Основные теги для поисковиков */}
-      
-      </Helmet>
+      <Helmet>{/* Основные теги для поисковиков */}</Helmet>
       <Container>
         {/* //<div className="vit-background-image"></div> */}
         <Row>
           {/* <Col className="vit-background-image"> */}
-         <Col>
+          <Col>
             <br />
             <h1 className="text-center">
               <Image src={Logo} alt="Логотип" className="vitImageContain " />
@@ -37,7 +34,9 @@ const HometScreen: FC = () => {
               </p>
             </h1>
             <h2 className="text-center">
-              <p>Сканируй. <br />     Считай. <br />    Управляй.</p>
+              <p>
+                Сканируй. <br /> Считай. <br /> Управляй.
+              </p>
             </h2>
 
             <Row className="text-center">
@@ -168,7 +167,20 @@ const HometScreen: FC = () => {
         <br />
         <Row>
           <Card className=" mb-2">
-            <Card.Body>Здесь будет обратная связь</Card.Body>
+            <Card.Body>
+              {" "}
+              <a className="btn btn-lg fixedbut" href="tel:+79269624599">
+                <span className="glyphicon glyphicon-phone-alt">
+                  +79269624599
+                </span>
+              </a>
+              <ButtonVit
+                className="m-2"
+                icon="Inboxes"
+                name="+79269624599"
+                href="tel:+79269624599"
+              />
+            </Card.Body>
           </Card>
         </Row>
 
