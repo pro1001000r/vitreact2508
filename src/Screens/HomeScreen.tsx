@@ -8,6 +8,7 @@ import ButtonVit from "../Components/ButtonVit";
 import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
 import { Helmet } from "react-helmet";
+import VComp from "../Components/VComp";
 
 const HometScreen: FC = () => {
   const [scan, setScan] = useState<string>("");
@@ -162,6 +163,9 @@ const HometScreen: FC = () => {
               24/7 из любой точки мира.
             </ListGroup.Item>
           </ListGroup>
+        </Row>
+        <Row>
+          <VComp />
         </Row>
 
         <br />
