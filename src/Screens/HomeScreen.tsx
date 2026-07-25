@@ -9,6 +9,7 @@ import ModalVit from "../Components/ModalVit";
 import ScanerVit from "../Components/ScanerVit";
 import { Helmet } from "react-helmet";
 import VComp from "../Components/VComp";
+import TreeJsVit from "../Components/TreeJsVit";
 
 const HometScreen: FC = () => {
   const [scan, setScan] = useState<string>("");
@@ -60,6 +61,10 @@ const HometScreen: FC = () => {
 
             <br />
           </Col>
+        </Row>
+
+        <Row>
+          <TreeJsVit />
         </Row>
 
         <br />
@@ -163,9 +168,6 @@ const HometScreen: FC = () => {
               24/7 из любой точки мира.
             </ListGroup.Item>
           </ListGroup>
-        </Row>
-        <Row>
-          <VComp />
         </Row>
 
         <br />
