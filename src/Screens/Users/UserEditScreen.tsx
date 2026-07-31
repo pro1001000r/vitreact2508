@@ -10,6 +10,7 @@ import InputVit from "../../Components/InputVit";
 import SelectVit from "../../Components/SelectVit";
 import ButtonVit from "../../Components/ButtonVit";
 import StocktakingCount from "../../Components/StocktakingCount";
+import { useUserSession } from "../../Components/useStoreZustandVit";
 
 declare var confirm: (q: string) => boolean; //объявление типа confirm
 
@@ -19,6 +20,8 @@ export default function UsersEditScreen() {
   const navigate = useNavigate();
 
   const [id, setId] = useState<number>(Number(params.id));
+
+  const usersession = useUserSession();
 
   // пустые значения
   const [user, setUser] = useState<IUsers>({
@@ -34,7 +37,7 @@ export default function UsersEditScreen() {
   });
 
   //
-  const [notS, setNotS] = useState(true);
+  const [notS, setNotS] = useState(false);
 
   // function setUser1(data1) {
   //   setUser((prev) =>{...prev, data1})
@@ -138,10 +141,12 @@ export default function UsersEditScreen() {
   useEffect(() => {
     // console.log(">>>> setUser из (UserEditScreen):", user); //консоль
     // console.log(">>>> id из (UserEditScreen):", user.id); //консоль
-    setNotS(true);
-    if (user?.status === "S") {
-      setNotS(false);
-    }
+    
+    // setNotS(true);
+    // if (user?.status === "S") {
+    //   setNotS(false);
+    // }
+    
     if (user?.id) {
       navigate("/UserEdit/" + user.id);
     }
@@ -189,11 +194,11 @@ export default function UsersEditScreen() {
           onClick={() => navigate("/Users/")}
           className=" btn-primary"
         />
-         <ButtonVit
+         {/* <ButtonVit
           name="Удалить"
           onClick={DeleteUser}
           className=" btn-danger"
-        />
+        /> */}
         {/* <TableStocktaking tableName={"users_id"} tableId={Number(data?.id)} /> */}
         <Accordion className="mb-1">
           <Accordion.Item eventKey="0">
@@ -214,8 +219,8 @@ export default function UsersEditScreen() {
                 {/* логин: {user.login} */}
               </p>
             </Accordion.Header>
+             {notS && ( 
             <Accordion.Body>
-              {/* className="d-flex small justify-content-end align-items-end" */}
               <Row>
                 <InputVit
                   value={user.name ?? ""}
@@ -298,7 +303,8 @@ export default function UsersEditScreen() {
                   className=" btn-primary"
                 />
               )}
-            </Accordion.Body>
+            </Accordion.Body> )}
+            
           </Accordion.Item>
         </Accordion>
         {user?.id && (

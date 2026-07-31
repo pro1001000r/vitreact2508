@@ -10,6 +10,7 @@ import ScanerVit from "../Components/ScanerVit";
 import { Helmet } from "react-helmet";
 import VComp from "../Components/VComp";
 import TreeJsVit from "../Components/TreeJsVit";
+import ImageVit from "../Components/ImageVit";
 
 const HometScreen: FC = () => {
   const [scan, setScan] = useState<string>("");
@@ -63,19 +64,8 @@ const HometScreen: FC = () => {
           </Col>
         </Row>
 
-        <Row>
-          <TreeJsVit />
-        </Row>
-
         <br />
-        <Row>
-          <h3>Автоматизируйте учет товаров с PikClick.ru</h3>
-          <br />
-          <p>
-            Сократите время инвентаризации с недель до часов и исключите
-            человеческий фактор.
-          </p>
-        </Row>
+
         <Row>
           <h3>Ваша инвентаризация похожа на хаос?</h3>
           <br />
@@ -85,6 +75,11 @@ const HometScreen: FC = () => {
             допускают ошибки при ручном вводе данных? Потеря товаров и
             пересортица съедают вашу прибыль?
           </p>
+          <img
+            src="upload/images/girl1.png"
+            alt="Девушка устала от пересчета"
+            style={{ maxWidth: 500, height: "auto" }}
+          />
         </Row>
         <br />
         <Row>
@@ -99,13 +94,14 @@ const HometScreen: FC = () => {
           </p>
           <ListGroup as="ol" numbered>
             <ListGroup.Item as="li">
-              <b>Скорость:</b> Сканирование штрихкодов в реальном времени.
+              <b>Скорость:</b> Сканирование штрихкодов с телефона в реальном времени БЕЗ всяких "выгрузок - загрузок".
             </ListGroup.Item>
             <ListGroup.Item as="li">
               <b>Точность:</b> Исключение ошибок ручного ввода.
             </ListGroup.Item>
             <ListGroup.Item as="li">
-              <b>Контроль:</b> Мгновенное формирование отчетов о расхождениях.
+              <b>Контроль:</b> Итоги сразу онлайн. Мгновенное формирование
+              отчетов о расхождениях. Вы видите всех сразу и на всех складах!!!
             </ListGroup.Item>
           </ListGroup>
         </Row>
@@ -113,7 +109,7 @@ const HometScreen: FC = () => {
         <Row>
           <h3>Как это работает?</h3>
           <br />
-          <p>3 простых шага к идеальному учету:</p>
+          <p>2 простых шага к идеальному учету:</p>
           <ListGroup as="ol" numbered>
             <ListGroup.Item as="li">
               <b>Подготовка:</b> Загрузите остатки из вашей учетной системы (1С,
@@ -122,15 +118,31 @@ const HometScreen: FC = () => {
             <ListGroup.Item as="li">
               <b>Сканирование:</b> Раздайте сотрудникам смартфоны с приложением
               PikClick.ru Они просто сканируют штрихкоды, проходя по складу.
-            </ListGroup.Item>
-            <ListGroup.Item as="li">
-              <b>Результат:</b> Сверка происходит автоматически. Вы получаете
-              готовый отчет с расхождениями в режиме реального времени.
+              Корректируют ошибки, печатают новые штрихкоды и т.д. Все действия
+              вы видите сразу онлай или в журнале хода инвентаризации, где
+              удобно отражены абсолютно все действия любого сотрудника с
+              точностью до секунды
+              <br />
+              <img
+                src="/upload/images/users.png"
+                alt="Пользователи"
+                style={{ maxWidth: 500, height: "auto" }}
+              />
+              <img
+                src="/upload/images/usercabinet.png"
+                alt="Пользователи"
+                style={{ maxWidth: 500, height: "auto" }}
+              />
             </ListGroup.Item>
           </ListGroup>
         </Row>
-        <br />
         <Row>
+          <Col className="text-center">
+            <TreeJsVit />
+          </Col>
+        </Row>
+        <br />
+        {/* <Row>
           <h3>Кому подходит сервис?</h3>
           <br />
           <p>Для бизнеса, который ценит точность и время</p>
@@ -168,7 +180,7 @@ const HometScreen: FC = () => {
               24/7 из любой точки мира.
             </ListGroup.Item>
           </ListGroup>
-        </Row>
+        </Row> */}
 
         <br />
         <Row>

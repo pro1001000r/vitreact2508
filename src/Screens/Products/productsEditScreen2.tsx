@@ -13,6 +13,8 @@ import InputVit from "../../Components/InputVit";
 import ButtonVit from "../../Components/ButtonVit";
 import SliderVit from "../../Components/SliderVit";
 import UploadFilesVit from "../../Components/UploadFilesVit";
+import StocktakingCount from "../../Components/StocktakingCount";
+import TableStocktaking from "../../Components/TableStocktaking";
 
 export default function ProductsEditScreen2() {
   const params = useParams();
@@ -177,6 +179,15 @@ export default function ProductsEditScreen2() {
               <Accordion.Body>
                 <UploadFilesVit tableName={"products"} tableId={id} />
                 <SliderVit tableName={"products"} tableId={id} />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header>проинвентаризировано:{" "}
+                <b>
+                  <StocktakingCount tableName={"products_id"} tableId={id} />
+                </b></Accordion.Header>
+              <Accordion.Body>
+                <TableStocktaking tableName={"products_id"} tableId={id} />
               </Accordion.Body>
             </Accordion.Item>
           </>
