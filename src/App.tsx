@@ -20,6 +20,7 @@ import PlaceEditScreen from "./Screens/Place/PlaceEditScreen";
 import UsersScreen from "./Screens/Users/UsersScreen";
 import UserEditScreen from "./Screens/Users/UserEditScreen";
 import ProductsEditScreen2 from "./Screens/Products/productsEditScreen2";
+import WorkTimesScreen from "./Screens/WorkTimes/WorkTimesScreen";
 
 
 const App: React.FC = () => {
@@ -42,6 +43,7 @@ const App: React.FC = () => {
           <Route path="/PlaceEdit/:id" element={<PlaceEditScreen />} />
           <Route path="/Users" element={<UsersScreen />} />
           <Route path="/UserEdit/:id" element={<UserEditScreen />} />
+          <Route path="/WorkTimes" element={<WorkTimesScreen/>} />
         </Routes>
       </Router>
       {/* </ContextVitProvider> */}

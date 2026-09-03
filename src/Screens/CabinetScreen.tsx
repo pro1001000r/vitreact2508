@@ -192,6 +192,7 @@ const CabinetScreen: FC = () => {
         href="/Place"
       />
       <ButtonVit href="/Users" name="Пользователи" />
+      <ButtonVit href="/WorkTimes" name="Время работ" />
       <Accordion className="mb-1">
         <Accordion.Item eventKey="1">
           <Accordion.Header>
