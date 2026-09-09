@@ -119,6 +119,16 @@ export interface IDataUrl {
   data: {};
 }
 
+//Новый
+export interface IDataUrl2 {
+  basename: string;
+  command: string;
+  tableName?: string;
+  tableId?: number;
+  vp?: any[];
+  data?: any;
+}
+
 export interface IGetTable extends IDataUrl {
   command: "GetTable";
   data: { tableName: string };

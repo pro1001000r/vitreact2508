@@ -36,11 +36,7 @@ const HometScreen: FC = () => {
                 </b>
               </p>
             </h1>
-            <h2 className="text-center">
-              <p>
-                Сканируй. <br /> Считай. <br /> Управляй.
-              </p>
-            </h2>
+           
 
             <Row className="text-center">
               <Col>
@@ -51,6 +47,7 @@ const HometScreen: FC = () => {
                   name="Сканер"
                   onClick={() => setShow(true)}
                 /> */}
+                <ButtonVit href="/WorkTimes" name="Время работ" />
 
                 <ButtonVit href="/Auth" name="Войти в систему" />
 
