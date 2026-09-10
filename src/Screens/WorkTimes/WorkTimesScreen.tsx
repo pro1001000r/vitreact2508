@@ -51,6 +51,7 @@ const WorkTimesScreen: FC = () => {
     idD: number; // ID документа
     idT?: number; // ID записи времени (может отсутствовать, если только документ)
     dateD?: string | null;
+    dateDRus?: string | null;
     userName?: string | null;
     commentD?: string | null;
     srtD?: string | null;
@@ -101,8 +102,9 @@ const WorkTimesScreen: FC = () => {
           <Accordion.Item eventKey="1">
             <Accordion.Header>
               <p>
-                Документ № <b> {group.doc.idD}</b> Дата:{" "}
-                <b>{group.doc.dateD}</b>
+                <b> {group.doc.dateDRus}</b> {" "}
+                <br />
+                Документ №  {group.doc.idD} Дата:{" "}
                 <br />
                 {group.doc.commentD}
                 <br />
