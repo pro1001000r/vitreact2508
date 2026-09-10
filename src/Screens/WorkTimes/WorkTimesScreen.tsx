@@ -2,7 +2,7 @@ import React, { useEffect, useState, FC } from "react";
 import ButtonVit from "../../Components/ButtonVit";
 import axios from "axios";
 import { IDataUrl2 } from "../../interfaces";
-import { Table } from "react-bootstrap";
+import { Accordion, Table } from "react-bootstrap";
 
 const WorkTimesScreen: FC = () => {
   const [data, setData] = useState([]);
@@ -45,52 +45,113 @@ const WorkTimesScreen: FC = () => {
     }
   }
 
-  let listRow = data.map((elem: any) => (
-    <tr key={elem.idT}>
-      <td>
-        <b>{elem.dateD}</b>
-        <br />
+  //Алиса*******************************************************************************
+  interface RowData {
+    // * описание строки из которой берем данные 10 Сентябрь 2026 (четверг)
+    idD: number; // ID документа
+    idT?: number; // ID записи времени (может отсутствовать, если только документ)
+    dateD?: string | null;
+    userName?: string | null;
+    commentD?: string | null;
+    srtD?: string | null;
+    commentT?: string | null;
+    StartT?: string | null;
+    EndT?: string | null;
+    srtT?: string | null;
+  }
+  type IDocsVit = Record<number, { doc: RowData; rows: RowData[] }>; // объект из документов
 
-        <b>{elem.userName}</b>
-        <br />
+  const doc0: IDocsVit = {}; //пустой имассив для начала перебора
 
-        <b>{elem.commentD}</b>
-      </td>
-      <td>
-        <b>{elem.srtD}</b>
-      </td>
-      <td>
-        <b>{elem.commentT}</b>
-      </td>
-      <td>
-        <b>{elem.StartT}</b>
-        <br />
-        <b>{elem.EndT}</b>
-        <br />
-        <b>{elem.srtT}</b>
-      </td>
-    </tr>
+  //превращаем массив в объект по доукуменгтавм
+  function reduceVit(data: RowData[]): IDocsVit {
+    return data.reduce((acc, row) => {
+      if (!acc[row.idD]) {
+        acc[row.idD] = { doc: row, rows: [] };
+      }
+      if (row.idT != null) {
+        acc[row.idD].rows.push(row);
+      }
+      return acc;
+    }, doc0);
+  }
+
+  // dataDoc = dataDoc.sort(
+  //   (a, b) => safeDate(b.doc.dateD) - safeDate(a.doc.dateD),
+  // );
+
+  const safeDate = (d: string | null | undefined) => new Date(d ?? 0).getTime();
+  const safeText = (value: any) => (value == null ? "" : String(value));
+
+  const dataDoc = Object.values(reduceVit(data)).sort(
+    (a, b) => safeDate(b.doc.dateD) - safeDate(a.doc.dateD),
+  );
+
+  //консоль 10 Сентябрь 2026 (четверг)
+  console.log(">>>> dataDoc из (WorkTimesScreen):", dataDoc); //консоль
+
+  function DocumentGroup({
+    group,
+  }: {
+    group: { doc: RowData; rows: RowData[] };
+  }) {
+    return (
+      <>
+        <Accordion className="mb-1">
+          <Accordion.Item eventKey="1">
+            <Accordion.Header>
+              <p>
+                Документ № <b> {group.doc.idD}</b> Дата:{" "}
+                <b>{group.doc.dateD}</b>
+                <br />
+                {group.doc.commentD}
+                <br />
+                Время: <b>{group.doc.srtD}</b>{" "}
+                <small>({group.rows.length} записей)</small>
+              </p>
+            </Accordion.Header>
+            <Accordion.Body>
+              <Table striped hover size="sm">
+                <thead>
+                  <tr>
+                    <th>период</th>
+                    <th>время</th>
+                    <th>описание</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {group.rows.map((row) => (
+                    <tr key={row.idT}>
+                      <td>
+                        {safeText(row.StartT)} – {safeText(row.EndT)}
+                      </td>
+                      <td>
+                        <b>{safeText(row.srtT)}</b>
+                      </td>
+                      <td>
+                        <b>{safeText(row.commentT)}</b>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
+      </>
+    );
+  }
+
+  const listRow = dataDoc.map((g) => (
+    <DocumentGroup key={g.doc.idD} group={g} />
   ));
+
+  //Алиса*******************************************************************************
+
   useEffect(() => {
     fetchVit();
   }, []);
 
-  return (
-    <>
-      {/* <ButtonVit href="/WorkTimes" name="Время работ" /> */}
-      <Table striped hover size="sm">
-        <thead>
-          <tr>
-            <th>Номер документа</th>
-            <th>Время начала</th>
-            <th>Время окончания</th>
-            <th>Длительность</th>
-            <th>Комментарий</th>
-          </tr>
-        </thead>
-        <tbody>{listRow}</tbody>
-      </Table>
-    </>
-  );
+  return <>{listRow}</>;
 };
 export default WorkTimesScreen;
