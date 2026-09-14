@@ -2,27 +2,27 @@ import React, { useEffect, useState, FC } from "react";
 import ButtonVit from "../../Components/ButtonVit";
 import axios from "axios";
 import { IDataUrl2 } from "../../interfaces";
-import { Accordion, Table } from "react-bootstrap";
+import { Accordion, Container, Row, Table, Col } from "react-bootstrap";
 
 const WorkTimesScreen: FC = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
 
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const apiUrl = "https://pikclick.ru/v2/";
-
-  //console.log('>>>> dataUrl из (AxiosVit):', dataUrl); //консоль
-
-  const dataUrl: IDataUrl2 = {
-    basename: "vitbase",
-    command: "WorkTimesTableView",
-  };
-
   async function fetchVit() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const apiUrl = "https://pikclick.ru/v2/";
+
+    //console.log('>>>> dataUrl из (AxiosVit):', dataUrl); //консоль
+
+    const dataUrl: IDataUrl2 = {
+      basename: "vitbase",
+      command: "WorkTimesTableView",
+    };
+
     try {
       const response = await axios.post(apiUrl, dataUrl, config);
       if (setData) {
@@ -62,7 +62,7 @@ const WorkTimesScreen: FC = () => {
   }
   type IDocsVit = Record<number, { doc: RowData; rows: RowData[] }>; // объект из документов
 
-  const doc0: IDocsVit = {}; //пустой имассив для начала перебора
+  //const doc0: IDocsVit = {}; //пустой имассив для начала перебора
 
   //превращаем массив в объект по доукуменгтавм
   function reduceVit(data: RowData[]): IDocsVit {
@@ -74,7 +74,7 @@ const WorkTimesScreen: FC = () => {
         acc[row.idD].rows.push(row);
       }
       return acc;
-    }, doc0);
+    }, {} as IDocsVit);
   }
 
   // dataDoc = dataDoc.sort(
@@ -102,10 +102,8 @@ const WorkTimesScreen: FC = () => {
           <Accordion.Item eventKey="1">
             <Accordion.Header>
               <p>
-                <b> {group.doc.dateDRus}</b> {" "}
-                <br />
-                Документ №  {group.doc.idD} Дата:{" "}
-                <br />
+                <b> {group.doc.dateDRus}</b> <br />
+                Документ № {group.doc.idD}<br />
                 {group.doc.commentD}
                 <br />
                 Время: <b>{group.doc.srtD}</b>{" "}
@@ -150,10 +148,65 @@ const WorkTimesScreen: FC = () => {
 
   //Алиса*******************************************************************************
 
+  async function GetStatus() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const apiUrl = "https://pikclick.ru/v2/";
+    const dataUrl = {
+      basename: "vitbase",
+      command: "WorkTimesGetStatus",
+    };
+
+    try {
+      const response = await axios.post(apiUrl, dataUrl, config);
+
+      //консоль 04 Ноябрь 2025 (вторник)
+      console.log(">>>> WorkTimesGetStatus.data из (AxiosVit):", response.data); //консоль
+    } catch (e) {
+      if (e) {
+        // setData(e);
+      }
+    }
+  }
+
+  async function StartStop() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const apiUrl = "https://pikclick.ru/v2/";
+    const dataUrl = {
+      basename: "vitbase",
+      command: "WorkTimesStartStop",
+    };
+
+    try {
+      const response = await axios.post(apiUrl, dataUrl, config);
+
+      console.log(">>>> response.data из (AxiosVit):", response.data); //консоль
+      fetchVit();
+    } catch (e) {}
+  }
+
   useEffect(() => {
+    GetStatus();
     fetchVit();
   }, []);
 
-  return <>{listRow}</>;
+  return (
+    <Container>
+      <Row className="my-1">
+        <Col className=" text-center">
+          <ButtonVit name="Старт/Стоп" onClick={StartStop} />
+        </Col>
+      </Row>
+
+      <div>{listRow}</div>
+    </Container>
+  );
 };
 export default WorkTimesScreen;
