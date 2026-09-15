@@ -7,6 +7,7 @@ import { Accordion, Container, Row, Table, Col } from "react-bootstrap";
 const WorkTimesScreen: FC = () => {
   const [data, setData] = useState([]);
   const [load, setLoad] = useState(false);
+  const [status, setStatus] = useState(false);
 
   async function fetchVit() {
     const config = {
@@ -103,7 +104,8 @@ const WorkTimesScreen: FC = () => {
             <Accordion.Header>
               <p>
                 <b> {group.doc.dateDRus}</b> <br />
-                Документ № {group.doc.idD}<br />
+                Документ № {group.doc.idD}
+                <br />
                 {group.doc.commentD}
                 <br />
                 Время: <b>{group.doc.srtD}</b>{" "}
@@ -116,22 +118,30 @@ const WorkTimesScreen: FC = () => {
                   <tr>
                     <th>период</th>
                     <th>время</th>
-                    <th>описание</th>
                   </tr>
                 </thead>
                 <tbody>
                   {group.rows.map((row) => (
-                    <tr key={row.idT}>
-                      <td>
-                        {safeText(row.StartT)} – {safeText(row.EndT)}
-                      </td>
-                      <td>
-                        <b>{safeText(row.srtT)}</b>
-                      </td>
-                      <td>
-                        <b>{safeText(row.commentT)}</b>
-                      </td>
-                    </tr>
+                    < >
+                      {row.commentT && (
+                        <tr key={row.idT}>
+                          <td>
+                            <b>{safeText(row.commentT)}</b>
+                          </td>
+                        </tr>
+                      )}
+                      <tr>
+                        <td>
+                          {safeText(row.StartT)} – {safeText(row.EndT)}
+                        </td>
+                        <td>
+                          <b>{safeText(row.srtT)}</b>
+                        </td>
+                        <td>
+                          <ButtonVit name="x" />
+                        </td>
+                      </tr>
+                    </>
                   ))}
                 </tbody>
               </Table>
@@ -165,6 +175,8 @@ const WorkTimesScreen: FC = () => {
 
       //консоль 04 Ноябрь 2025 (вторник)
       console.log(">>>> WorkTimesGetStatus.data из (AxiosVit):", response.data); //консоль
+      setStatus(response.data.data.status);
+
     } catch (e) {
       if (e) {
         // setData(e);
@@ -187,7 +199,8 @@ const WorkTimesScreen: FC = () => {
     try {
       const response = await axios.post(apiUrl, dataUrl, config);
 
-      console.log(">>>> response.data из (AxiosVit):", response.data); //консоль
+      console.log(">>>> StartStop из (AxiosVit):", response.data); //консоль
+      GetStatus();
       fetchVit();
     } catch (e) {}
   }
@@ -199,6 +212,20 @@ const WorkTimesScreen: FC = () => {
 
   return (
     <Container>
+      {status && (
+        <Row className="my-1 ">
+          <Col className="text-center">
+            <h1 style={{ color: 'green' }}>Работает</h1>
+          </Col>
+        </Row>
+      )}
+      {!status && (
+        <Row className="my-1 ">
+          <Col className="text-center">
+            <h1 style={{ color: 'red' }}>Отдыхает</h1>
+          </Col>
+        </Row>
+      )}
       <Row className="my-1">
         <Col className=" text-center">
           <ButtonVit name="Старт/Стоп" onClick={StartStop} />
